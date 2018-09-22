@@ -1,28 +1,35 @@
 package com.example.asokah.mobilepresence;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.asokah.mobilepresence.Model.Tracking;
 import com.example.asokah.mobilepresence.Model.User;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -77,12 +84,12 @@ public class ListOnline extends AppCompatActivity implements GoogleApiClient.Con
         currentUserRef = FirebaseDatabase.getInstance().getReference("lastOnline")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid()); //create new child in lastOnline with key is uid
 
-        if(ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        if(ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
         {
             ActivityCompat.requestPermissions(this, new String[]{
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION
+                android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION
             },MY_PERMISSION_REQUEST_CODE);
         }
         else
@@ -123,8 +130,8 @@ public class ListOnline extends AppCompatActivity implements GoogleApiClient.Con
     }
 
     private void displayLocation() {
-        if(ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        if(ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
         {
             return;
         }
@@ -140,7 +147,8 @@ public class ListOnline extends AppCompatActivity implements GoogleApiClient.Con
         }
         else
         {
-            Toast.makeText(this,"No se pudo obtener la ubicación",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this,"No se pudo obtener la ubicación",Toast.LENGTH_SHORT).show();
+            Log.d("TEST", "No se pudo establecer la ubicación");
         }
     }
 
@@ -180,19 +188,47 @@ public class ListOnline extends AppCompatActivity implements GoogleApiClient.Con
     }
 
     private void updateList() {
-        adapter = new FirebaseRecyclerAdapter<User, ListOnlineViewHolder>(
-                User.class,
-                R.layout.user_layout,
-                ListOnlineViewHolder.class,
-                counterRef
-        ){
+
+        FirebaseRecyclerOptions<User> userOptions =new FirebaseRecyclerOptions.Builder<User>()
+                .setQuery(counterRef,User.class)
+                .build();
+        adapter = new FirebaseRecyclerAdapter<User, ListOnlineViewHolder>(userOptions) {
             @Override
-            protected void populateViewHolder(ListOnlineViewHolder viewHolder, User model, int position){
-                viewHolder.txtEmail.setText(model.getEmail());
+            protected void onBindViewHolder(@NonNull ListOnlineViewHolder viewHolder, int position, @NonNull final User model) {
+                if(model.getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail()))
+                    viewHolder.txtEmail.setText(model.getEmail()+" (yo)");
+                else
+                    viewHolder.txtEmail.setText(model.getEmail());
+
+                //we need implement item click of recycler view
+                viewHolder.itemClickListener = new ItemClickListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                        //if model is current user, not set click event
+                        if(!model.getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail()))
+                        {
+                            Intent map = new Intent(ListOnline.this,MapTracking.class);
+                            map.putExtra("email",model.getEmail());
+                            map.putExtra("lat",mLastLocation.getLatitude());
+                            map.putExtra("lng",mLastLocation.getLongitude());
+                            startActivity(map);
+                        }
+                    }
+                };
+            }
+
+            @NonNull
+            @Override
+            public ListOnlineViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View itemView = LayoutInflater.from(getBaseContext())
+                        .inflate(R.layout.user_layout,parent,false);
+                return new ListOnlineViewHolder(itemView);
             }
         };
-        adapter.notifyDataSetChanged();
+        adapter.startListening();
         listOnline.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
     }
 
 
@@ -230,6 +266,8 @@ public class ListOnline extends AppCompatActivity implements GoogleApiClient.Con
             }
         });
     }
+
+
 
 
     @Override
@@ -285,12 +323,12 @@ public class ListOnline extends AppCompatActivity implements GoogleApiClient.Con
     }
 
     private void startLocationUpdates() {
-        if(ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this,Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        if(ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this,android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
         {
             return;
         }
-        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, (com.google.android.gms.location.LocationListener) this);
 
     }
 
@@ -316,6 +354,8 @@ public class ListOnline extends AppCompatActivity implements GoogleApiClient.Con
     protected void onStop() {
         if(mGoogleApiClient != null)
             mGoogleApiClient.disconnect();
+        if(adapter != null)
+            adapter.stopListening();
         super.onStop();
     }
 
