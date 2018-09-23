@@ -24,8 +24,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivityForResult(
-                        AuthUI.getInstance().createSignInIntentBuilder()
-                        .setAllowNewEmailAccounts(true).build(),LOGIN_PERMISSION
+                        AuthUI.getInstance().createSignInIntentBuilder().build(),LOGIN_PERMISSION
                 );
             }
         });
