@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".inicio">
+
+    <ImageButton
+        android:id="@+id/menu_luces"
+        android:layout_width="176dp"
+        android:layout_height="194dp"
+        android:layout_marginTop="208dp"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/menu_luces"
+        android:scaleType="centerInside"
+        android:src="@drawable/foco_vector"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/menu_tv"
+        android:layout_width="179dp"
+        android:layout_height="194dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="208dp"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/menu_tv"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_tv_black_48dp"
+        app:layout_constraintEnd_toStartOf="@+id/menu_luces"
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_televisor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="@string/tv_televisor"
+        android:fontFamily="@font/roboto_thin"
+        android:text="@string/tv_televisor"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu_tv"
+        tools:text="@string/tv_televisor" />
+
+    <TextView
+        android:id="@+id/tv_luces"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="72dp"
+        android:fontFamily="@font/roboto_thin"
+        android:text="@string/tv_luces"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menu_luces"
+        tools:text="@string/tv_luces" />
+
+    <TextView
+        android:id="@+id/tv_comenzamos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/roboto_thin"
+        android:text="@string/tv_comenzamos"
+        android:textAlignment="center"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>
