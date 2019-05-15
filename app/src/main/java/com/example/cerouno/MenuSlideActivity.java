@@ -21,7 +21,7 @@ import android.widget.ImageButton;
 public class MenuSlideActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    //variable para q aparezca el fragment elegido en la pantalla de inicio
+    //variable para q aparezca el fragment elegido en la pantalla de aparatos
     public static int opcion;
 
     @Override
@@ -47,7 +47,7 @@ public class MenuSlideActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        //metodo para q se elija el fragment en el inicio
+        //metodo para q se elija el fragment en el aparatos
         FragmentManager fm = getSupportFragmentManager();
         switch (opcion){
 

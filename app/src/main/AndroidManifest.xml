@@ -16,11 +16,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ambiente"></activity>
+        <activity android:name=".inicio"></activity>
         <activity
             android:name=".MenuSlideActivity"
             android:label="@string/title_activity_menu_slide"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".inicio" />
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".aparatos" />
         <activity android:name=".logIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
