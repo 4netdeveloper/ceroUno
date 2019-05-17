@@ -10,7 +10,8 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."</string>
+        completions."
+    </string>
     <string name="logo">Logo</string>
     <string name="btn_ingresar">Ingresar</string>
     <string name="btn_registrarse">Registrarse</string>
@@ -40,6 +41,48 @@
     <string name="luz_2">Luz 2</string>
     <string name="luz_3">Luz 3</string>
     <string name="luz_4">Luz 4</string>
+
+
+    <string name="encendido">On/Off</string>
+    <string name="input">Input</string>
+
+    <string name="mute">Mute</string>
+    <string name="canal_ant">Anterior</string>
+    <string name="ok">Ok</string>
+
+    <string name="flecha_up">Arriba</string>
+    <string name="flecha_dw">Abajo</string>
+    <string name="flecha_lf">Izquierda</string>
+    <string name="flecha_rg">Derecha</string>
+    <string name="proyector">proyector</string>
+
+    <string name="string_televisor">Televisor</string>
+    <string name="string_luces">Luces</string>
+    <string name="string_proyector">Proyector</string>
+    <string name="string_salir">Salir</string>
+    <string name="string_cocina">Cocina</string>
+    <string name="tv_living">Living</string>
+    <string name="string_dormitorio">Dormitorio</string>
+    <string name="string_bano">Baño</string>
+    <string name="string_comedor">Comedor</string>
+    <string name="string_patio">Patio</string>
+
+    <string name="volumen">Volúmen</string>
+    <string name="canal">Canales</string>
+
+    <string name="canal_1">1</string>
+    <string name="canal_2">2</string>
+    <string name="canal_3">3</string>
+    <string name="canal_4">4</string>
+    <string name="canal_5">5</string>
+    <string name="canal_6">6</string>
+    <string name="canal_7">7</string>
+    <string name="canal_8">8</string>
+    <string name="canal_9">9</string>
+    <string name="canal_0">0</string>
+
+    <string name="habitaciones">HABITACIONES</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
