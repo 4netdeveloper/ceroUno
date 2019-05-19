@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -47,7 +48,7 @@ public class Televisor extends Fragment implements View.OnClickListener {
     public Button btn_flechaLeft;
     public Button btn_botonOk;
 
-
+    public ArrayList<Button> btn_array[];
 
 
     private admin admin = new admin("", "");
