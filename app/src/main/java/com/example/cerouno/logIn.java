@@ -22,7 +22,7 @@ public class logIn extends AppCompatActivity {
         ingreso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), aparatos.class);
+                Intent intent = new Intent(getApplicationContext(), ambiente.class);
                 startActivity(intent);
             }
         });

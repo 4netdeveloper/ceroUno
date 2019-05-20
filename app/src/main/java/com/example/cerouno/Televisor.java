@@ -48,10 +48,10 @@ public class Televisor extends Fragment implements View.OnClickListener {
     public Button btn_flechaLeft;
     public Button btn_botonOk;
 
-    public ArrayList<Button> btn_array[];
+    //private int[] botonesTv = {R.id.onOff_tv, R.i};
 
 
-    private admin admin = new admin("", "");
+   // private admin admin = new admin("", "");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -138,14 +138,14 @@ public class Televisor extends Fragment implements View.OnClickListener {
 
     // metodo para mandar comandos al ADMIN
 
-    public void evento (int opcion){
+ /*   public void evento (int opcion){
 
         switch (opcion){
-            case R.id.input_tv: admin.setBoton(String.valueOf(opcion));
+            //case R.id.input_tv: admin.setBoton(String.valueOf(opcion));
             break;
         }
 
-    }
+    }*/
 
     @Override
     public void onClick(View view) {

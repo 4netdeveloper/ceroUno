@@ -1,6 +1,7 @@
 package com.example.cerouno;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -25,6 +26,8 @@ public class Luces extends Fragment implements  View.OnClickListener{
     public Button bt_luz3;
     public Button bt_luz4;
 
+    private int[] botonesLuces = {R.id.btn_tv, R.id.luz1,R.id.luz2};
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,5 +43,8 @@ public class Luces extends Fragment implements  View.OnClickListener{
     @Override
     public void onClick(View view) {
 
+
+        }
+
     }
-}
+
