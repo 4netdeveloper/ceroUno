@@ -19,7 +19,7 @@ import android.view.Menu;
 import android.widget.ImageButton;
 
 public class MenuSlideActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, ComunicaBoton {
 
     //variable para q aparezca el fragment elegido en la pantalla de aparatos
     public static int opcion;
@@ -47,16 +47,17 @@ public class MenuSlideActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        //metodo para q se elija el fragment en el aparatos
-        FragmentManager fm = getSupportFragmentManager();
-        switch (opcion){
+    }
 
-            case 1: fm.beginTransaction().replace(R.id.contenedor, new Televisor()).commit(); break;
-            case 2: fm.beginTransaction().replace(R.id.contenedor, new Luces()).commit(); break;
-            default: fm.beginTransaction().replace(R.id.contenedor, new Televisor()).commit(); break;
-        }
+    @Override
+    public void boton(int queBoton) {
+
+        Intent intent = new Intent(this, aparatos.class);
+        intent.putExtra("BOTONPULSADO", queBoton);      //se carga la info con el boton pulsado
+        startActivity(intent);
 
     }
+
 
     @Override
     public void onBackPressed() {
@@ -118,4 +119,6 @@ public class MenuSlideActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }

@@ -1,41 +1,49 @@
 package com.example.cerouno;
 
-import android.content.Intent;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class aparatos extends AppCompatActivity implements View.OnClickListener{
+public class aparatos extends AppCompatActivity implements View.OnClickListener, ComunicaBoton{
 
-    //botones para iniciar las actividades
-    private ImageButton boton_tv, boton_luces;
+    Fragment [] misFragmentos;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_aparatos);
 
-        ImageButton boton_tv = (ImageButton) findViewById(R.id.menu_tv);
-        boton_tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MenuSlideActivity.opcion = 1;   //metodo para q aparezca este FRAGMENT cuando se elija este boton
-                Intent intent = new Intent(getApplicationContext(), MenuSlideActivity.class);
-                startActivity(intent);
-            }
-        });
+        misFragmentos = new Fragment[6];
 
-        ImageButton boton_luces = (ImageButton) findViewById(R.id.menu_luces);
-        boton_luces.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        misFragmentos [0] = new Living();
+        misFragmentos [1] = new Cocina();
+        misFragmentos [2] = new Comedor();
+        misFragmentos [3] = new Bano();
+        misFragmentos [4] = new Dormitorio();
+        misFragmentos [5] = new Patio();
 
-                MenuSlideActivity.opcion = 2;   //metodo para q aparezca este FRAGMENT cuando se elija este boton
-                Intent intent = new Intent(getApplicationContext(), MenuSlideActivity.class);
-                startActivity(intent);
-            }
-        });
+        Bundle extras = getIntent().getExtras();    //en EXTRAS se tiene la info del boton pulsado
+
+        boton(extras.getInt("BOTONPULSADO")); //se extrae la info y se la envia al metodo boton()
+
+    }
+
+    @Override
+    public void boton(int queBoton) {
+
+        FragmentManager miManejador = getFragmentManager();
+
+        FragmentTransaction miTransaccion = miManejador.beginTransaction();
+
+        miTransaccion.replace(R.id.contenedor, misFragmentos[queBoton]);
+
+        miTransaccion.commit();
+
     }
 
     @Override

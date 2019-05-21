@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".inicio"></activity>
+        <activity android:name=".ambiente"></activity>
         <activity
             android:name=".MenuSlideActivity"
             android:label="@string/title_activity_menu_slide"

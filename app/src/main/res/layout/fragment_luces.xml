@@ -38,13 +38,13 @@
                     android:layout_height="wrap_content"
                     android:text= "@string/tv_televisor"
                     android:fontFamily="@font/roboto_light"
-                    android:textSize="25dp"/>
+                    android:textSize="25sp"/>
             </LinearLayout>
 
             <View
                 android:id="@+id/divider"
                 android:layout_width="match_parent"
-                android:layout_height="5"
+                android:layout_height="5sp"
                 android:background="?android:attr/listDivider"
                 android:visibility="visible" />
 
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="25dp">
+                android:padding="25sp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
