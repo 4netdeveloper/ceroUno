@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Televisor">
+    tools:context=".aparatos.Televisor"
+    android:background="#FFFFFF">
 
     <!-- TODO: Update blank fragment layout -->
     <android.support.constraint.ConstraintLayout
@@ -519,43 +520,35 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
 
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/textViewVolumen"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_thin"
+                        android:text="@string/volumen"
+                        android:textAlignment="center"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/textViewVolumen"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/roboto_thin"
-                            android:text="@string/volumen"
-                            android:textAlignment="center"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
+                    <Space
+                        android:layout_width="172dp"
+                        android:layout_height="match_parent" />
 
-                        <Space
-                            android:layout_width="74dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1" />
-
-                        <TextView
-                            android:id="@+id/textViewCanal"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/roboto_thin"
-                            android:text="@string/canal"
-                            android:textAlignment="center"
-                            android:textSize="18sp"
-                            android:textStyle="bold" />
-
-                    </TableRow>
+                    <TextView
+                        android:id="@+id/textViewCanal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/roboto_thin"
+                        android:text="@string/canal"
+                        android:textAlignment="center"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>

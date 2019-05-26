@@ -46,7 +46,7 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
 
         ImageButton patioB = findViewById(BOTONESMENU[6]);
         patioB.setOnClickListener(this);
-    }
+   }
 
     private void cargarFragmento (Fragment fragmento){
         FragmentManager manager = getSupportFragmentManager();

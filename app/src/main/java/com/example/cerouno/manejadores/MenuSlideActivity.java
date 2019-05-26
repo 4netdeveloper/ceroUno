@@ -1,6 +1,5 @@
-package com.example.cerouno;
+package com.example.cerouno.manejadores;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,10 +15,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.widget.ImageButton;
+
+import com.example.cerouno.R;
+import com.example.cerouno.ambientes.Bano;
+import com.example.cerouno.ambientes.Cocina;
+import com.example.cerouno.ambientes.Comedor;
+import com.example.cerouno.ambientes.Dormitorio;
+import com.example.cerouno.ambientes.Living;
+import com.example.cerouno.ambientes.Patio;
 
 public class MenuSlideActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, ComunicaBoton {
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     //variable para q aparezca el fragment elegido en la pantalla de aparatos
     public static int opcion;
@@ -46,26 +52,43 @@ public class MenuSlideActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        switch (opcion){
+            case 1: cargarFragmento(new Living()); break;
+            case 2: cargarFragmento(new Cocina()); break;
+            case 3: cargarFragmento(new Comedor()); break;
+            case 4: cargarFragmento(new Bano());break;
+            case 5: cargarFragmento(new Dormitorio());break;
+            case 6: cargarFragmento(new Dormitorio());break;
+            case 7: cargarFragmento(new Patio());break;
+
+            default: cargarFragmento(new Living()); break;
+        }
+
+        navigationView.getMenu().getItem(0).setChecked(true);
+
+
+
+
 
     }
-
-    @Override
-    public void boton(int queBoton) {
-
-        Intent intent = new Intent(this, aparatos.class);
-        intent.putExtra("BOTONPULSADO", queBoton);      //se carga la info con el boton pulsado
-        startActivity(intent);
-
-    }
-
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        /*DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }*/
+
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+        if(count == 0){
+            super.onBackPressed();
+        }else{
+            getSupportFragmentManager().popBackStack();
         }
     }
 
@@ -95,24 +118,24 @@ public class MenuSlideActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected( MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        FragmentManager fm = getSupportFragmentManager();
-
-        if (id == R.id.nav_home) {
-            fm.beginTransaction().replace(R.id.contenedor, new Televisor()).commit();
-        } else if (id == R.id.nav_gallery) {
-            fm.beginTransaction().replace(R.id.contenedor, new Luces()).commit();
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_tools) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.nav_living) {
+            cargarFragmento(new Living());
+        } else if (id == R.id.nav_cocina) {
+            cargarFragmento(new Cocina());
+        } else if (id == R.id.nav_comedor) {
+            cargarFragmento(new Comedor());
+        } else if (id == R.id.nav_bano) {
+            cargarFragmento(new Bano());
+        } else if (id == R.id.nav_dorm1) {
+            cargarFragmento(new Dormitorio());
+        } else if (id == R.id.nav_dorm2) {
+            cargarFragmento(new Dormitorio());
+        } else if (id == R.id.nav_patio) {
+            cargarFragmento(new Patio());
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -120,5 +143,8 @@ public class MenuSlideActivity extends AppCompatActivity
         return true;
     }
 
-
+    private void cargarFragmento (Fragment fragmento){
+        FragmentManager manager = getSupportFragmentManager();
+        manager.beginTransaction().replace(R.id.contenedor, fragmento).commit();
+    }
 }
