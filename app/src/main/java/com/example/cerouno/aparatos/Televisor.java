@@ -1,30 +1,25 @@
-package com.example.cerouno;
+package com.example.cerouno.aparatos;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentContainer;
-import android.util.Log;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import com.example.cerouno.R;
 
 
 public class Televisor extends Fragment implements View.OnClickListener {
 
-    public Button btn_input;
-    public Button btn_power;
-    public Button btn_mute;
-    public Button btn_anterior;
+    public ImageView btn_input;
+    public ImageView btn_power;
+    public ImageView btn_mute;
+    public ImageView btn_anterior;
 
     public Button btn_ch0;
     public Button btn_ch1;
@@ -36,17 +31,18 @@ public class Televisor extends Fragment implements View.OnClickListener {
     public Button btn_ch7;
     public Button btn_ch8;
     public Button btn_ch9;
-
-    public Button btn_volumeUp;
-    public Button btn_volumeDw;
-    public Button btn_canalUp;
-    public Button btn_canalDw;
-
-    public Button btn_flechaUp;
-    public Button btn_flechaDw;
-    public Button btn_flechaRight;
-    public Button btn_flechaLeft;
     public Button btn_botonOk;
+
+    public ImageButton btn_volumeUp;
+    public ImageButton btn_volumeDw;
+    public ImageButton btn_canalUp;
+    public ImageButton btn_canalDw;
+
+    public ImageButton btn_flechaUp;
+    public ImageButton btn_flechaDw;
+    public ImageButton btn_flechaRight;
+    public ImageButton btn_flechaLeft;
+
 
     //private int[] botonesTv = {R.id.onOff_tv, R.i};
 
@@ -59,12 +55,6 @@ public class Televisor extends Fragment implements View.OnClickListener {
         View myView = inflater.inflate(R.layout.fragment_televisor, container, false);
 
         //listeners(myView);
-
-        return myView;
-    }
-
-    private void listeners(View myView) {
-
 
         btn_input = myView.findViewById(R.id.input_tv);
         btn_input.setOnClickListener(this);
@@ -101,6 +91,7 @@ public class Televisor extends Fragment implements View.OnClickListener {
 
         btn_ch7 = myView.findViewById(R.id.canal7);
         btn_ch7.setOnClickListener(this);
+
         btn_ch8 = myView.findViewById(R.id.canal8);
         btn_ch8.setOnClickListener(this);
 
@@ -134,7 +125,10 @@ public class Televisor extends Fragment implements View.OnClickListener {
         btn_botonOk = myView.findViewById(R.id.botonOk);
         btn_botonOk.setOnClickListener(this);
 
+        return myView;
     }
+
+
 
     // metodo para mandar comandos al ADMIN
 
@@ -147,10 +141,15 @@ public class Televisor extends Fragment implements View.OnClickListener {
 
     }*/
 
+    private void cargarFragmento (Fragment fragmento){
+        FragmentManager manager = getFragmentManager();
+        manager.beginTransaction().replace(R.id.contenedor, fragmento).commit();
+    }
+
     @Override
     public void onClick(View view) {
 
-        Log.d("prueba", view.getTag().toString());  //agregar foncion de enviar tag
+        //cargarFragmento(new Living());
     }
 
 

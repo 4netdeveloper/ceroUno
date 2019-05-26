@@ -1,4 +1,4 @@
-package com.example.cerouno;
+package com.example.cerouno.aparatos;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import com.example.cerouno.R;
 
 import java.io.IOException;
 
