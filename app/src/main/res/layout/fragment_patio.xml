@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ambientes.Patio">
+    tools:context=".ambientes.Patio"
+    android:background="#FFFFFF">
 
     <RelativeLayout
         android:layout_width="match_parent"
