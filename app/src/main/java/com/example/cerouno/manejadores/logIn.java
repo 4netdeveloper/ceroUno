@@ -31,7 +31,7 @@ public class logIn extends AppCompatActivity {
 
         /* ************************************************ * /
         / * manejadores de red y activaciones de servicio: * /
-        / * ************************************************ */
+        / * *********************************************** */
 
 
         ingreso = findViewById(R.id.btn_ingresar);

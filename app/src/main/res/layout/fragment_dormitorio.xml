@@ -37,6 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"
+                    android:onClick="onClick"
                     android:src="@drawable/ic_tv_black_36dp" />
 
                 <TextView
