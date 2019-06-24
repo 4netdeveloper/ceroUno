@@ -1,15 +1,16 @@
 package com.example.cerouno.manejadores;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+// import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+// import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cerouno.R;
-import com.example.cerouno.administrador.RaspbyConnect;
 
 public class logIn extends AppCompatActivity {
 
@@ -39,12 +40,19 @@ public class logIn extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ambiente.class);
+                Ingresar(view );
+
+                intent.putExtra("usuario", etu.getText().toString());
+                intent.putExtra("hasusr", etp.getText().toString());
+
                 startActivity(intent);
             }
         });
 
-        etu = (EditText)findViewById(R.id.usuario);
-        etp = (EditText)findViewById(R.id.pass);
+        etu = (EditText)findViewById(R.id.usuario);//.setText("leandro");
+        etp = (EditText)findViewById(R.id.pass);//.setText("159357");
+
+
     }
 
     //metodo para el boton
@@ -53,18 +61,19 @@ public class logIn extends AppCompatActivity {
 
         String nombre = etu.getText().toString();
         String password = etp.getText().toString();
-
+        /*
         if(nombre.length() == 0){
-            Toast.makeText(this, "Debes ingresar un usuario", Toast.LENGTH_LONG).show();
+            msg.msg(this, "Debes ingresar un usuario", );
         }
 
         if(password.length() == 0){
-            Toast.makeText(this, "Debes ingresar una contraseña", Toast.LENGTH_LONG).show();
+            msg.msg(this, "Debes ingresar una contraseña", );
         }
 
         if(nombre.length() !=0 && password.length() !=0){
-            Toast.makeText(this, "Registro en proceso", Toast.LENGTH_LONG).show();
+            msg.msg(this, "Registro en proceso",);
         }
+        */
 
     }
 }
