@@ -34,7 +34,7 @@ public class raspberry extends Fragment {
     private JSONObject raspberryJsonObjectOriginator = null;
 
     public static raspberry onConstruct(raspberry previa ){
-        // metodo de auto construccion del objeto.
+        // metodo de auto construccion del objeto. estado nuevo.
 
         conexion ctn = new conexion(null , previa.getHashUsaroi() , previa.getUrlRPI());
 
