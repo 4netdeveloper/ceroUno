@@ -1,8 +1,10 @@
 package com.example.cerouno.ambientes;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +17,7 @@ public class Living extends Fragment implements View.OnClickListener{
 
 
 
-    @Override
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)  {
         View myView = inflater.inflate(R.layout.fragment_living, container, false);

@@ -59,10 +59,10 @@ public class habitacion extends Fragment {
 
     public int getIntValue(){
         int[] intvals = {
-                R.layout.living,R.layout.cocina
-                ,R.layout.comedor,R.layout.bau00f1o
-                ,R.layout.dormitorioprincipal,R.layout.dormitoriosecundario
-                ,R.layout.patio };
+                R.layout.fragment_living,R.layout.fragment_cocina
+                ,R.layout.fragment_comedor,R.layout.fragment_bano
+                ,R.layout.fragment_dormitorio,R.layout.fragment_dormitorio
+                ,R.layout.fragment_patio };
         return intvals[this.indice];
     }
 
