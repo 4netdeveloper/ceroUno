@@ -1,56 +1,19 @@
 package com.example.cerouno.administrador;
 
+import android.util.Log;
 
+// import java.io.Console;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
-public class configuraciones {
-    // FIXME: 24/05/19 conseguir almacenar los datos de usuario y configuracion del nucleo en un archivo local.
-    static String Archivo="Configuraciones.obj";
-    // la url tiene que contener el puerto correspondiente:
-    private String[] clavesConfig = {"localhost","remotehost"
-                ,"hasUsr"   ,"grupos"   ,"dipositivos"};
+public class configuraciones<config> {
 
-    public configuraciones(){
-
-        Recuperar();
-
-    }
-
-    public String getConfig(String variable){
-        // obtener un valor del archivo de configuracion
-        String rt="";
-
-        return rt;
-    }
-    public void setConfiguracion(String variable,String valor){
-
-    }
-    public void unset(){
-
-    }
-    static int echo (String valor){
-        msg.echo( valor );
-        return 0;
-    }
-
-
-    /* **************************
-    *
-    * guradar y recuperar datos:
-    *
-    * ***************************/
-
-
-    private void Guardar(){
-
-    }
-
-    // @ SuppressWarnings("unchecked")
-    private void Recuperar() {
-
-    }
-
-    private void inicializar(){inicializar(false);}
-
-    private void inicializar(boolean inicializa) {
-    }
 }
