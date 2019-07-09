@@ -4,6 +4,8 @@ package com.example.cerouno.aparatos;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +14,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.cerouno.R;
+import com.example.cerouno.manejadores.ambiente;
 
 
 public class Televisor extends Fragment implements View.OnClickListener {
+
+    public static String dev ="";
 
     public ImageView btn_input;
     public ImageView btn_power;
@@ -54,7 +59,6 @@ public class Televisor extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View myView = inflater.inflate(R.layout.fragment_televisor, container, false);
 
-        //listeners(myView);
 
         btn_input = myView.findViewById(R.id.input_tv);
         btn_input.setOnClickListener(this);
@@ -147,8 +151,9 @@ public class Televisor extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View view) {
-
+    public void onClick(View v) {
+        Log.i("-----------------------", "BOTON: "+v.getTag());
+        ambiente.recibeBotones(dev, String.valueOf(v.getTag()), "A");
         //cargarFragmento(new Living());
     }
 

@@ -39,7 +39,7 @@ public class MenuSlideActivity extends AppCompatActivity
         setContentView(R.layout.activity_menu_slide);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
+/*        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,6 +47,7 @@ public class MenuSlideActivity extends AppCompatActivity
                         .setAction("Action", null).show();
             }
         });
+        */
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -135,8 +136,10 @@ public class MenuSlideActivity extends AppCompatActivity
             cargarFragmento(new Bano());
         } else if (id == R.id.nav_dorm1) {
             cargarFragmento(new Dormitorio());
+            Dormitorio.id = 1;
         } else if (id == R.id.nav_dorm2) {
             cargarFragmento(new Dormitorio());
+            Dormitorio.id = 2;
         } else if (id == R.id.nav_patio) {
             cargarFragmento(new Patio());
         }
