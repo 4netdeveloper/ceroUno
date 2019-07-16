@@ -153,7 +153,7 @@ public class Televisor extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         Log.i("-----------------------", "BOTON: "+v.getTag());
-        ambiente.recibeBotones(dev, String.valueOf(v.getTag()), "A");
+        ambiente.recibeBotones(dev, "A", String.valueOf(v.getTag()));
         //cargarFragmento(new Living());
     }
 

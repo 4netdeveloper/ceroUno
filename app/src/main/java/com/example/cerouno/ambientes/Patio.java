@@ -35,15 +35,15 @@ public class Patio extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.l51:
                 Log.i("-----------------------", "BOTON LUZ 1 PATIO");
-                ambiente.recibeBotones(String.valueOf(v.getTag()), "0", "A");
+                ambiente.recibeBotones(String.valueOf(v.getTag()),  "A", "0");
                 break;
             case R.id.l52:
                 Log.i("-----------------------", "BOTON LUZ 2 PATIO");
-                ambiente.recibeBotones(String.valueOf(v.getTag()), "0", "A");
+                ambiente.recibeBotones(String.valueOf(v.getTag()),   "A", "0");
                 break;
             case R.id.l53:
                 Log.i("-----------------------", "BOTON LUZ 3 PATIO");
-                ambiente.recibeBotones(String.valueOf(v.getTag()), "0", "A");
+                ambiente.recibeBotones(String.valueOf(v.getTag()),  "A", "0");
                 break;
         }
     }

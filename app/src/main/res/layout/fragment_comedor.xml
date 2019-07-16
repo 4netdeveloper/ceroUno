@@ -82,7 +82,7 @@
                             android:background="#FFFFFF"
                             android:onClick="onClick"
                             android:src="@drawable/foco"
-                            android:tag="l21" />
+                            android:tag="GP2A01" />
 
                         <TextView
                             android:layout_width="match_parent"

@@ -88,7 +88,7 @@
                             android:background="#FFFFFF"
                             android:focusableInTouchMode="false"
                             android:src="@drawable/foco"
-                            android:tag="l41" />
+                            android:tag="GP4A01" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -120,7 +120,7 @@
                             android:layout_height="wrap_content"
                             android:background="#FFFFFF"
                             android:src="@drawable/foco"
-                            android:tag="l42" />
+                            android:tag="GP4A02" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -152,7 +152,7 @@
                             android:layout_height="wrap_content"
                             android:background="#FFFFFF"
                             android:src="@drawable/foco"
-                            android:tag="l43" />
+                            android:tag="GP4A03" />
 
                         <TextView
                             android:layout_width="match_parent"

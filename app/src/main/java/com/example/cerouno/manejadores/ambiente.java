@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 
 import com.example.cerouno.R;
 import com.example.cerouno.administrador.conexion;
@@ -54,15 +55,15 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ambiente);
-
         // bucle de creacion de ambientes:
         for(int ambiente : BOTONESMENU){
             // Console.echo("asignado:"+ambiente);
             // asignando el controlador del boton :
             findViewById(ambiente).setOnClickListener(this);
         }
+        Log.i("-------------------", "On Create-------------");
 
-   }
+    }
 
     private void cargarFragmento (Fragment fragmento){
         FragmentManager manager = getSupportFragmentManager();
@@ -99,5 +100,40 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
     public static void recibeBotones (String dev, String acc, String val){
         Log.i ("--------------", "Llamando a conexion");
         conex.send( dev, acc, val);
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i("-------------------", "On Pause-------------");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i("-------------------", "On Stop-------------");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i("-------------------", "On Destroy-------------");
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i("-------------------", "On Start-------------");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i("-------------------", "On Resume-------------");
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.i("-------------------", "On Restart-------------");
     }
 }

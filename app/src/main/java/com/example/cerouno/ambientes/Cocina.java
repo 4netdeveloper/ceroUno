@@ -38,6 +38,6 @@ public class Cocina extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         Log.i( "-----------------------", "BOTON LUZ COCINA");
-        ambiente.recibeBotones(String.valueOf(v.getTag()), "0", "A");
+        ambiente.recibeBotones(String.valueOf(v.getTag()),  "A", "0");
     }
 }

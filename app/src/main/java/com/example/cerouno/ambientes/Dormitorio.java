@@ -43,27 +43,27 @@ public class Dormitorio extends Fragment implements View.OnClickListener{
                 cargarFragmento(new Televisor());
                 if (id == 1){
                     Log.i( "-----------------------", "BOTON TELE DORMITORIO 1");
-                    Televisor.dev = "30A";}
+                    Televisor.dev = "TV3A01";}
                 else if (id == 2){
                     Log.i( "-----------------------", "BOTON TELE DORMITORIO 2");
-                    Televisor.dev = "30B";}
+                    Televisor.dev = "TV3B01";}
                 break;
             case R.id.l31:
                 if (id == 1) {
                     Log.i("-----------------------", "BOTON LUZ 1 DORMITORIO 1");
-                    ambiente.recibeBotones(String.valueOf(v.getTag()), "0", "A");
+                    ambiente.recibeBotones("GP3A01",  "A", "0");
                 } else if (id == 2) {
                     Log.i("-----------------------", "BOTON LUZ 1 DORMITORIO 2");
-                    ambiente.recibeBotones(String.valueOf(v.getTag()), "0", "A");
+                    ambiente.recibeBotones("GP3B01",  "A", "0");
                 }
                 break;
             case R.id.l32:
                 if (id == 1) {
                     Log.i("-----------------------", "BOTON LUZ 2 DORMITORIO 1");
-                    ambiente.recibeBotones(String.valueOf(v.getTag()), "0", "A");
+                    ambiente.recibeBotones("GP3A02", "A", "0");
                 } else if (id == 2) {
                     Log.i("-----------------------", "BOTON LUZ 2 DORMITORIO 2");
-                    ambiente.recibeBotones(String.valueOf(v.getTag()), "0", "A");
+                    ambiente.recibeBotones("GP3B02", "A", "0");
                 }
                 break;
     }

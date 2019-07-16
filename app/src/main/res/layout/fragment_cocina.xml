@@ -60,7 +60,7 @@
                             android:layout_height="wrap_content"
                             android:background="#FFFFFF"
                             android:src="@drawable/foco"
-                            android:tag="l11" />
+                            android:tag="GP1A01" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -92,7 +92,7 @@
                             android:layout_height="wrap_content"
                             android:background="#FFFFFF"
                             android:src="@drawable/foco"
-                            android:tag="l12" />
+                            android:tag="GP1A02" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -124,7 +124,7 @@
                             android:layout_height="wrap_content"
                             android:background="#FFFFFF"
                             android:src="@drawable/foco"
-                            android:tag="l13" />
+                            android:tag="GP1A03" />
 
                         <TextView
                             android:layout_width="match_parent"

@@ -37,11 +37,11 @@ public class Comedor extends Fragment implements View.OnClickListener{
         switch (v.getId()) {
             case R.id.botonTvCom:
                 cargarFragmento(new Televisor());
-                Televisor.dev = "20";
+                Televisor.dev = "TV2A01";
                 break;
             case R.id.l21:
                 Log.i("-----------------------", "BOTON LUZ COMEDOR");
-                ambiente.recibeBotones(String.valueOf(v.getTag()), "0", "A");
+                ambiente.recibeBotones(String.valueOf(v.getTag()),  "A", "0");
                 break;
         }
     }

@@ -6,6 +6,8 @@ import com.google.android.material.snackbar.Snackbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
+
+import android.util.Log;
 import android.view.View;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -39,6 +41,7 @@ public class MenuSlideActivity extends AppCompatActivity
         setContentView(R.layout.activity_menu_slide);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 /*        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,4 +158,5 @@ public class MenuSlideActivity extends AppCompatActivity
         fragmentTransaction.commit();
 
     }
+
 }

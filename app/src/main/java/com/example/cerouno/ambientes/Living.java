@@ -45,20 +45,20 @@ public class Living extends Fragment implements View.OnClickListener{
         switch (v.getId()) {
             case R.id.botonTv:
                 cargarFragmento(new Televisor());
-                Televisor.dev = "40";
+                Televisor.dev = "TV4A01";
                 break;
             case R.id.l41:
                 Log.i("-----------------------", "BOTON LUZ 1 LIVING");
                 Log.i("-----------------------", String.valueOf(v.getTag()));
-                ambiente.recibeBotones(String.valueOf(v.getTag()), "0", "A");
+                ambiente.recibeBotones(String.valueOf(v.getTag()),  "A", "0");
                 break;
             case R.id.l42:
                 Log.i("-----------------------", "BOTON LUZ 2 LIVING");
-                ambiente.recibeBotones(String.valueOf(v.getTag()), "0", "A");
+                ambiente.recibeBotones(String.valueOf(v.getTag()),  "A", "0");
                 break;
             case R.id.l43:
                 Log.i("-----------------------", "BOTON LUZ 3 LIVING");
-                ambiente.recibeBotones(String.valueOf(v.getTag()), "0", "A");
+                ambiente.recibeBotones(String.valueOf(v.getTag()),  "A", "0");
                 break;
         }
     }
