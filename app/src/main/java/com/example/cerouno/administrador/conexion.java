@@ -248,5 +248,36 @@ public class conexion {
         // {proto,host,port} = url.split(':');
     }
 
+    public static String user;
+    public static int hash;
+
+    public conexion (String usuario, int clave)
+    {
+        user = usuario;
+        hash = clave;
+    }
+    public void setUser(String nombre){
+        user = nombre;
+        Log.i ("-------------", "SET NOMBRE");
+    }
+
+    public void setHash(int clave){
+        hash = clave;
+        Log.i ("-------------", "SET HASH");
+    }
+
+    int estado;
+
+    public int getStatus(){
+
+        Log.i (user, String.valueOf(hash));
+        if(user.equals("Usuario") && hash == 123456 )
+            estado = 2;
+        else
+            estado = 1;
+
+        return estado;
+    }
+
 
 }

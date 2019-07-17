@@ -21,18 +21,17 @@
         android:usesCleartextTraffic="true"
         android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/AppTheme">
-        <activity android:name=".ambientes.Patio" />
         <activity android:name=".ambientes.Dormitorio" />
         <activity android:name=".ambientes.Comedor" />
         <activity android:name=".ambientes.Cocina" />
         <activity android:name=".ambientes.Living" />
         <activity android:name=".ambientes.Bano" />
-        <activity android:name=".manejadores.ambiente" />
+        <activity android:name=".manejadores.logIn" />
         <activity
             android:name=".manejadores.MenuSlideActivity"
             android:label="@string/title_activity_menu_slide"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".manejadores.logIn">
+        <activity android:name=".manejadores.ambiente">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

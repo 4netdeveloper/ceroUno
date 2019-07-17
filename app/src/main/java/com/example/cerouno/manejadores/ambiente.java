@@ -1,25 +1,36 @@
 package com.example.cerouno.manejadores;
 
+import android.content.Context;
 import android.content.Intent;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
 
 import com.example.cerouno.R;
 import com.example.cerouno.administrador.conexion;
 import com.example.cerouno.ambientes.Dormitorio;
+
+import android.widget.Toast;
 
 public class ambiente extends AppCompatActivity implements View.OnClickListener{
 
 
     static int[] BOTONESMENU = {R.id.amb_tv, R.id.amb_cocina, R.id.amb_comedor, R.id.amb_bano, R.id.amb_dormitorio, R.id.amb_dormitorio2,  //array de botones
             R.id.amb_patio};
+    public static conexion conex;
     int i, j;
     int opcion = i;
+
+    static String [] lucesTag =
+    {"GP0A01", "GP0A02", "GP0A03","GPA1A01", "GPA1A02", "GPA1A03","GP2A01",
+            "GP3A01", "GP3202", "GP3B01", "GP3B02", "GP4A01", "GP4A02", "GP4A03", "GP5A01", "GP5A02", "GP5A03"};
+
+    static int [] estados = new int[lucesTag.length];
 
     /* ************************************************ * /
     / *
@@ -54,7 +65,41 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
         / * ************************************************ */
 
         super.onCreate(savedInstanceState);
+        //Login----------
+        SharedPreferences prefLectura = getSharedPreferences("usuario", Context.MODE_PRIVATE);
+
+       conex.setUser(prefLectura.getString("user", ""));
+        conex.setHash(prefLectura.getInt("hash", 0));
+
+        int status = conex.getStatus();
+        Log.i("---- AMBIENTE", String.valueOf(status));
+
+        switch (status){
+            case 0: Toast.makeText(this, "Servicio no encontrado!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this, logIn.class);
+                    startActivity(intent);
+                    break;
+
+            case 1: SharedPreferences prefGuarda = getSharedPreferences("usuario", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefGuarda.edit();
+                    editor.putString("user","");
+                    editor.putInt("hash", 0);
+                    editor.apply();
+                    finish();
+                    intent = new Intent(this, logIn.class);
+                    startActivity(intent);
+                    break;
+
+            case 2:
+                break;
+
+            default: break;
+        }
+
+
+
         setContentView(R.layout.activity_ambiente);
+
         // bucle de creacion de ambientes:
         for(int ambiente : BOTONESMENU){
             // Console.echo("asignado:"+ambiente);
@@ -65,11 +110,16 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
 
     }
 
+
+
     private void cargarFragmento (Fragment fragmento){
         FragmentManager manager = getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.contenedor, fragmento).commit();
     }
-
+    public static conexion creaConexion(Context context){
+        conex  = new conexion(context);
+        return conex;
+    }
     @Override
     public void onClick(View v) {
         Intent intent = new Intent(getApplicationContext(),MenuSlideActivity.class);
@@ -95,11 +145,23 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
 
 
     }
-    static conexion conex = new conexion();
+
+    public static int devuelveEstados (String tag){
+        int estado = 0;
+
+        for(int i =0; i<lucesTag.length; i++){
+            if(lucesTag[i] == tag){
+                estado = estados[i];
+            }
+        }       return estado;
+    }
+
+
+
     //Recibe los datos de todos los botones y los redirecciona a conexion
     public static void recibeBotones (String dev, String acc, String val){
         Log.i ("--------------", "Llamando a conexion");
-        conex.send( dev, acc, val);
+        //conex.setDev(dev).setAcc(acc).setVal(val).send( );
     }
     @Override
     protected void onPause() {
@@ -123,6 +185,10 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
     protected void onStart() {
         super.onStart();
         Log.i("-------------------", "On Start-------------");
+
+        for(int i=0; i<lucesTag.length; i++){
+            estados[i]=0;
+        }
     }
 
     @Override

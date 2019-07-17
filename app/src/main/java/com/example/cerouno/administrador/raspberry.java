@@ -23,5 +23,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class raspberry extends Fragment {
+public class raspberry {
+
+    Object luz = new Object();
+
+    String [][] estadoRaspberry;
 }
