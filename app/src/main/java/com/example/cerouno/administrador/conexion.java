@@ -1,28 +1,26 @@
 package com.example.cerouno.administrador;
 
 import android.content.Context;
-import android.net.nsd.NsdManager;
-import android.net.nsd.NsdServiceInfo;
 import android.net.wifi.WifiManager;
+import android.net.DhcpInfo;
+import java.net.InetAddress;
+
 import android.os.AsyncTask;
-import android.text.format.Formatter;
 import android.util.Base64;
 import android.util.Log;
 
 
-import com.example.cerouno.manejadores.usuario;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
 import java.net.Socket;
-import java.util.concurrent.ExecutionException;
+import java.net.SocketException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 public class conexion {
     private String url;
@@ -33,7 +31,8 @@ public class conexion {
     // accion
     // valor
     private int status;
-    private String has;
+    private String user, has ;
+    private boolean bol_user =false,bol_has=false;
     private MyAsyncTask _MAsync;
     private Context Contexto;
     private WifiManager wifi;
@@ -42,7 +41,7 @@ public class conexion {
     /*objeto especial para procesar respuestas */
     //private resultado rts;
 
-    public conexion(Context Contexto, String usrhas, String url) {
+    public conexion(Context Contexto) {
         /*
         * TODO: clase de coneccion se requiere :
             url conformada por <protocolo>://<host>:<port>
@@ -52,10 +51,13 @@ public class conexion {
 
         // funcion de prueba de coneccion.
         this.Contexto = Contexto;
-        this.has = usrhas;
 
-        this.setUrl(url);
-        this._MAsync = new MyAsyncTask(host, port, usrhas);
+        // this.setUrl(url);
+        // this._MAsync = new MyAsyncTask(host, port, usrhas);
+        host="http://192.168.0.103";
+        port="8181";
+
+        this._MAsync = new MyAsyncTask(host, port);
 
         //
         // prueba exitosa enciende una luz con el usuario leandro morala.
@@ -64,28 +66,112 @@ public class conexion {
 
     }
 
-    public static String urlDelCorePi() {
-
-        return "http://192.168.155.14:8181";
-
-    }
-
-    public Boolean send(String dev, String acc, String val, Boolean sinRespuesta) {
-
-        send(dev, acc, val);
-        return false;
-
-    }
-    public conexion()
-    {}
     public conexion send(String dev, String acc, String val) {
         // alg oooo par hacer.
 
-        /*_MAsync.setDev(dev).setAcc(acc).setVal(val);
-        _MAsync.execute("");*/
+        _MAsync.setDev(dev).setAcc(acc).setVal(val);
+        _MAsync.execute("");// */
         Log.i("CONEXION SEND -------", dev+" --- "+acc+" --- "+val);
         return this;
     }
+    public conexion setUser(String usuario){
+        this.user = usuario;
+        bol_user=true;
+        this._MAsync.setUsrhas(usuario);
+
+        return this;
+    }
+    public conexion setHash(String hash){
+        this.has=hash;
+        bol_has=true;
+        return this;
+    }
+    /***
+     * return int ( 0=falla no hay conecion)
+     * (1=falla no autorizado)
+     * (2=ok)
+     * */
+    public int getStatus(){
+        status=0;
+        if (bol_user && bol_has){
+            // tengo usuario y clave.
+            //detectando red:
+            Object t = Contexto.getSystemService(Contexto.WIFI_SERVICE);
+            if (  t != null  ){
+                status=1;
+            }
+        }
+        return status;
+    }
+
+    public conexion setUrl(String url){
+        // forma del url:
+        // <prot>://<host>:<port>
+        String[] datos = url.split(":");
+        proto=datos[0];
+        host=datos[1].replace("/","");
+        port=datos[2];
+        this.url = url;
+        return this;
+
+        // {proto,host,port} = url.split(':');
+    }
+
+
+
+    /**
+     *
+     *
+     * codificacion de servicios
+     *
+     * */
+
+
+    public void sendBroadcast(
+            final String Usuario, final String Valor
+            , String address, final int puerto
+    ) throws Exception {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    InetAddress address = getBroadcastAddress(Contexto );
+
+                    String Cadena = "u:" + Usuario + ":v:" + Valor;
+                    byte[] Buf = Cadena.getBytes();
+                    DatagramSocket clientSocket = new DatagramSocket();
+                    clientSocket.setBroadcast(true);
+
+                    DatagramPacket sendPacket = new DatagramPacket(
+                            Buf
+                            , Buf.length
+                            , address
+                            , puerto);
+
+                    clientSocket.send(sendPacket);
+
+                    clientSocket.close();
+
+                } catch (Exception e) {
+                    //Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, null, e);
+                    msg.echo(e.getMessage());
+                }
+            }
+        }).start();
+
+    }
+
+
+
+
+    /*
+     *
+     * clase asincronica de comunicacion de datos.
+     *
+     * */
+
 
     private class MyAsyncTask extends AsyncTask<String, Void, String>
     {
@@ -96,11 +182,11 @@ public class conexion {
         IOException ioException;
         boolean working=false;
 
-        MyAsyncTask( String host,String port, String usr ) {
+        MyAsyncTask( String host,String port ) {
             super();
             this.host = host;
             this.port = port;
-            this.usrhas=usr;
+            // this.usrhas=usr;
 
             this.response = "";
             this.ioException = null;
@@ -177,7 +263,10 @@ public class conexion {
         }
 
         public String getUsrhas() { return usrhas;}
-        public void setUsrhas(String usrhas) {this.usrhas = usrhas;}
+        public void setUsrhas(String usrhas) {
+            this.usrhas = usrhas;
+
+        }
 
         public String getDev() {return dev;}
         public MyAsyncTask setDev(String dev) {this.dev = dev; return this ;}
@@ -235,49 +324,99 @@ public class conexion {
 
     }
 
-    public conexion setUrl(String url){
-        // forma del url:
-        // <prot>://<host>:<port>
-        String[] datos = url.split(":");
-        proto=datos[0];
-        host=datos[1].replace("/","");
-        port=datos[2];
-        this.url = url;
-        return this;
 
-        // {proto,host,port} = url.split(':');
+
+
+    private class UDPServer {
+        //servicio de escucha en un puerto.
+        private DatagramSocket udpSocket;
+        private int port;
+        private String host,key;
+        private String msg;
+        // private Activity activity;
+
+        public UDPServer( int port ) throws SocketException, IOException {
+            this.port = port;
+            this.udpSocket = new DatagramSocket(this.port);
+            /* udpSocket .*/
+            //this.activity = activity;
+            this.host="";
+        }
+
+        public void listen() throws Exception {
+
+            // String msg;
+
+            while (true) {
+
+                byte[] buf = new byte[256];
+                DatagramPacket packet = new DatagramPacket(buf, buf.length);
+                // blocks until a packet is received
+                udpSocket.receive(packet);
+                // convirtiendo el datagrama en string recibido.
+                msg = new String(packet.getData()).trim();
+                /*
+                if (msg.equals("Okkkk")) {
+                    msg = "Message from " + packet.getAddress().getHostAddress() + ": " + msg;
+                    final String finalMsg = msg;
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(activity, finalMsg, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }
+                */
+                Log.e("UDP_SERVER", "Message from "
+                        + packet.getAddress().getHostAddress()
+                        + ": " + msg);
+                host=packet.getAddress().getHostAddress();
+                key=msg;
+            }
+
+
+        }
+
     }
 
-    public static String user;
-    public static int hash;
+    // private class NetworkHelper {
 
-    public conexion (String usuario, int clave)
-    {
-        user = usuario;
-        hash = clave;
-    }
-    public void setUser(String nombre){
-        user = nombre;
-        Log.i ("-------------", "SET NOMBRE");
-    }
+    /**
+     * Método que se encarga de obtener la dirección de broadcast de la subred.
+     * @return  InetAddres con la dirección de broadcast.
+     */
+    private static InetAddress getBroadcastAddress(Context context) throws Exception {
 
-    public void setHash(int clave){
-        hash = clave;
-        Log.i ("-------------", "SET HASH");
-    }
+        WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        DhcpInfo dhcp = wifi.getDhcpInfo();
 
-    int estado;
-
-    public int getStatus(){
-
-        Log.i (user, String.valueOf(hash));
-        if(user.equals("Usuario") && hash == 123456 )
-            estado = 2;
-        else
-            estado = 1;
-
-        return estado;
+        int broadcast = (dhcp.ipAddress & dhcp.netmask) | ~dhcp.netmask;
+        byte[] quads = new byte[4];
+        for (int k = 0; k < 4; k++)
+            quads[k] = (byte) (broadcast >> (k * 8));
+        return InetAddress.getByAddress(quads);
     }
 
+    /**
+     * Método que se encarga de obtener la dirección ip del dispositivo.
+     * @return  InetAddres con la dirección ip del dispositivo.
+     */
+    private static InetAddress getLocalIpAddress(Context context) throws IOException{
+
+        final WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        final ByteBuffer byteBuffer = ByteBuffer.allocate(4);
+        byteBuffer.order(ByteOrder.LITTLE_ENDIAN);
+        byteBuffer.putInt(wifiManager.getConnectionInfo().getIpAddress());
+        InetAddress inetAddress = null;
+        try {
+            inetAddress = InetAddress.getByAddress(null, byteBuffer.array());
+        } catch (Exception e) {
+            msg.echo("NetworkHelper"+ e.getMessage() );
+        }
+        return inetAddress;
+    }
+
+    //}
 
 }
