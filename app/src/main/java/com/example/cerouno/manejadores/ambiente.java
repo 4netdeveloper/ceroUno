@@ -57,6 +57,7 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
         / * ************************************************ */
 
 
+
         //RaspbyConnect rp = new RaspbyConnect(this);
 
 
@@ -65,11 +66,12 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
         / * ************************************************ */
 
         super.onCreate(savedInstanceState);
+        conex=new conexion(this);
         //Login----------
         SharedPreferences prefLectura = getSharedPreferences("usuario", Context.MODE_PRIVATE);
 
        conex.setUser(prefLectura.getString("user", ""));
-        conex.setHash(prefLectura.getInt("hash", 0));
+        conex.setHash(prefLectura.getInt("hash", 0)+"");
 
         int status = conex.getStatus();
         Log.i("---- AMBIENTE", String.valueOf(status));
@@ -106,7 +108,7 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
             // asignando el controlador del boton :
             findViewById(ambiente).setOnClickListener(this);
         }
-        Log.i("-------------------", "On Create-------------");
+
 
     }
 
@@ -163,43 +165,15 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
         Log.i ("--------------", "Llamando a conexion");
         //conex.setDev(dev).setAcc(acc).setVal(val).send( );
     }
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.i("-------------------", "On Pause-------------");
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.i("-------------------", "On Stop-------------");
-    }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i("-------------------", "On Destroy-------------");
-    }
+
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.i("-------------------", "On Start-------------");
-
         for(int i=0; i<lucesTag.length; i++){
             estados[i]=0;
         }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.i("-------------------", "On Resume-------------");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.i("-------------------", "On Restart-------------");
     }
 }

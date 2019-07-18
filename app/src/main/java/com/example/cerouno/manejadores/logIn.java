@@ -35,6 +35,7 @@ public class logIn extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
+        if (conex==null) ambiente.creaConexion(this);
 
         /* ************************************************ * /
         / * manejadores de red y activaciones de servicio: * /
@@ -59,7 +60,7 @@ public class logIn extends AppCompatActivity {
                 ambiente.conex.setUser(nombre);
 
                 String password = String.valueOf(etp.getText());
-                conex.setHash(Integer.parseInt(password));
+                conex.setHash(Integer.parseInt(password)+"");
 
                 int status = conex.getStatus();
                 Log.i ("--------LOGIN", String.valueOf(status));

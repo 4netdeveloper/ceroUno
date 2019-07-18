@@ -19,12 +19,11 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/TextHabitacion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_light"
                 android:text="@string/string_patio"
                 android:textAlignment="center"
+                android:fontFamily="@font/roboto_light"
                 android:textSize="45dp" />
 
 
@@ -55,11 +54,12 @@
                         android:padding="15dp">
 
                         <ImageButton
-                            android:id="@+id/luz-01"
+                            android:id="@+id/l51"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="#FFFFFF"
-                            android:src="@drawable/foco" />
+                            android:src="@drawable/foco"
+                            android:tag="GP5A01" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -86,11 +86,12 @@
                         android:padding="15dp">
 
                         <ImageButton
-                            android:id="@+id/luz-02"
+                            android:id="@+id/l52"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="#FFFFFF"
-                            android:src="@drawable/foco" />
+                            android:src="@drawable/foco"
+                            android:tag="GP5A02" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -117,11 +118,12 @@
                         android:padding="15dp">
 
                         <ImageButton
-                            android:id="@+id/luz-03"
+                            android:id="@+id/l53"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="#FFFFFF"
-                            android:src="@drawable/foco" />
+                            android:src="@drawable/foco"
+                            android:tag="GP5A03" />
 
                         <TextView
                             android:layout_width="match_parent"

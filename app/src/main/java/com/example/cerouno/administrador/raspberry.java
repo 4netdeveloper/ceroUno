@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import com.example.cerouno.R;
 import com.example.cerouno.ambientes.habitacion;
 import com.example.cerouno.aparatos.Televisor;
-import com.example.cerouno.manejadores.usuario;
+//import com.example.cerouno.manejadores.usuario;
 
 import org.json.JSONException;
 import org.json.JSONObject;
