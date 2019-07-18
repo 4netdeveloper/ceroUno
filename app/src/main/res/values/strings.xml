@@ -1,0 +1,91 @@
+<resources>
+    <string name="app_name">ceroUno</string>
+    <!-- Strings related to login -->
+    <string name="ingresar_usuario">Usuario</string>
+    <string name="ingresar_password">Contraseña</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="logo">Logo</string>
+    <string name="btn_ingresar">Ingresar</string>
+    <string name="btn_registrarse">Registrarse</string>
+    <string name="tv_etiqueta">Domótica</string>
+    <string name="title_activity_menu_slide">ceroUno</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
+    <string name="menu_tv">MenuTelevisor</string>
+    <string name="menu_luces">MenuLuces</string>
+    <string name="tv_televisor">Televisor</string>
+    <string name="tv_luces">Luces</string>
+    <string name="tv_comenzamos">Donde comenzamos?</string>
+
+    <string name="luz_1">Luz 1</string>
+    <string name="luz_2">Luz 2</string>
+    <string name="luz_3">Luz 3</string>
+    <string name="luz_4">Luz 4</string>
+
+
+    <string name="encendido">On/Off</string>
+    <string name="input">Input</string>
+
+    <string name="mute">Mute</string>
+    <string name="canal_ant">Anterior</string>
+    <string name="ok">Ok</string>
+
+    <string name="flecha_up">Arriba</string>
+    <string name="flecha_dw">Abajo</string>
+    <string name="flecha_lf">Izquierda</string>
+    <string name="flecha_rg">Derecha</string>
+    <string name="proyector">proyector</string>
+
+    <string name="string_televisor">Televisor</string>
+    <string name="string_luces">Luces</string>
+    <string name="string_proyector">Proyector</string>
+    <string name="string_salir">Salir</string>
+    <string name="string_cocina">Cocina</string>
+    <string name="tv_living">Living</string>
+    <string name="string_dormitorio">Dormitorio</string>
+    <string name="string_dormitorio2">Dormitorio 2</string>
+    <string name="string_bano">Baño</string>
+    <string name="string_comedor">Comedor</string>
+    <string name="string_patio">Patio</string>
+
+    <string name="volumen">Volúmen</string>
+    <string name="canal">Canales</string>
+
+    <string name="canal_1">1</string>
+    <string name="canal_2">2</string>
+    <string name="canal_3">3</string>
+    <string name="canal_4">4</string>
+    <string name="canal_5">5</string>
+    <string name="canal_6">6</string>
+    <string name="canal_7">7</string>
+    <string name="canal_8">8</string>
+    <string name="canal_9">9</string>
+    <string name="canal_0">0</string>
+
+    <string name="habitaciones">HABITACIONES</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="communicate">Communicate</string>
+</resources>

@@ -53,11 +53,10 @@
                         android:padding="15dp">
 
                         <ImageButton
-                            android:id="@+id/l01"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/foco_apagado"
-                            android:tag="GP0A01" />
+                            android:background="#FFFFFF"
+                            android:src="@drawable/foco" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -84,11 +83,10 @@
                         android:padding="15dp">
 
                         <ImageButton
-                            android:id="@+id/l02"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/foco_apagado"
-                            android:tag="GP0A02" />
+                            android:background="#FFFFFF"
+                            android:src="@drawable/foco" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -115,11 +113,10 @@
                         android:padding="15dp">
 
                         <ImageButton
-                            android:id="@+id/l03"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/foco_apagado"
-                            android:tag="GP0A03" />
+                            android:background="#FFFFFF"
+                            android:src="@drawable/foco" />
 
                         <TextView
                             android:layout_width="match_parent"

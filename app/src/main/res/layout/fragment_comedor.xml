@@ -76,13 +76,10 @@
                         android:padding="15dp">
 
                         <ImageButton
-                            android:id="@+id/l21"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="#FFFFFF"
-                            android:onClick="onClick"
-                            android:src="@drawable/foco"
-                            android:tag="GP2A01" />
+                            android:src="@drawable/foco" />
 
                         <TextView
                             android:layout_width="match_parent"

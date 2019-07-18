@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/living"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:tag="living"
-    tools:context=".ambientes.Living">
+    tools:context=".ambientes.Living"
+    android:background="#FFFFFF">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -18,15 +16,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_light"
                 android:text="@string/tv_living"
                 android:textAlignment="center"
+                android:fontFamily="@font/roboto_light"
                 android:textSize="45dp" />
 
             <LinearLayout
@@ -42,16 +40,16 @@
                     android:background="#FFFFFF"
                     android:onClick="onClick"
                     android:src="@drawable/ic_tv_black_36dp" />
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_light"
                     android:text="@string/tv_televisor"
-                    android:textAlignment="center"
-                    android:textSize="25dp" />
+                    android:fontFamily="@font/roboto_light"
+                    android:textSize="25dp"
+                    android:textAlignment="center"/>
 
             </LinearLayout>
+
 
 
             <LinearLayout
@@ -59,20 +57,21 @@
                 android:layout_height="1dp"
                 android:background="@color/cardview_dark_background"
                 android:orientation="horizontal"
-                android:padding="50dp"></LinearLayout>
+                android:padding="50dp">
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:orientation="horizontal"
+                android:gravity="center"
                 android:padding="15dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -81,22 +80,19 @@
                         android:padding="15dp">
 
                         <ImageButton
-                            android:id="@+id/l41"
-                            style="@style/Widget.AppCompat.ImageButton"
+                            android:id="@+id/botonLuz1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="#FFFFFF"
-                            android:focusableInTouchMode="false"
-                            android:src="@drawable/foco"
-                            android:tag="GP4A01" />
+                            android:src="@drawable/foco" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_light"
                             android:text="@string/luz_1"
-                            android:textAlignment="center"
-                            android:textSize="25dp" />
+                            android:textSize="25dp"
+                            android:fontFamily="@font/roboto_light"
+                            android:textAlignment="center"/>
 
                     </LinearLayout>
 
@@ -105,8 +101,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -115,20 +111,19 @@
                         android:padding="15dp">
 
                         <ImageButton
-                            android:id="@+id/l42"
+                            android:id="@+id/botonLuz2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="#FFFFFF"
-                            android:src="@drawable/foco"
-                            android:tag="GP4A02" />
+                            android:src="@drawable/foco" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_light"
                             android:text="@string/luz_2"
-                            android:textAlignment="center"
-                            android:textSize="25dp" />
+                            android:textSize="25dp"
+                            android:fontFamily="@font/roboto_light"
+                            android:textAlignment="center"/>
 
                     </LinearLayout>
 
@@ -137,8 +132,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -147,20 +142,19 @@
                         android:padding="15dp">
 
                         <ImageButton
-                            android:id="@+id/l43"
+                            android:id="@+id/botonLuz3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="#FFFFFF"
-                            android:src="@drawable/foco"
-                            android:tag="GP4A03" />
+                            android:src="@drawable/foco" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto_light"
                             android:text="@string/luz_3"
-                            android:textAlignment="center"
-                            android:textSize="25dp" />
+                            android:textSize="25dp"
+                            android:fontFamily="@font/roboto_light"
+                            android:textAlignment="center"/>
 
                     </LinearLayout>
 
@@ -173,4 +167,4 @@
 
     </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

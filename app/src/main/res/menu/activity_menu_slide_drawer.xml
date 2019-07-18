@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_living"
+            android:icon="@drawable/ic_tv_black_36dp"
+            android:title="@string/tv_living" />
+        <item
+            android:id="@+id/nav_cocina"
+            android:icon="@drawable/ic_kitchen_black_18dp"
+            android:title="@string/string_cocina" />
+        <item
+            android:id="@+id/nav_comedor"
+            android:icon="@drawable/ic_restaurant_black_18dp"
+            android:title="@string/string_comedor" />
+        <item
+            android:id="@+id/nav_bano"
+            android:icon="@drawable/ic_wc_black_18dp"
+            android:title="@string/string_bano"/>
+        <item
+            android:id="@+id/nav_dorm1"
+            android:icon="@drawable/ic_hotel_black_12dp"
+            android:title="@string/string_dormitorio"/>
+        <item
+            android:id="@+id/nav_dorm2"
+            android:icon="@drawable/ic_hotel_black_12dp"
+            android:title="@string/string_dormitorio2"/>
+        <item
+            android:id="@+id/nav_patio"
+            android:icon="@drawable/ic_local_florist_black_18dp"
+            android:title="@string/string_patio"/>
+    </group>
+
+    <item android:title="@string/communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/menu_share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/menu_send" />
+        </menu>
+    </item>
+
+</menu>

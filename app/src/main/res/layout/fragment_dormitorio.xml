@@ -78,13 +78,10 @@
                         android:padding="15dp">
 
                         <ImageButton
-                            android:id="@+id/l31"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="#FFFFFF"
-                            android:onClick="onClick"
-                            android:src="@drawable/foco"
-                            android:tag="l31" />
+                            android:src="@drawable/foco" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -111,13 +108,10 @@
                         android:padding="15dp">
 
                         <ImageButton
-                            android:id="@+id/l32"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="#FFFFFF"
-                            android:onClick="onClick"
-                            android:src="@drawable/foco"
-                            android:tag="l32" />
+                            android:src="@drawable/foco" />
 
                         <TextView
                             android:layout_width="match_parent"

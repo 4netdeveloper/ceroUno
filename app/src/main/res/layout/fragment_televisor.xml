@@ -8,11 +8,11 @@
     android:background="#FFFFFF">
 
     <!-- TODO: Update blank fragment layout -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <android.support.constraint.ConstraintLayout
             android:id="@+id/card"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -55,7 +55,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:contentDescription="@string/input"
-                        android:tag="input_tv"
+                        android:tag="BOTON INPUT"
                         app:srcCompat="@drawable/ic_input_black_48dp" />
 
                     <Space
@@ -69,7 +69,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:contentDescription="@string/encendido"
-                        android:tag="onOffTv"
+                        android:tag="BOTON ONOFF"
                         app:srcCompat="@drawable/ic_power_settings_new_black_36dp" />
 
                     <Space
@@ -153,7 +153,7 @@
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_thin"
                                 android:onClick="onClick"
-                                android:tag="canal1"
+                                android:tag="BOTON CANAL 1"
                                 android:text="@string/canal_1"
                                 android:textAlignment="center"
                                 android:textSize="24sp"
@@ -166,7 +166,7 @@
                                 android:layout_height="60dp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_thin"
-                                android:tag="canal2"
+                                android:tag="BOTON CANAL 2"
                                 android:text="@string/canal_2"
                                 android:textAlignment="center"
                                 android:textSize="24sp"
@@ -179,7 +179,6 @@
                                 android:layout_height="60dp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_thin"
-                                android:tag="canal3"
                                 android:text="@string/canal_3"
                                 android:textAlignment="center"
                                 android:textSize="24sp"
@@ -197,7 +196,6 @@
                                 android:layout_height="60dp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_thin"
-                                android:tag="canal4"
                                 android:text="@string/canal_4"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
@@ -209,7 +207,6 @@
                                 android:layout_height="60dp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_thin"
-                                android:tag="canal5"
                                 android:text="@string/canal_5"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
@@ -221,7 +218,6 @@
                                 android:layout_height="60dp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_thin"
-                                android:tag="canal6"
                                 android:text="@string/canal_6"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
@@ -238,7 +234,6 @@
                                 android:layout_height="60dp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_thin"
-                                android:tag="canal7"
                                 android:text="@string/canal_7"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
@@ -250,7 +245,6 @@
                                 android:layout_height="60dp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_thin"
-                                android:tag="canal8"
                                 android:text="@string/canal_8"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
@@ -262,7 +256,6 @@
                                 android:layout_height="60dp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_thin"
-                                android:tag="canal9"
                                 android:text="@string/canal_9"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
@@ -280,7 +273,6 @@
                                 android:layout_weight="1"
                                 android:contentDescription="@string/mute"
                                 android:scaleType="fitCenter"
-                                android:tag="mute"
                                 app:srcCompat="@drawable/ic_volume_off_black_48dp" />
 
                             <Button
@@ -288,7 +280,6 @@
                                 android:layout_height="60dp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_thin"
-                                android:tag="canal0"
                                 android:text="@string/canal_0"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
@@ -300,7 +291,6 @@
                                 android:layout_weight="1"
                                 android:contentDescription="@string/canal_ant"
                                 android:scaleType="fitCenter"
-                                android:tag="can_ant"
                                 app:srcCompat="@drawable/ic_replay_black_48dp" />
 
                         </TableRow>
@@ -384,7 +374,6 @@
                                 android:layout_weight="1"
                                 android:contentDescription="@string/flecha_up"
                                 android:scaleType="fitStart"
-                                android:tag="volumeUp"
                                 app:srcCompat="@drawable/arrow_u" />
 
                             <ImageButton
@@ -394,7 +383,6 @@
                                 android:layout_weight="1"
                                 android:contentDescription="@string/flecha_dw"
                                 android:scaleType="fitEnd"
-                                android:tag="volumeDw"
                                 app:srcCompat="@drawable/arrow_d" />
                         </LinearLayout>
 
@@ -420,7 +408,6 @@
                                 android:layout_weight="1"
                                 android:contentDescription="@string/flecha_rg"
                                 android:scaleType="fitCenter"
-                                android:tag="flechaLeft"
                                 app:srcCompat="@drawable/arrow_l" />
 
                             <Space
@@ -442,7 +429,6 @@
                                 android:layout_weight="1"
                                 android:contentDescription="@string/flecha_up"
                                 android:scaleType="fitCenter"
-                                android:tag="flechaUp"
                                 app:srcCompat="@drawable/arrow_u" />
 
                             <Button
@@ -451,7 +437,6 @@
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/roboto_thin"
-                                android:tag="botonOk"
                                 android:text="@string/ok"
                                 android:textSize="24sp"
                                 android:textStyle="bold" />
@@ -463,7 +448,6 @@
                                 android:layout_weight="1"
                                 android:contentDescription="@string/flecha_dw"
                                 android:scaleType="fitCenter"
-                                android:tag="flechaDw"
                                 app:srcCompat="@drawable/arrow_d" />
                         </LinearLayout>
 
@@ -485,7 +469,6 @@
                                 android:layout_weight="1"
                                 android:contentDescription="@string/flecha_lf"
                                 android:scaleType="fitCenter"
-                                android:tag="flechaRight"
                                 app:srcCompat="@drawable/arrow_r" />
 
                             <Space
@@ -512,7 +495,6 @@
                                 android:layout_weight="1"
                                 android:contentDescription="@string/flecha_up"
                                 android:scaleType="fitStart"
-                                android:tag="canalUp"
                                 app:srcCompat="@drawable/arrow_u" />
 
                             <ImageButton
@@ -523,7 +505,6 @@
                                 android:contentDescription="@string/flecha_dw"
                                 android:saveEnabled="false"
                                 android:scaleType="fitEnd"
-                                android:tag="canalDw"
                                 app:srcCompat="@drawable/arrow_d" />
 
                         </LinearLayout>
@@ -573,7 +554,7 @@
             </LinearLayout>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
 
 </FrameLayout>
