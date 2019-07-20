@@ -26,6 +26,7 @@
                 android:fontFamily="@font/roboto_light"
                 android:textSize="45dp" />
 
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -81,9 +82,8 @@
                             android:id="@+id/l31"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="#FFFFFF"
+                            android:background="@drawable/foco_apagado"
                             android:onClick="onClick"
-                            android:src="@drawable/foco"
                             android:tag="l31" />
 
                         <TextView
@@ -114,9 +114,8 @@
                             android:id="@+id/l32"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="#FFFFFF"
+                            android:background="@drawable/foco_apagado"
                             android:onClick="onClick"
-                            android:src="@drawable/foco"
                             android:tag="l32" />
 
                         <TextView

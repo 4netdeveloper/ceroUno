@@ -14,12 +14,18 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.cerouno.R;
+import com.example.cerouno.administrador.conexion;
 import com.example.cerouno.aparatos.Televisor;
 import com.example.cerouno.manejadores.ambiente;
+
+import static com.example.cerouno.R.drawable.foco;
+import static com.example.cerouno.R.drawable.foco_apagado;
+import static com.example.cerouno.manejadores.ambiente.conex;
 
 public class Comedor extends Fragment implements View.OnClickListener{
 
     public ImageButton boton1;
+    static int estado1;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)  {
@@ -29,6 +35,15 @@ public class Comedor extends Fragment implements View.OnClickListener{
         boton.setOnClickListener(this);
         boton1 = myView.findViewById(R.id.l21);
         boton1.setOnClickListener(this);
+
+        estado1 = ambiente.devuelveEstados(String.valueOf(boton1.getTag()));
+
+        if(estado1 == 0){
+            boton1.setBackgroundResource(foco_apagado);
+        }else{
+            boton1.setBackgroundResource(foco);
+        }
+
         return myView;
     }
 
@@ -41,7 +56,14 @@ public class Comedor extends Fragment implements View.OnClickListener{
                 break;
             case R.id.l21:
                 Log.i("-----------------------", "BOTON LUZ COMEDOR");
-                ambiente.recibeBotones(String.valueOf(v.getTag()),  "A", "0");
+                conex.send(String.valueOf(v.getTag()), "A", "0");
+                if(estado1 == 0){
+                    boton1.setBackgroundResource(foco);
+                    estado1 = 1;
+                }else{
+                    boton1.setBackgroundResource(foco_apagado);
+                    estado1 = 0;
+                }
                 break;
         }
     }

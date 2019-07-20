@@ -16,6 +16,10 @@ import com.example.cerouno.R;
 import com.example.cerouno.aparatos.Televisor;
 import com.example.cerouno.manejadores.ambiente;
 
+import static com.example.cerouno.R.drawable.foco;
+import static com.example.cerouno.R.drawable.foco_apagado;
+import static com.example.cerouno.manejadores.ambiente.conex;
+
 
 public class Living extends Fragment implements View.OnClickListener{
 
@@ -23,6 +27,10 @@ public class Living extends Fragment implements View.OnClickListener{
     public ImageButton boton1;
     public ImageButton boton2;
     public ImageButton boton3;
+
+    static int estado1;
+    static int estado2;
+    static int estado3;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)  {
@@ -36,8 +44,30 @@ public class Living extends Fragment implements View.OnClickListener{
         boton2.setOnClickListener(this);
         boton3 = myView.findViewById(R.id.l43);
         boton3.setOnClickListener(this);
-        return myView;
 
+        estado1 = ambiente.devuelveEstados(String.valueOf(boton1.getTag()));
+        estado2 = ambiente.devuelveEstados(String.valueOf(boton2.getTag()));
+        estado3 = ambiente.devuelveEstados(String.valueOf(boton3.getTag()));
+
+        if(estado1 == 0){
+            boton1.setBackgroundResource(foco_apagado);
+        }else{
+            boton1.setBackgroundResource(foco);
+        }
+
+        if(estado2 == 0){
+            boton2.setBackgroundResource(foco_apagado);
+        }else{
+            boton2.setBackgroundResource(foco);
+        }
+
+        if(estado3 == 0){
+            boton3.setBackgroundResource(foco_apagado);
+        }else{
+            boton3.setBackgroundResource(foco);
+        }
+
+        return myView;
     }
 
     @Override
@@ -50,15 +80,39 @@ public class Living extends Fragment implements View.OnClickListener{
             case R.id.l41:
                 Log.i("-----------------------", "BOTON LUZ 1 LIVING");
                 Log.i("-----------------------", String.valueOf(v.getTag()));
-                ambiente.recibeBotones(String.valueOf(v.getTag()),  "A", "0");
+                if(estado1 == 0){
+                    boton1.setBackgroundResource(foco);
+                    estado1 = 1;
+                }else{
+                    boton1.setBackgroundResource(foco_apagado);
+                    estado1 = 0;
+                }
+                conex.send(String.valueOf(v.getTag()), "A", "0");
+
                 break;
             case R.id.l42:
                 Log.i("-----------------------", "BOTON LUZ 2 LIVING");
-                ambiente.recibeBotones(String.valueOf(v.getTag()),  "A", "0");
+                if(estado2 == 0){
+                    boton2.setBackgroundResource(foco);
+                    estado2 = 1;
+                }else{
+                    boton2.setBackgroundResource(foco_apagado);
+                    estado2 = 0;
+                }
+                conex.send(String.valueOf(v.getTag()), "A", "0");
+
                 break;
             case R.id.l43:
                 Log.i("-----------------------", "BOTON LUZ 3 LIVING");
-                ambiente.recibeBotones(String.valueOf(v.getTag()),  "A", "0");
+                if(estado3 == 0){
+                    boton3.setBackgroundResource(foco);
+                    estado3 = 1;
+                }else{
+                    boton3.setBackgroundResource(foco_apagado);
+                    estado3 = 0;
+                }
+                conex.send(String.valueOf(v.getTag()), "A", "0");
+
                 break;
         }
     }

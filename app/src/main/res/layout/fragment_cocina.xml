@@ -58,8 +58,7 @@
                             android:id="@+id/l11"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="#FFFFFF"
-                            android:src="@drawable/foco"
+                            android:background="@drawable/foco_apagado"
                             android:tag="GP1A01" />
 
                         <TextView
@@ -90,8 +89,7 @@
                             android:id="@+id/l12"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="#FFFFFF"
-                            android:src="@drawable/foco"
+                            android:background="@drawable/foco_apagado"
                             android:tag="GP1A02" />
 
                         <TextView
@@ -122,8 +120,7 @@
                             android:id="@+id/l13"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="#FFFFFF"
-                            android:src="@drawable/foco"
+                            android:background="@drawable/foco_apagado"
                             android:tag="GP1A03" />
 
                         <TextView

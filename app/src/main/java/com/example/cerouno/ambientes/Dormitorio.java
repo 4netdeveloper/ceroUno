@@ -17,11 +17,18 @@ import com.example.cerouno.R;
 import com.example.cerouno.aparatos.Televisor;
 import com.example.cerouno.manejadores.ambiente;
 
+import static com.example.cerouno.R.drawable.foco;
+import static com.example.cerouno.R.drawable.foco_apagado;
+import static com.example.cerouno.manejadores.ambiente.conex;
+
 public class Dormitorio extends Fragment implements View.OnClickListener{
 
     public static int id = 0;
     public ImageButton boton1;
     public ImageButton boton2;
+    static int estado1;
+    static int estado2;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)  {
         View myView = inflater.inflate(R.layout.fragment_dormitorio, container, false);
@@ -32,6 +39,27 @@ public class Dormitorio extends Fragment implements View.OnClickListener{
         boton1.setOnClickListener(this);
         boton2 = myView.findViewById(R.id.l32);
         boton2.setOnClickListener(this);
+
+        if(id == 1){
+            estado1 = ambiente.devuelveEstados("GP3A01");
+            estado2 = ambiente.devuelveEstados("GP3A02");
+        }else{
+            estado1 = ambiente.devuelveEstados("GP3B01");
+            estado2 = ambiente.devuelveEstados("GP3B02");
+        }
+
+
+        if(estado1 == 0){
+            boton1.setBackgroundResource(foco_apagado);
+        }else{
+            boton1.setBackgroundResource(foco);
+        }
+
+        if(estado2 == 0){
+            boton2.setBackgroundResource(foco_apagado);
+        }else{
+            boton2.setBackgroundResource(foco);
+        }
 
         return myView;
     }
@@ -51,19 +79,49 @@ public class Dormitorio extends Fragment implements View.OnClickListener{
             case R.id.l31:
                 if (id == 1) {
                     Log.i("-----------------------", "BOTON LUZ 1 DORMITORIO 1");
-                    ambiente.recibeBotones("GP3A01",  "A", "0");
+                    if(estado1 == 0){
+                        boton1.setBackgroundResource(foco);
+                        estado1 = 1;
+                    }else{
+                        boton1.setBackgroundResource(foco_apagado);
+                        estado1 = 0;
+                    }
+                    conex.send("GP3A01", "A", "0");
+
                 } else if (id == 2) {
                     Log.i("-----------------------", "BOTON LUZ 1 DORMITORIO 2");
-                    ambiente.recibeBotones("GP3B01",  "A", "0");
+                    if(estado1 == 0){
+                        boton1.setBackgroundResource(foco);
+                        estado1 = 1;
+                    }else{
+                        boton1.setBackgroundResource(foco_apagado);
+                        estado1 = 0;
+                    }
+                    conex.send("GP3B01", "A", "0");
+
                 }
                 break;
             case R.id.l32:
                 if (id == 1) {
                     Log.i("-----------------------", "BOTON LUZ 2 DORMITORIO 1");
-                    ambiente.recibeBotones("GP3A02", "A", "0");
+                    if(estado2 == 0){
+                        boton2.setBackgroundResource(foco);
+                        estado2 = 1;
+                    }else{
+                        boton2.setBackgroundResource(foco_apagado);
+                        estado2 = 0;
+                    }
+                    conex.send("GP3A02", "A", "0");
                 } else if (id == 2) {
                     Log.i("-----------------------", "BOTON LUZ 2 DORMITORIO 2");
-                    ambiente.recibeBotones("GP3B02", "A", "0");
+                    if(estado2 == 0){
+                        boton2.setBackgroundResource(foco);
+                        estado2 = 1;
+                    }else{
+                        boton2.setBackgroundResource(foco_apagado);
+                        estado2 = 0;
+                    }
+                    conex.send("GP3B02", "A", "0");
                 }
                 break;
     }

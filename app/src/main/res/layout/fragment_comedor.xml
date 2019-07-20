@@ -79,9 +79,8 @@
                             android:id="@+id/l21"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="#FFFFFF"
+                            android:background="@drawable/foco_apagado"
                             android:onClick="onClick"
-                            android:src="@drawable/foco"
                             android:tag="GP2A01" />
 
                         <TextView

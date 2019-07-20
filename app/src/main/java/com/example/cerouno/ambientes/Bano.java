@@ -68,7 +68,6 @@ public class Bano extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         Log.i("----------------------", "BOTON LUZ BAÑO " + String.valueOf(v.getTag()));
-        // ambiente.recibeBotones(String.valueOf(v.getTag()), "A", "0");
 
         final String param = String.valueOf(v.getTag()) ;
 
@@ -84,7 +83,7 @@ public class Bano extends Fragment implements View.OnClickListener {
     public void CambiarEstadoDeLuz(String tag){
         msg.echo("cambiando la luz"+tag);
         switch (tag){
-            case "GP0":
+            case "GP0A01":
                 if(estado1 == 0){
                     boton1.setBackgroundResource(foco);
                     estado1 = 1;

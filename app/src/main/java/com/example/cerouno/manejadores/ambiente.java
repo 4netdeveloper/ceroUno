@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
@@ -35,23 +34,7 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
 
     static int [] estados = new int[lucesTag.length];
 
-    /* ************************************************ * /
-    / *
-        A= Alterar/Cambiar, -> recive respuesta de Estado
-        R= Pide Estado
-        W= Escrive Valor
-        ambientes:
-        baño: 01, 02, etc
-        cocina: 11, 12, etc
-        comedor: 21, 22, etc
-        dormitorio 1: 31a, 32a, etc
-        dormitorio 2: 31b, 32b, etc
-        dormitorio 3: 31c, 32c, etc
-        living: 41, 42, etc
-        patio: 51, 52, etc
-        entrada: 61, 62, etc
-        exteriores: 71, 72, etc* /
-    / * ************************************************ */
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,17 +58,10 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
         //Login----------
         SharedPreferences prefLectura = getSharedPreferences("usuario", Context.MODE_PRIVATE);
 
-        conex.setUser(prefLectura.getString("user", ""));
-        conex.setHash(prefLectura.getInt("hash", 0)+"");
+        conex.setUser(prefLectura.getString("user", "test"));
+        conex.setHash(prefLectura.getString("hash", "test"));
         banderaStatus = 1;
-        Handler handler = new Handler();
-        /*handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                status = conex.getStatus();
-            }
-        },1000);
-        */
+
         status = conex.getStatus();
 
         Log.i("---- AMBIENTE", String.valueOf(status));

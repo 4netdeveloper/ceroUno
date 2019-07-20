@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import com.example.cerouno.R;
 import com.example.cerouno.manejadores.ambiente;
 
+import static com.example.cerouno.manejadores.ambiente.conex;
+
 
 public class Televisor extends Fragment implements View.OnClickListener {
 
@@ -49,10 +51,7 @@ public class Televisor extends Fragment implements View.OnClickListener {
     public ImageButton btn_flechaLeft;
 
 
-    //private int[] botonesTv = {R.id.onOff_tv, R.i};
 
-
-   // private admin admin = new admin("", "");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -132,29 +131,13 @@ public class Televisor extends Fragment implements View.OnClickListener {
         return myView;
     }
 
-
-
-    // metodo para mandar comandos al ADMIN
-
- /*   public void evento (int opcion){
-
-        switch (opcion){
-            //case R.id.input_tv: admin.setBoton(String.valueOf(opcion));
-            break;
-        }
-
-    }*/
-
-    private void cargarFragmento (Fragment fragmento){
-        FragmentManager manager = getFragmentManager();
-        manager.beginTransaction().replace(R.id.contenedor, fragmento).commit();
-    }
-
     @Override
     public void onClick(View v) {
         Log.i("-----------------------", "BOTON: "+v.getTag());
-        ambiente.recibeBotones(dev, "A", String.valueOf(v.getTag()));
-        //cargarFragmento(new Living());
+        //ambiente.recibeBotones(dev, "A", String.valueOf(v.getTag()));
+        conex.send( dev,"A", String.valueOf(v.getTag()));
+
+
     }
 
 

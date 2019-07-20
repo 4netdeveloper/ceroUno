@@ -57,8 +57,7 @@
                             android:id="@+id/l51"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="#FFFFFF"
-                            android:src="@drawable/foco"
+                            android:background="@drawable/foco_apagado"
                             android:tag="GP5A01" />
 
                         <TextView
@@ -89,8 +88,7 @@
                             android:id="@+id/l52"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="#FFFFFF"
-                            android:src="@drawable/foco"
+                            android:background="@drawable/foco_apagado"
                             android:tag="GP5A02" />
 
                         <TextView
@@ -121,8 +119,7 @@
                             android:id="@+id/l53"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="#FFFFFF"
-                            android:src="@drawable/foco"
+                            android:background="@drawable/foco_apagado"
                             android:tag="GP5A03" />
 
                         <TextView
@@ -140,7 +137,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
 
     </RelativeLayout>
 </FrameLayout>
