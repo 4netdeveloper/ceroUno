@@ -1,4 +1,5 @@
 package com.example.cerouno.administrador;
+// package com.example.testconexion;
 
 import android.content.Context;
 import android.net.wifi.WifiManager;
@@ -8,8 +9,12 @@ import java.net.InetAddress;
 import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
+import android.widget.Toast;
 
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,6 +26,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.concurrent.ExecutionException;
 
 public class conexion {
     private String url;
@@ -32,6 +38,7 @@ public class conexion {
     // valor
     private int status;
     private String user, has ;
+    private onPostExecute FuncionAEjecutar;
     private boolean bol_user =false,bol_has=false;
     private MyAsyncTask _MAsync;
     private Context Contexto;
@@ -54,10 +61,13 @@ public class conexion {
 
         // this.setUrl(url);
         // this._MAsync = new MyAsyncTask(host, port, usrhas);
-        host="http://192.168.0.103";
+
+        // host="192.168.155.10";
         port="8181";
 
-        this._MAsync = new MyAsyncTask(host, port);
+        // entre otras cosas buscar la raspberry:
+
+
 
         //
         // prueba exitosa enciende una luz con el usuario leandro morala.
@@ -66,24 +76,59 @@ public class conexion {
 
     }
 
-    public conexion send(String dev, String acc, String val) {
-        // alg oooo par hacer.
+    public conexion send(String dev, String acc, String val){
+        send(dev,acc,val,new conexion.onPostExecute() {
+            @Override
+            public void recibirTexto(String txt) {
+            }
+        });
+        return this;
+    }
 
-        _MAsync.setDev(dev).setAcc(acc).setVal(val);
-        _MAsync.execute("");// */
+    public conexion send(String dev, String acc, String val,onPostExecute EjecutarDespues) {
+        // alg oooo par hacer.
+        if (_MAsync == null) {
+            // primera vez obteniendo informacion de contexto
+
+            if (host==null || host=="" ) {
+                msg.echo("buscar raspberry....");
+                ScanRaspberry("4net-core"
+                        , port
+                        , "_domotica._tcp");
+            }else {
+                // no se ejecuta si no tengo el host
+                this._MAsync = new MyAsyncTask(host, port, this);
+                this._MAsync.setUsrhas(this.has);
+
+                _MAsync
+                        .setDev(dev)
+                        .setAcc(acc)
+                        .setVal(val)
+                        .execute();
+
+                FuncionAEjecutar = EjecutarDespues;
+            }
+        }else{
+            Toast.makeText(Contexto
+                    , "Hay una tecla funcionando ahun."
+                    , Toast.LENGTH_LONG).show();
+        }
+        // _MAsync.execute();// */
         Log.i("CONEXION SEND -------", dev+" --- "+acc+" --- "+val);
         return this;
     }
+
+
     public conexion setUser(String usuario){
         this.user = usuario;
         bol_user=true;
-        this._MAsync.setUsrhas(usuario);
 
         return this;
     }
     public conexion setHash(String hash){
         this.has=hash;
         bol_has=true;
+
         return this;
     }
     /***
@@ -91,19 +136,47 @@ public class conexion {
      * (1=falla no autorizado)
      * (2=ok)
      * */
+
     public int getStatus(){
-        status=0;
-        if (bol_user && bol_has){
-            // tengo usuario y clave.
-            //detectando red:
-            Object t = Contexto.getSystemService(Contexto.WIFI_SERVICE);
-            if (  t != null  ){
-                status=1;
+        return getStatus(new onPostExecute() {
+            @Override
+            public void recibirTexto(String txt) {
+                // no hay accion asociada al recibir texto
             }
+        });
+    }
+
+    public int getStatus(onPostExecute EjecutarDespues){
+        status=0;
+        if ( ( bol_user && bol_has ) && ( getWIFIStatus() == 1 ) ){
+            status=1;
+            /*
+            if (_MAsync == null) {
+                // primera vez obteniendo informacion de contexto
+                ScanRaspberry("4net-core", "8181","_domotica._tcp");
+                this._MAsync = new MyAsyncTask(host, port, this);
+                this._MAsync.setUsrhas(this.has);
+            }
+
+            _MAsync.setDev("GP0")
+                    .setAcc("R")
+                    .setVal("0")
+                    .execute();
+
+            FuncionAEjecutar=EjecutarDespues;
+            */
+            send("GP0","R","0",EjecutarDespues);
+
         }
+
+
         return status;
     }
 
+
+    private boolean validarLogin(String rtUsr){
+        return user == rtUsr;
+    }
     public conexion setUrl(String url){
         // forma del url:
         // <prot>://<host>:<port>
@@ -119,48 +192,78 @@ public class conexion {
 
 
 
-    /**
-     *
-     *
-     * codificacion de servicios
-     *
-     * */
+    /* objeto especial para procesar respuestas inicio */
+    private resultado rts;
+    private class resultado{
+        public String staus;
+        public String usuario;
+        public Object respuesta;
+        public int error;
 
+        public resultado(JSONObject objSon){
+            try {
+                staus = objSon.getString("status");
+                usuario=objSon.getString("usuario");
+                respuesta=objSon.getJSONObject("respuesta");
+                error=objSon.getInt("error");
 
-    public void sendBroadcast(
-            final String Usuario, final String Valor
-            , String address, final int puerto
-    ) throws Exception {
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                try {
-                    InetAddress address = getBroadcastAddress(Contexto );
-
-                    String Cadena = "u:" + Usuario + ":v:" + Valor;
-                    byte[] Buf = Cadena.getBytes();
-                    DatagramSocket clientSocket = new DatagramSocket();
-                    clientSocket.setBroadcast(true);
-
-                    DatagramPacket sendPacket = new DatagramPacket(
-                            Buf
-                            , Buf.length
-                            , address
-                            , puerto);
-
-                    clientSocket.send(sendPacket);
-
-                    clientSocket.close();
-
-                } catch (Exception e) {
-                    //Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, null, e);
-                    msg.echo(e.getMessage());
-                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-        }).start();
 
+
+        }
+    }
+    /* objeto especial para procesar respuestas fin */
+
+    protected void onPostProcesor(String respuesta){
+        // procesando respuesta recibida.
+        receive();
+        String rtspost="";
+        // deve ejecutar la funcion asignada ( si existiera )
+        if (rts.usuario.compareToIgnoreCase(user)==0 ) {
+            // validar usuario en cada peticion.
+            status = 2;
+        }
+
+        if (!(((JSONObject) rts.respuesta).isNull("shell"))) {
+            rtspost = ((JSONObject) rts.respuesta).opt("shell").toString();
+        }
+        FuncionAEjecutar.recibirTexto(rtspost);
+
+        //_MAsync.
+        // destruir el conector.
+        _MAsync = null;
+
+    }
+
+    public interface onPostExecute{
+
+        void recibirTexto(String txt);
+    }
+
+    public String receive(){
+
+        String rt= null;
+        try {
+            rt = ((MyAsyncTask) _MAsync).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // msg.echo("datos recibidos fin de espera.:"+rt);
+        try {
+            rts = new resultado(new JSONObject(rt));
+            //msg.var_dump(rts);
+
+        } catch (JSONException e) {
+            rts = new resultado(new JSONObject());
+            e.printStackTrace();
+        }
+
+        return rt;
     }
 
 
@@ -179,17 +282,21 @@ public class conexion {
         String host,port,headget,response;
         private int contadorSend =0;
         String usrhas, dev,acc,val;
+        // private onPostExecute FuncionPost;
+        private conexion padre;
         IOException ioException;
         boolean working=false;
 
-        MyAsyncTask( String host,String port ) {
+        MyAsyncTask( String host,String port ,conexion padre) {
             super();
+
             this.host = host;
             this.port = port;
             // this.usrhas=usr;
-
+            this.padre=padre;
             this.response = "";
             this.ioException = null;
+
         }
 
         /*
@@ -252,9 +359,12 @@ public class conexion {
 
                 this.response=result;
             }
+
+
             //msg.echo("MyAsinc: request-brute:"+result);
             msg.echo("MyAsinc: responde: --\r\n"+response );
             // this.button.setEnabled(true);
+            padre.onPostProcesor(result);
         }
 
         public String getResponse(){
@@ -325,13 +435,111 @@ public class conexion {
     }
 
 
+    /**
+     * TODO: conexion automatica con la raspberry
+     *
+     */
+    public void ScanRaspberry(String Nombre,String Puerto,String BusquedaBonjour){
+
+        // funcion de buqueda del equipo
+        // "_domotica._tcp"
+
+        InetAddress test= null;
+        boolean ch=false;
+        msg.echo("buscando la raspberry pi.............");
+
+        try {
+            // solo envia paquete al broadcast
+            sendBroadcast(
+                    this.user
+                    ,this.has
+                    ,8182);//(int) Integer.getInteger(Puerto));
+            ch=true;
+            msg.echo("se ha enviado el broadcast");
+        } catch (Exception e) {
+            e.printStackTrace();
+            ch=false;
+        }
+
+
+        msg.echo("fin de la busqueda de la raspberry.");
+
+    }
+    protected void setHost(String host){
+        // la clave deve coincidir con el has de usuario
+        this.host = host;
+        status=2;
+    }
+
+    /**
+     *
+     *
+     * codificacion de servicios
+     *
+     * */
+
+
+    public void sendBroadcast(
+            final String Usuario, final String Valor
+            , final int puerto
+    ) throws Exception {
+        InetAddress respuesta = null;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    msg.echo("enviando datagrama");
+                    InetAddress address = getBroadcastAddress(Contexto );
+                    msg.echo("broadcast obtenido.");
+                    String Cadena = "u:" + Usuario + ":v:" + Valor;
+                    byte[] Buf = Cadena.getBytes();
+
+
+                    msg.echo("verificando.");
+                    DatagramSocket clientSocket = new DatagramSocket();
+                    clientSocket.setBroadcast(true);
+
+                    msg.echo("preparando envio.");
+                    DatagramPacket sendPacket = new DatagramPacket(
+                            Buf
+                            , Buf.length
+                            , address
+                            , puerto);
+
+                    msg.echo("enviado.");
+                    clientSocket.send(sendPacket);
+
+
+                    DatagramPacket peticion = new DatagramPacket(Buf, Buf.length);
+                    msg.echo("recepcion:");
+                    clientSocket.receive(peticion);
+                    String txt = new String(peticion.getData());
+
+                    msg.echo("autorizacion:"+txt  );
+                    setHash(txt);
+                    setHost(peticion.getAddress().getHostAddress().toString());
+
+                    msg.echo("host:"+ peticion.getAddress().getHostAddress().toString() );
+
+                    clientSocket.close();
+
+                } catch (Exception e) {
+                    //Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, null, e);
+                    msg.echo(e.getMessage());
+                }
+            }
+        }).start();
+
+    }
+
 
 
     private class UDPServer {
         //servicio de escucha en un puerto.
         private DatagramSocket udpSocket;
         private int port;
-        private String host,key;
+        public String host,key;
         private String msg;
         // private Activity activity;
 
@@ -382,6 +590,22 @@ public class conexion {
 
     // private class NetworkHelper {
 
+
+    private int getWIFIStatus(){
+        InetAddress ch = null;
+        try {
+            ch = getBroadcastAddress(Contexto);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (ch!=null)
+            return 1;
+        else
+            return 0;
+
+
+    }
     /**
      * Método que se encarga de obtener la dirección de broadcast de la subred.
      * @return  InetAddres con la dirección de broadcast.
@@ -395,6 +619,7 @@ public class conexion {
         byte[] quads = new byte[4];
         for (int k = 0; k < 4; k++)
             quads[k] = (byte) (broadcast >> (k * 8));
+
         return InetAddress.getByAddress(quads);
     }
 

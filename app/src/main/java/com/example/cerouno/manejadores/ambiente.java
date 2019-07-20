@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
@@ -25,10 +26,12 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
     public static conexion conex;
     int i, j;
     int opcion = i;
+    static int status;
+    public static int banderaStatus;
 
     static String [] lucesTag =
-    {"GP0A01", "GP0A02", "GP0A03","GPA1A01", "GPA1A02", "GPA1A03","GP2A01",
-            "GP3A01", "GP3202", "GP3B01", "GP3B02", "GP4A01", "GP4A02", "GP4A03", "GP5A01", "GP5A02", "GP5A03"};
+            {"GP0A01", "GP0A02", "GP0A03","GPA1A01", "GPA1A02", "GPA1A03","GP2A01",
+                    "GP3A01", "GP3202", "GP3B01", "GP3B02", "GP4A01", "GP4A02", "GP4A03", "GP5A01", "GP5A02", "GP5A03"};
 
     static int [] estados = new int[lucesTag.length];
 
@@ -66,41 +69,36 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
         / * ************************************************ */
 
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_ambiente);
+
         conex=new conexion(this);
         //Login----------
         SharedPreferences prefLectura = getSharedPreferences("usuario", Context.MODE_PRIVATE);
 
-       conex.setUser(prefLectura.getString("user", ""));
+        conex.setUser(prefLectura.getString("user", ""));
         conex.setHash(prefLectura.getInt("hash", 0)+"");
+        banderaStatus = 1;
+        Handler handler = new Handler();
+        /*handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                status = conex.getStatus();
+            }
+        },1000);
+        */
+        status = conex.getStatus();
 
-        int status = conex.getStatus();
         Log.i("---- AMBIENTE", String.valueOf(status));
 
-        switch (status){
-            case 0: Toast.makeText(this, "Servicio no encontrado!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(this, logIn.class);
-                    startActivity(intent);
-                    break;
-
-            case 1: SharedPreferences prefGuarda = getSharedPreferences("usuario", Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = prefGuarda.edit();
-                    editor.putString("user","");
-                    editor.putInt("hash", 0);
-                    editor.apply();
-                    finish();
-                    intent = new Intent(this, logIn.class);
-                    startActivity(intent);
-                    break;
-
-            case 2:
-                break;
-
-            default: break;
+        if(status == 0){
+            Toast.makeText(this, "Servicio no encontrado!",
+                    Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, logIn.class);
+            startActivity(intent);
         }
 
 
 
-        setContentView(R.layout.activity_ambiente);
 
         // bucle de creacion de ambientes:
         for(int ambiente : BOTONESMENU){
@@ -109,9 +107,29 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
             findViewById(ambiente).setOnClickListener(this);
         }
 
-
     }
 
+
+    public void estadoUsuario(String respuesta){
+        if (banderaStatus == 1){
+            if (respuesta == "ok"){
+                Toast.makeText(getApplicationContext(), "Bienvenid@!!!", Toast.LENGTH_SHORT).show();
+            }else if(respuesta == "no"){
+                SharedPreferences prefGuarda = getSharedPreferences("usuario", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefGuarda.edit();
+                editor.putString("user","");
+                editor.putInt("hash", 0);
+                editor.apply();
+                finish();
+                Intent intent = new Intent(this, logIn.class);
+                startActivity(intent);
+            }}else if(banderaStatus == 2){
+            if(respuesta == "ok")
+                logIn.respuestaStatus = true;
+            else if (respuesta == "no")
+                logIn.respuestaStatus = false;
+        }
+    }
 
 
     private void cargarFragmento (Fragment fragmento){
@@ -136,7 +154,7 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
         }
         // buscar el id en el indice de botones para obtener su correlacion
         for(int t : BOTONESMENU){
-           // Console.echo("index:"+index+" view:"+v.getId()+" t="+t);
+            // Console.echo("index:"+index+" view:"+v.getId()+" t="+t);
             if (v.getId() == t){
 
                 break;
@@ -163,7 +181,8 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
     //Recibe los datos de todos los botones y los redirecciona a conexion
     public static void recibeBotones (String dev, String acc, String val){
         Log.i ("--------------", "Llamando a conexion");
-        //conex.setDev(dev).setAcc(acc).setVal(val).send( );
+        // conex.setDev(dev).setAcc(acc).setVal(val).send( );
+        // conex.send(dev,acc,val);
     }
 
 
