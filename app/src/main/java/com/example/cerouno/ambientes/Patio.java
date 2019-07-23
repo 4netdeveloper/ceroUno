@@ -72,7 +72,7 @@ public class Patio extends Fragment implements View.OnClickListener {
 
         conex.send(String.valueOf(v.getTag()), "A", "0", new conexion.onPostExecute() {
             @Override
-            public void recibirTexto(String txt) {
+            public void recibirTexto(String txt, int est) {
                 CambiarEstadoDeLuz(param);
             }
         });

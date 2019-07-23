@@ -79,7 +79,7 @@ public class conexion {
     public conexion send(String dev, String acc, String val){
         send(dev,acc,val,new conexion.onPostExecute() {
             @Override
-            public void recibirTexto(String txt) {
+            public void recibirTexto(String txt, int est) {
             }
         });
         return this;
@@ -94,7 +94,7 @@ public class conexion {
                 msg.echo("buscar raspberry....");
                 ScanRaspberry("4net-core"
                         , port
-                        , "_domotica._tcp");
+                        , "_domotica._tcp",EjecutarDespues);
             }else {
                 // no se ejecuta si no tengo el host
                 this._MAsync = new MyAsyncTask(host, port, this);
@@ -110,7 +110,7 @@ public class conexion {
             }
         }else{
             Toast.makeText(Contexto
-                    , "Hay una tecla funcionando ahun."
+                    , "Hay una tecla funcionando aun."
                     , Toast.LENGTH_LONG).show();
         }
         // _MAsync.execute();// */
@@ -131,6 +131,7 @@ public class conexion {
 
         return this;
     }
+
     /***
      * return int ( 0=falla no hay conecion)
      * (1=falla no autorizado)
@@ -140,7 +141,7 @@ public class conexion {
     public int getStatus(){
         return getStatus(new onPostExecute() {
             @Override
-            public void recibirTexto(String txt) {
+            public void recibirTexto(String txt, int est) {
                 // no hay accion asociada al recibir texto
             }
         });
@@ -177,6 +178,7 @@ public class conexion {
     private boolean validarLogin(String rtUsr){
         return user == rtUsr;
     }
+
     public conexion setUrl(String url){
         // forma del url:
         // <prot>://<host>:<port>
@@ -221,15 +223,16 @@ public class conexion {
         receive();
         String rtspost="";
         // deve ejecutar la funcion asignada ( si existiera )
-        if (rts.usuario.compareToIgnoreCase(user)==0 ) {
+        if (rts.staus.compareToIgnoreCase("ok")==0 ) {
             // validar usuario en cada peticion.
             status = 2;
-        }
+        }else
+            status = 1;
 
         if (!(((JSONObject) rts.respuesta).isNull("shell"))) {
             rtspost = ((JSONObject) rts.respuesta).opt("shell").toString();
         }
-        FuncionAEjecutar.recibirTexto(rtspost);
+        FuncionAEjecutar.recibirTexto(rtspost, status);
 
         //_MAsync.
         // destruir el conector.
@@ -239,7 +242,7 @@ public class conexion {
 
     public interface onPostExecute{
 
-        void recibirTexto(String txt);
+        void recibirTexto(String txt, int estado);
     }
 
     public String receive(){
@@ -439,7 +442,7 @@ public class conexion {
      * TODO: conexion automatica con la raspberry
      *
      */
-    public void ScanRaspberry(String Nombre,String Puerto,String BusquedaBonjour){
+    public void ScanRaspberry(String Nombre,String Puerto,String BusquedaBonjour,onPostExecute Ejecutor){
 
         // funcion de buqueda del equipo
         // "_domotica._tcp"
@@ -453,7 +456,7 @@ public class conexion {
             sendBroadcast(
                     this.user
                     ,this.has
-                    ,8182);//(int) Integer.getInteger(Puerto));
+                    ,8182,Ejecutor);//(int) Integer.getInteger(Puerto));
             ch=true;
             msg.echo("se ha enviado el broadcast");
         } catch (Exception e) {
@@ -465,7 +468,7 @@ public class conexion {
         msg.echo("fin de la busqueda de la raspberry.");
 
     }
-    protected void setHost(String host){
+    public void setHost(String host){
         // la clave deve coincidir con el has de usuario
         this.host = host;
         status=2;
@@ -482,6 +485,7 @@ public class conexion {
     public void sendBroadcast(
             final String Usuario, final String Valor
             , final int puerto
+            , final onPostExecute Ejecutor
     ) throws Exception {
         InetAddress respuesta = null;
         new Thread(new Runnable() {
@@ -517,11 +521,11 @@ public class conexion {
                     String txt = new String(peticion.getData());
 
                     msg.echo("autorizacion:"+txt  );
-                    setHash(txt);
+                    setHash(txt.substring(0,13));
                     setHost(peticion.getAddress().getHostAddress().toString());
 
                     msg.echo("host:"+ peticion.getAddress().getHostAddress().toString() );
-
+                    Ejecutor.recibirTexto("broadcast",1);
                     clientSocket.close();
 
                 } catch (Exception e) {

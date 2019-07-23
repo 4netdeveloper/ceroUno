@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.example.cerouno.R;
 import com.example.cerouno.administrador.conexion;
+import com.example.cerouno.administrador.msg;
 import com.example.cerouno.ambientes.Dormitorio;
 
 import android.widget.Toast;
@@ -58,12 +59,19 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
         //Login----------
         SharedPreferences prefLectura = getSharedPreferences("usuario", Context.MODE_PRIVATE);
 
-        conex.setUser(prefLectura.getString("user", "test"));
-        conex.setHash(prefLectura.getString("hash", "test"));
+        conex.setUser(prefLectura.getString("user", "nouser"));
+        conex.setHash(prefLectura.getString("hash", "nouser"));
         banderaStatus = 1;
 
-        status = conex.getStatus();
+        status = conex.getStatus(new conexion.onPostExecute() {
+            @Override
+            public void recibirTexto(String txt, int estado) {
+                msg.echo("-------estadoamb"+ String.valueOf(estado));
+                validarNuevoUsuario();
 
+            }
+        });
+        /*
         Log.i("---- AMBIENTE", String.valueOf(status));
 
         if(status == 0){
@@ -72,7 +80,7 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
             Intent intent = new Intent(this, logIn.class);
             startActivity(intent);
         }
-
+        */
 
 
 
@@ -86,11 +94,10 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
     }
 
 
-    public void estadoUsuario(String respuesta){
-        if (banderaStatus == 1){
-            if (respuesta == "ok"){
+    public void estadoUsuario(int respuesta){
+            if (respuesta == 2){
                 Toast.makeText(getApplicationContext(), "Bienvenid@!!!", Toast.LENGTH_SHORT).show();
-            }else if(respuesta == "no"){
+            }else if(respuesta == 1){
                 SharedPreferences prefGuarda = getSharedPreferences("usuario", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefGuarda.edit();
                 editor.putString("user","");
@@ -99,12 +106,7 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
                 finish();
                 Intent intent = new Intent(this, logIn.class);
                 startActivity(intent);
-            }}else if(banderaStatus == 2){
-            if(respuesta == "ok")
-                logIn.respuestaStatus = true;
-            else if (respuesta == "no")
-                logIn.respuestaStatus = false;
-        }
+            }
     }
 
 
@@ -123,7 +125,7 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
         int index=0;
         if (v.getId() == R.id.amb_dormitorio){
             Dormitorio.id = 1;
-            Log.i(String.valueOf(v.getId()),"------------------------");
+           msg.echo(String.valueOf(v.getId())+"-");
         }else if (v.getId() == R.id.amb_dormitorio2){
             Dormitorio.id = 2;
             Log.i(String.valueOf(v.getId()),"------------------------");
@@ -141,7 +143,16 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
 
 
     }
+    public void validarNuevoUsuario(){
+        conex.getStatus(new conexion.onPostExecute() {
+            @Override
+            public void recibirTexto(String txt, int estado) {
+                msg.echo("recibido:"+String.valueOf(estado));
+                estadoUsuario(estado);
 
+            }
+        });
+    }
     public static int devuelveEstados (String tag){
         int estado = 0;
 
@@ -153,13 +164,6 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
     }
 
 
-
-    //Recibe los datos de todos los botones y los redirecciona a conexion
-    public static void recibeBotones (String dev, String acc, String val){
-        Log.i ("--------------", "Llamando a conexion");
-        // conex.setDev(dev).setAcc(acc).setVal(val).send( );
-        // conex.send(dev,acc,val);
-    }
 
 
 

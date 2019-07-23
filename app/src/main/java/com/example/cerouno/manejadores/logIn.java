@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -58,34 +57,43 @@ public class logIn extends AppCompatActivity {
                 ambiente.conex.setUser(nombre);
 
                 password = String.valueOf(etp.getText());
-                conex.setHash(Integer.parseInt(password) + "");
+                conex.setHash(password);
+                conex.setHost("");
                 banderaStatus = 2;
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
+                status = conex.getStatus(new conexion.onPostExecute() {
                     @Override
-                    public void run() {
-                        status = conex.getStatus();
+                    public void recibirTexto(String txt, int estado) {
+                        validarNuevoUsuario();
+                        Log.i("-------estadoamb", String.valueOf(estado));
                     }
-                }, 1000);
+                });
+
 
                 Log.i("--------LOGIN", String.valueOf(status));
 
                 if (status == 0) {
                     Toast.makeText(getApplicationContext(), "Servicio no encontrado!", Toast.LENGTH_SHORT).show();
-                } else {
-                    checkeo(respuestaStatus);
-                }
-            }
+                }}
         });
 
     }
-    public void checkeo(boolean check){
-        if (check){
+    public void validarNuevoUsuario(){
+        conex.getStatus(new conexion.onPostExecute() {
+            @Override
+            public void recibirTexto(String txt, int estado) {
+                Log.d("recibido","recibido:"+String.valueOf(estado));
+                estadoUsuario(estado);
+
+            }
+        });
+    }
+    public void estadoUsuario(int check){
+        if (check == 2){
             Toast.makeText(getApplicationContext(), "Bienvenido!", Toast.LENGTH_SHORT).show();
             SharedPreferences prefGuarda = getSharedPreferences("usuario", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = prefGuarda.edit();
             editor.putString("user",etu.getText().toString());
-            editor.putInt("hash", Integer.parseInt(password));
+            editor.putString("hash", password);
             editor.apply();
             finish();
             Intent intent = new Intent(getApplicationContext(), ambiente.class);
