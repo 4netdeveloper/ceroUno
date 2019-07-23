@@ -34,6 +34,8 @@
             android:title="@string/string_patio"/>
     </group>
 
+    <!---
+
     <item android:title="@string/communicate">
         <menu>
             <item
@@ -46,5 +48,6 @@
                 android:title="@string/menu_send" />
         </menu>
     </item>
+    -->
 
 </menu>
