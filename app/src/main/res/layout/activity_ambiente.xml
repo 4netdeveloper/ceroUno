@@ -21,8 +21,6 @@
             android:text="Donde comenzamos?"
             android:textAlignment="center"
             android:textSize="30dp">
-
-
         </TextView>
 
         <ScrollView

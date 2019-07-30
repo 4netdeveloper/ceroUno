@@ -19,6 +19,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/tv_dormitorio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/string_dormitorio"
@@ -39,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"
                     android:onClick="onClick"
-                    android:src="@drawable/ic_tv_black_36dp" />
+                    android:src="@drawable/ic_tv_black" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -57,14 +58,14 @@
                 android:layout_height="1dp"
                 android:background="@color/cardview_dark_background"
                 android:orientation="horizontal"
-                android:padding="50dp"></LinearLayout>
+                ></LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:padding="15dp">
+                >
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -127,6 +128,71 @@
                             android:textSize="25dp" />
 
                     </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="1dp"
+                android:background="@color/cardview_dark_background"
+                android:orientation="horizontal"
+                ></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="10dp">
+
+
+                    <ImageButton
+                        android:id="@+id/persiana1"
+                        style="@style/Widget.AppCompat.ImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_persiana_48dp"
+                        android:tag="IR4A01"/>
+
+                    <TextView
+                        android:id="@+id/tv_persiana1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/persiana_1"
+                        android:textSize="25dp"
+                        android:fontFamily="@font/roboto_light"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="10dp">
+
+                    <ImageButton
+                        android:id="@+id/persiana2"
+                        style="@style/Widget.AppCompat.ImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ic_persiana_48dp"
+                        android:tag="IR4A02" />
+
+                    <TextView
+                        android:id="@+id/tv_persiana2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/persiana_2"
+                        android:textSize="25dp"
+                        android:fontFamily="@font/roboto_light"/>
 
                 </LinearLayout>
 
