@@ -169,8 +169,6 @@ public class conexion {
             send("GP0","R","0",EjecutarDespues);
 
         }
-
-
         return status;
     }
 
