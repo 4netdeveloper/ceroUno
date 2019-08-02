@@ -159,8 +159,15 @@
                         style="@style/Widget.AppCompat.ImageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/ic_persiana_48dp"
-                        android:tag="IR4A01"/>
+                        android:src="@drawable/ic_persiana_48dp"
+                        android:background="#FFFFFF"/>
+                    <ImageButton
+                        android:id="@+id/persiana2"
+                        style="@style/Widget.AppCompat.ImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_persiana_apagado_48dp"
+                        android:background="#FFFFFF"/>
 
                     <TextView
                         android:id="@+id/tv_persiana1"
@@ -179,12 +186,19 @@
                     android:padding="10dp">
 
                     <ImageButton
-                        android:id="@+id/persiana2"
+                        android:id="@+id/persiana3"
                         style="@style/Widget.AppCompat.ImageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/ic_persiana_48dp"
-                        android:tag="IR4A02" />
+                        android:src="@drawable/ic_persiana_48dp"
+                        android:background="#FFFFFF"/>
+                    <ImageButton
+                        android:id="@+id/persiana4"
+                        style="@style/Widget.AppCompat.ImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_persiana_apagado_48dp"
+                        android:background="#FFFFFF"/>
 
                     <TextView
                         android:id="@+id/tv_persiana2"
