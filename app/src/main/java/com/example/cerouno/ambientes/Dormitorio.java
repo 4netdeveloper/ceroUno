@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -28,6 +29,8 @@ public class Dormitorio extends Fragment implements View.OnClickListener{
 
     private ImageButton persiana1;
     private ImageButton persiana2;
+    private ImageButton persiana3;
+    private ImageButton persiana4;
 
     private TextView dormitorio;
 
@@ -38,6 +41,8 @@ public class Dormitorio extends Fragment implements View.OnClickListener{
     static int estado2;
     static int estado3;
     static int estado4;
+    static int estado5;
+    static int estado6;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)  {
@@ -54,17 +59,29 @@ public class Dormitorio extends Fragment implements View.OnClickListener{
         persiana1.setOnClickListener(this);
         persiana2 = myView.findViewById(R.id.persiana2);
         persiana2.setOnClickListener(this);
+        persiana3 = myView.findViewById(R.id.persiana3);
+        persiana3.setOnClickListener(this);
+        persiana4 = myView.findViewById(R.id.persiana4);
+        //persiana2B.setOnClickListener(this);
+
+        persiana4.setOnLongClickListener((OnLongClickListener) this);
+
 
         if(id == 1){
             estado1 = ambiente.devuelveEstados("GP3A01");
             estado2 = ambiente.devuelveEstados("GP3A02");
             estado3 = ambiente.devuelveEstados("IR3A01");
             estado4 = ambiente.devuelveEstados("IR3A02");
+            estado5 = ambiente.devuelveEstados("IR3A03");
+            estado6 = ambiente.devuelveEstados("IR3A04");
+
         }else{
             estado1 = ambiente.devuelveEstados("GP3B01");
             estado2 = ambiente.devuelveEstados("GP3B02");
             estado3 = ambiente.devuelveEstados("IR3B01");
             estado4 = ambiente.devuelveEstados("IR3B02");
+            estado5 = ambiente.devuelveEstados("IR3B03");
+            estado6 = ambiente.devuelveEstados("IR3B04");
         }
 
         dormitorio = myView.findViewById(R.id.tv_dormitorio);
@@ -80,18 +97,6 @@ public class Dormitorio extends Fragment implements View.OnClickListener{
             boton2.setBackgroundResource(foco_apagado);
         }else{
             boton2.setBackgroundResource(foco);
-        }
-
-        if(estado3 == 0){
-            persiana1.setBackgroundResource(ic_persiana_apagado_48dp);
-        }else{
-            persiana1.setBackgroundResource(ic_persiana_48dp);
-        }
-
-        if(estado4 == 0){
-            persiana2.setBackgroundResource(ic_persiana_apagado_48dp);
-        }else{
-            persiana2.setBackgroundResource(ic_persiana_48dp);
         }
 
         return myView;
@@ -208,9 +213,38 @@ public class Dormitorio extends Fragment implements View.OnClickListener{
                     conex.send("IR3B02", "A", "0");
                 }
                 break;
+            case R.id.persiana3:
+                if(id == 1){
+                    Log.i("--------------------", "PERSIANA 3, DORMITORIO 1");
+                    if(estado5 == 0){
+                        persiana3.setBackgroundResource(ic_persiana_48dp);
+                        estado5 = 1;
+                    }else{
+                        persiana3.setBackgroundResource(ic_persiana_apagado_48dp);
+                        estado5 = 0;
+                    }
+                    conex.send("IR3A03", "A", "0");
+                }
+                break;
+
+            case R.id.persiana4:
+                if(id == 1){
+                    Log.i("--------------------", "PERSIANA 3, DORMITORIO 2");
+                    if(estado6 == 0){
+                        persiana4.setBackgroundResource(ic_persiana_48dp);
+                        estado6 = 1;
+                    }else{
+                        persiana4.setBackgroundResource(ic_persiana_apagado_48dp);
+                        estado6 = 0;
+                    }
+                    conex.send("IR3A04", "A", "0");
+                }
+                break;
     }
 
 }
+
+
 
     private void cargarFragmento (Fragment fragmento){
         FragmentManager manager = getFragmentManager();
