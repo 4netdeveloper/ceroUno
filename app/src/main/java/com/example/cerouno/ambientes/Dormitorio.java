@@ -13,7 +13,9 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cerouno.R;
 import com.example.cerouno.aparatos.Televisor;
@@ -27,10 +29,6 @@ import static com.example.cerouno.manejadores.ambiente.conex;
 
 public class Dormitorio extends Fragment implements View.OnClickListener{
 
-    private ImageButton persiana1;
-    private ImageButton persiana2;
-    private ImageButton persiana3;
-    private ImageButton persiana4;
 
     private TextView dormitorio;
 
@@ -41,8 +39,11 @@ public class Dormitorio extends Fragment implements View.OnClickListener{
     static int estado2;
     static int estado3;
     static int estado4;
-    static int estado5;
-    static int estado6;
+
+
+    static SeekBar persiana1;
+    static SeekBar persiana2;
+    static int estadoPersiana = 0;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)  {
@@ -55,6 +56,7 @@ public class Dormitorio extends Fragment implements View.OnClickListener{
         boton2 = myView.findViewById(R.id.l32);
         boton2.setOnClickListener(this);
 
+        /*
         persiana1 = myView.findViewById(R.id.persiana1);
         persiana1.setOnClickListener(this);
         persiana2 = myView.findViewById(R.id.persiana2);
@@ -64,25 +66,23 @@ public class Dormitorio extends Fragment implements View.OnClickListener{
         persiana4 = myView.findViewById(R.id.persiana4);
         //persiana2B.setOnClickListener(this);
 
-        persiana4.setOnLongClickListener((OnLongClickListener) this);
+       // persiana4.setOnLongClickListener((OnLongClickListener) this);
 
-
+*/
         if(id == 1){
             estado1 = ambiente.devuelveEstados("GP3A01");
             estado2 = ambiente.devuelveEstados("GP3A02");
             estado3 = ambiente.devuelveEstados("IR3A01");
             estado4 = ambiente.devuelveEstados("IR3A02");
-            estado5 = ambiente.devuelveEstados("IR3A03");
-            estado6 = ambiente.devuelveEstados("IR3A04");
+
 
         }else{
             estado1 = ambiente.devuelveEstados("GP3B01");
             estado2 = ambiente.devuelveEstados("GP3B02");
-            estado3 = ambiente.devuelveEstados("IR3B01");
-            estado4 = ambiente.devuelveEstados("IR3B02");
-            estado5 = ambiente.devuelveEstados("IR3B03");
-            estado6 = ambiente.devuelveEstados("IR3B04");
+            estado3 = ambiente.devuelveEstados("IR3A01");
+            estado4 = ambiente.devuelveEstados("IR3A02");
         }
+
 
         dormitorio = myView.findViewById(R.id.tv_dormitorio);
         dormitorio.setText("Dormitorio " + id);
@@ -98,6 +98,18 @@ public class Dormitorio extends Fragment implements View.OnClickListener{
         }else{
             boton2.setBackgroundResource(foco);
         }
+
+        //seekbar
+        persiana1 = myView.findViewById(R.id.seekBar_1);
+        persiana1.setProgress(estadoPersiana);
+        persiana1.setMax(100);
+        manejoPersiana(persiana1);
+
+        persiana2 = myView.findViewById(R.id.seekBar_2);
+        persiana2.setProgress(estadoPersiana);
+        persiana2.setMax(100);
+        manejoPersiana(persiana2);
+
 
         return myView;
     }
@@ -162,7 +174,8 @@ public class Dormitorio extends Fragment implements View.OnClickListener{
                     conex.send("GP3B02", "A", "0");
                 }
                 break;
-            case R.id.persiana1:
+
+            /*case R.id.persiana1:
                 if (id == 1){
                     Log.i("---------------------", "PERSIANA 1, DORMITORIO 1");
                     if(estado3 == 0){
@@ -213,6 +226,7 @@ public class Dormitorio extends Fragment implements View.OnClickListener{
                     conex.send("IR3B02", "A", "0");
                 }
                 break;
+
             case R.id.persiana3:
                 if(id == 1){
                     Log.i("--------------------", "PERSIANA 3, DORMITORIO 1");
@@ -240,9 +254,81 @@ public class Dormitorio extends Fragment implements View.OnClickListener{
                     conex.send("IR3A04", "A", "0");
                 }
                 break;
+                */
+
+
     }
 
 }
+
+    private void manejoPersiana (SeekBar seekBar) {
+
+        seekBar.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener() {
+                    //hace un llamado a la perilla cuando se arrastra
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar,
+                                                  int progress, boolean fromUser) {
+
+                    }
+                    //hace un llamado  cuando se toca la perilla
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
+                    //hace un llamado  cuando se detiene la perilla
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+
+                        switch (seekBar.getId()){
+                            case R.id.seekBar_1:
+                                if(id == 1){
+                                    Log.i("---------------------", "PERSIANA 1, DORMITORIO 1");
+
+                                    estadoPersiana = persiana1.getProgress();
+                                    conex.send("IR3A01", "A", "0");
+                                }
+
+                                if(id == 2){
+                                    Log.i("---------------------", "PERSIANA 1, DORMITORIO 2");
+
+                                    estadoPersiana = persiana1.getProgress();
+                                    conex.send("IR3B01", "A", "0");
+                                }
+                                break;
+
+                            case  R.id.seekBar_2:
+                                if(id == 1){
+                                    Log.i("---------------------", "PERSIANA 2, DORMITORIO 1");
+
+                                    estadoPersiana = persiana2.getProgress();
+                                    conex.send("IR3A02", "A", "0");
+                                }
+
+                                if(id == 2){
+                                    Log.i("---------------------", "PERSIANA 2, DORMITORIO 2");
+
+                                    estadoPersiana = persiana2.getProgress();
+                                    conex.send("IR3B02", "A", "0");
+                                }
+                                break;
+                        }
+
+                        if(seekBar.getProgress() == 0){
+                            Toast.makeText(getContext(), "Persiana cerrada", Toast.LENGTH_SHORT).show();
+                        }else if(seekBar.getProgress() == 100){
+                            Toast.makeText(getContext(), "Persiana abierta", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(getContext(), "Persiana abierta al " + seekBar.getProgress()+"%", Toast.LENGTH_SHORT).show();
+                        }
+                        estadoPersiana = seekBar.getProgress();
+
+                    }
+                });
+    }
+
+
+
+
+
+
 
 
 

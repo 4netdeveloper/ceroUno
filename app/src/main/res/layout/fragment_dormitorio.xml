@@ -146,6 +146,8 @@
                 android:orientation="horizontal"
                 android:padding="10dp">
 
+
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -153,21 +155,12 @@
                     android:gravity="center"
                     android:padding="10dp">
 
+                    <SeekBar
+                        android:id="@+id/seekBar_1"
+                        android:layout_width="138dp"
+                        android:layout_height="138dp"
+                        android:rotation="270" />
 
-                    <ImageButton
-                        android:id="@+id/persiana1"
-                        style="@style/Widget.AppCompat.ImageButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_persiana_48dp"
-                        android:background="#FFFFFF"/>
-                    <ImageButton
-                        android:id="@+id/persiana2"
-                        style="@style/Widget.AppCompat.ImageButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_persiana_apagado_48dp"
-                        android:background="#FFFFFF"/>
 
                     <TextView
                         android:id="@+id/tv_persiana1"
@@ -185,20 +178,11 @@
                     android:gravity="center"
                     android:padding="10dp">
 
-                    <ImageButton
-                        android:id="@+id/persiana3"
-                        style="@style/Widget.AppCompat.ImageButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_persiana_48dp"
-                        android:background="#FFFFFF"/>
-                    <ImageButton
-                        android:id="@+id/persiana4"
-                        style="@style/Widget.AppCompat.ImageButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_persiana_apagado_48dp"
-                        android:background="#FFFFFF"/>
+                    <SeekBar
+                        android:id="@+id/seekBar_2"
+                        android:layout_width="138dp"
+                        android:layout_height="138dp"
+                        android:rotation="270" />
 
                     <TextView
                         android:id="@+id/tv_persiana2"
