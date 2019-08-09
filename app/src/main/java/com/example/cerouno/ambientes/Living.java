@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cerouno.R;
 import com.example.cerouno.aparatos.Televisor;
@@ -27,8 +28,6 @@ import static com.example.cerouno.manejadores.ambiente.conex;
 
 public class Living extends Fragment implements View.OnClickListener{
 
-    public ImageButton persiana1;
-    public ImageButton persiana2;;
 
     public ImageButton boton1;
     public ImageButton boton2;
@@ -37,8 +36,10 @@ public class Living extends Fragment implements View.OnClickListener{
     static int estado1;
     static int estado2;
     static int estado3;
-    static int estado4;
-    static int estado5;
+
+    static SeekBar persiana1;
+    static SeekBar persiana2;
+    static int estadoPersiana = 0;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)  {
@@ -54,19 +55,10 @@ public class Living extends Fragment implements View.OnClickListener{
         boton3 = myView.findViewById(R.id.l43);
         boton3.setOnClickListener(this);
 
-        persiana1 = myView.findViewById(R.id.IR4A01);
-        persiana1.setOnClickListener(this);
-        persiana2 = myView.findViewById(R.id.IR4A02);
-        persiana2.setOnClickListener(this);
-
-
-
-
         estado1 = ambiente.devuelveEstados(String.valueOf(boton1.getTag()));
         estado2 = ambiente.devuelveEstados(String.valueOf(boton2.getTag()));
         estado3 = ambiente.devuelveEstados(String.valueOf(boton3.getTag()));
-        estado4 = ambiente.devuelveEstados(String.valueOf(persiana1.getTag()));
-        estado5 = ambiente.devuelveEstados(String.valueOf(persiana2.getTag()));
+
 
 
         if(estado1 == 0){
@@ -87,17 +79,17 @@ public class Living extends Fragment implements View.OnClickListener{
             boton3.setBackgroundResource(foco);
         }
 
-        if(estado4 == 0){
-            persiana1.setBackgroundResource(ic_persiana_apagado_48dp);
-        }else{
-            persiana1.setBackgroundResource(ic_persiana_48dp);
-        }
 
-        if(estado5 == 0){
-            persiana2.setBackgroundResource(ic_persiana_apagado_48dp);
-        }else{
-            persiana2.setBackgroundResource(ic_persiana_48dp);
-        }
+        //seekbar
+        persiana1 = myView.findViewById(R.id.seekBar_1);
+        persiana1.setProgress(estadoPersiana);
+        persiana1.setMax(100);
+        manejoPersiana(persiana1);
+
+        persiana2 = myView.findViewById(R.id.seekBar_2);
+        persiana2.setProgress(estadoPersiana);
+        persiana2.setMax(100);
+        manejoPersiana(persiana2);
 
 
 
@@ -149,30 +141,55 @@ public class Living extends Fragment implements View.OnClickListener{
                 conex.send(String.valueOf(v.getTag()), "A", "0");
                 break;
 
-            case R.id.IR4A01:
-                Log.i("-----------------------", "PERSIANA 1 LIVING");
-                if(estado4 == 0){
-                    persiana1.setBackgroundResource(ic_persiana_48dp);
-                    estado4 = 1;
-                }else{
-                    persiana1.setBackgroundResource(ic_persiana_apagado_48dp);
-                    estado4 = 0;
-                }
-                conex.send(String.valueOf(v.getTag()), "A", "0");
-                break;
 
-            case R.id.IR4A02:
-                Log.i("-----------------------", "PERSIANA 2 LIVING");
-                if(estado5 == 0){
-                    persiana2.setBackgroundResource(ic_persiana_48dp);
-                    estado5 = 1;
-                }else{
-                    persiana2.setBackgroundResource(ic_persiana_apagado_48dp);
-                    estado5 = 0;
-                }
-                conex.send(String.valueOf(v.getTag()), "A", "0");
-                break;
         }
+    }
+
+    private void manejoPersiana (SeekBar seekBar) {
+
+        seekBar.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener() {
+                    //hace un llamado a la perilla cuando se arrastra
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar,
+                                                  int progress, boolean fromUser) {
+
+                    }
+                    //hace un llamado  cuando se toca la perilla
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
+                    //hace un llamado  cuando se detiene la perilla
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+
+                        switch (seekBar.getId()){
+                            case R.id.seekBar_1:
+
+                                    Log.i("---------------------", "PERSIANA 1, LIVING");
+
+                                    estadoPersiana = persiana1.getProgress();
+                                    conex.send("PR4A01", "A", String.valueOf(estadoPersiana));
+                                break;
+
+                            case  R.id.seekBar_2:
+                                    Log.i("---------------------", "PERSIANA 2, LIVING");
+
+                                    estadoPersiana = persiana2.getProgress();
+                                    conex.send("PR4A02", "A", String.valueOf(estadoPersiana));
+
+                                break;
+                        }
+
+                        if(seekBar.getProgress() == 0){
+                            Toast.makeText(getContext(), "Persiana cerrada", Toast.LENGTH_SHORT).show();
+                        }else if(seekBar.getProgress() == 100){
+                            Toast.makeText(getContext(), "Persiana abierta", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(getContext(), "Persiana abierta al " + seekBar.getProgress()+"%", Toast.LENGTH_SHORT).show();
+                        }
+                        estadoPersiana = seekBar.getProgress();
+
+                    }
+                });
     }
 
     private void cargarFragmento (Fragment fragmento){

@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"
                     android:onClick="onClick"
-                    android:src="@drawable/ic_tv_black_36dp" />
+                    android:src="@drawable/ic_tv_black" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -171,6 +171,8 @@
                 android:orientation="horizontal"
                 android:padding="10dp">
 
+
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -178,17 +180,15 @@
                     android:gravity="center"
                     android:padding="10dp">
 
+                    <SeekBar
+                        android:id="@+id/seekBar_1"
+                        android:layout_width="138dp"
+                        android:layout_height="138dp"
+                        android:rotation="270" />
 
-                    <ImageButton
-                        android:id="@+id/IR4A01"
-                        style="@style/Widget.AppCompat.ImageButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_persiana_48dp"
-                        android:tag="IR4A01"/>
 
                     <TextView
-                        android:id="@+id/tv_IR4A01"
+                        android:id="@+id/tv_persiana1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/persiana_1"
@@ -203,16 +203,14 @@
                     android:gravity="center"
                     android:padding="10dp">
 
-                    <ImageButton
-                        android:id="@+id/IR4A02"
-                        style="@style/Widget.AppCompat.ImageButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_persiana_48dp"
-                        android:tag="IR4A02" />
+                    <SeekBar
+                        android:id="@+id/seekBar_2"
+                        android:layout_width="138dp"
+                        android:layout_height="138dp"
+                        android:rotation="270" />
 
                     <TextView
-                        android:id="@+id/tv_IR4A02"
+                        android:id="@+id/tv_persiana2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/persiana_2"

@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.SeekBar;
+import android.widget.Toast;
 
 import com.example.cerouno.R;
 import com.example.cerouno.administrador.conexion;
@@ -26,6 +28,9 @@ public class Comedor extends Fragment implements View.OnClickListener{
 
     public ImageButton boton1;
     static int estado1;
+    static SeekBar persiana1;
+    static SeekBar persiana2;
+    static int estadoPersiana = 0;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)  {
@@ -43,6 +48,17 @@ public class Comedor extends Fragment implements View.OnClickListener{
         }else{
             boton1.setBackgroundResource(foco);
         }
+
+        //seekbar
+        persiana1 = myView.findViewById(R.id.seekBar_1);
+        persiana1.setProgress(estadoPersiana);
+        persiana1.setMax(100);
+        manejoPersiana(persiana1);
+
+        persiana2 = myView.findViewById(R.id.seekBar_2);
+        persiana2.setProgress(estadoPersiana);
+        persiana2.setMax(100);
+        manejoPersiana(persiana2);
 
         return myView;
     }
@@ -66,6 +82,53 @@ public class Comedor extends Fragment implements View.OnClickListener{
                 }
                 break;
         }
+    }
+
+    private void manejoPersiana (SeekBar seekBar) {
+
+        seekBar.setOnSeekBarChangeListener(
+                new SeekBar.OnSeekBarChangeListener() {
+                    //hace un llamado a la perilla cuando se arrastra
+                    @Override
+                    public void onProgressChanged(SeekBar seekBar,
+                                                  int progress, boolean fromUser) {
+
+                    }
+                    //hace un llamado  cuando se toca la perilla
+                    public void onStartTrackingTouch(SeekBar seekBar) {
+                    }
+                    //hace un llamado  cuando se detiene la perilla
+                    public void onStopTrackingTouch(SeekBar seekBar) {
+
+                        switch (seekBar.getId()){
+                            case R.id.seekBar_1:
+
+                                Log.i("---------------------", "PERSIANA 1, COMEDOR");
+
+                                estadoPersiana = persiana1.getProgress();
+                                conex.send("PR2A01", "A", String.valueOf(estadoPersiana));
+                                break;
+
+                            case  R.id.seekBar_2:
+                                Log.i("---------------------", "PERSIANA 2, COMEDOR");
+
+                                estadoPersiana = persiana2.getProgress();
+                                conex.send("PR2A02", "A", String.valueOf(estadoPersiana));
+
+                                break;
+                        }
+
+                        if(seekBar.getProgress() == 0){
+                            Toast.makeText(getContext(), "Persiana cerrada", Toast.LENGTH_SHORT).show();
+                        }else if(seekBar.getProgress() == 100){
+                            Toast.makeText(getContext(), "Persiana abierta", Toast.LENGTH_SHORT).show();
+                        }else{
+                            Toast.makeText(getContext(), "Persiana abierta al " + seekBar.getProgress()+"%", Toast.LENGTH_SHORT).show();
+                        }
+                        estadoPersiana = seekBar.getProgress();
+
+                    }
+                });
     }
 
     private void cargarFragmento (Fragment fragmento){

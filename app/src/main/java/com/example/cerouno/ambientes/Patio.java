@@ -1,7 +1,6 @@
 package com.example.cerouno.ambientes;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -43,7 +42,7 @@ public class Patio extends Fragment implements View.OnClickListener {
         estado2 = ambiente.devuelveEstados(String.valueOf(boton2.getTag()));
         estado3 = ambiente.devuelveEstados(String.valueOf(boton3.getTag()));
 
-        if(estado1 == 0){
+     /*   if(estado1 == 0){
             boton1.setBackgroundResource(foco_apagado);
         }else{
             boton1.setBackgroundResource(foco);
@@ -59,15 +58,15 @@ public class Patio extends Fragment implements View.OnClickListener {
             boton3.setBackgroundResource(foco_apagado);
         }else{
             boton3.setBackgroundResource(foco);
-        }
+        }*/
 
         return myView;
     }
 
+
     @Override
     public void onClick(View v) {
-        Log.i("----------------------", "BOTON LUZ BAÑO " + String.valueOf(v.getTag()));
-
+        Log.i( "-----------------------", "BOTON LUZ PATIO");
         final String param = String.valueOf(v.getTag()) ;
 
         conex.send(String.valueOf(v.getTag()), "A", "0", new conexion.onPostExecute() {
@@ -82,7 +81,7 @@ public class Patio extends Fragment implements View.OnClickListener {
     public void CambiarEstadoDeLuz(String tag){
         msg.echo("cambiando la luz"+tag);
         switch (tag){
-            case "GP5A01":
+            case "GP5C01":
                 if(estado1 == 0){
                     boton1.setBackgroundResource(foco);
                     estado1 = 1;
@@ -90,7 +89,7 @@ public class Patio extends Fragment implements View.OnClickListener {
                     boton1.setBackgroundResource(foco_apagado);
                     estado1 = 0;
                 } break;
-            case "GP5A02":
+            case "GP5C02":
                 if(estado2 == 0){
                     boton2.setBackgroundResource(foco);
                     estado2 = 1;
@@ -99,7 +98,7 @@ public class Patio extends Fragment implements View.OnClickListener {
                     estado2 = 0;
                 }break;
 
-            case "GP5A03":
+            case "GP5C03":
                 if(estado3 == 0){
                     boton3.setBackgroundResource(foco);
                     estado3 = 1;

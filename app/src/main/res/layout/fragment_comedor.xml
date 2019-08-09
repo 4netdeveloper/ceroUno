@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"
-                    android:src="@drawable/ic_tv_black_36dp" />
+                    android:src="@drawable/ic_tv_black" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -47,7 +47,6 @@
                     android:textSize="25dp" />
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:layout_width="300dp"
@@ -72,8 +71,7 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="15dp">
+                        android:orientation="vertical">
 
                         <ImageButton
                             android:id="@+id/l21"
@@ -92,6 +90,69 @@
                             android:textSize="25dp" />
 
                     </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="1dp"
+                android:background="@color/cardview_dark_background"
+                android:orientation="horizontal"
+                android:padding="50dp"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="10dp">
+
+                    <SeekBar
+                        android:id="@+id/seekBar_1"
+                        android:layout_width="138dp"
+                        android:layout_height="138dp"
+                        android:rotation="270" />
+
+
+                    <TextView
+                        android:id="@+id/tv_persiana1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/persiana_1"
+                        android:textSize="25dp"
+                        android:fontFamily="@font/roboto_light"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:padding="10dp">
+
+                    <SeekBar
+                        android:id="@+id/seekBar_2"
+                        android:layout_width="138dp"
+                        android:layout_height="138dp"
+                        android:rotation="270" />
+
+                    <TextView
+                        android:id="@+id/tv_persiana2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/persiana_2"
+                        android:textSize="25dp"
+                        android:fontFamily="@font/roboto_light"/>
 
                 </LinearLayout>
 

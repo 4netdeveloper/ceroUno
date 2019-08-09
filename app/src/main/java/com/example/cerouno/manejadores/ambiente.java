@@ -21,8 +21,9 @@ import android.widget.Toast;
 public class ambiente extends AppCompatActivity implements View.OnClickListener{
 
 
-    static int[] BOTONESMENU = {R.id.amb_tv, R.id.amb_cocina, R.id.amb_comedor, R.id.amb_bano, R.id.amb_dormitorio, R.id.amb_dormitorio2,  //array de botones
-            R.id.amb_patio};
+    static int[] BOTONESMENU = {R.id.amb_entrada, R.id.amb_patio, R.id.amb_tv, R.id.amb_cocina, R.id.amb_comedor,
+            R.id.amb_bano, R.id.amb_dormitorio,  //array de botones
+            R.id.amb_dormitorio2};
     public static conexion conex;
     int i, j;
     int opcion = i;
@@ -31,7 +32,8 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
 
     static String [] lucesTag =
             {"GP0A01", "GP0A02", "GP0A03","GPA1A01", "GPA1A02", "GPA1A03","GP2A01",
-                    "GP3A01", "GP3202", "GP3B01", "GP3B02", "GP4A01", "GP4A02", "GP4A03", "GP5A01", "GP5A02", "GP5A03"};
+                    "GP3A01", "GP3202", "GP3B01", "GP3B02", "GP4A01", "GP4A02", "GP4A03",
+                        "GP5A01", "GP5A02", "GP5A03", "GP5C01", "GP5C02", "GP5C03"};
 
     static int [] estados = new int[lucesTag.length];
 

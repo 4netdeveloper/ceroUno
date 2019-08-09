@@ -58,7 +58,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/foco_apagado"
-                            android:tag="GP5A01" />
+                            android:tag="GP5C01" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -89,7 +89,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/foco_apagado"
-                            android:tag="GP5A02" />
+                            android:tag="GP5C02" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -120,7 +120,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/foco_apagado"
-                            android:tag="GP5A03" />
+                            android:tag="GP5C03" />
 
                         <TextView
                             android:layout_width="match_parent"

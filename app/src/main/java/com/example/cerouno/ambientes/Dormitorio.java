@@ -56,31 +56,19 @@ public class Dormitorio extends Fragment implements View.OnClickListener{
         boton2 = myView.findViewById(R.id.l32);
         boton2.setOnClickListener(this);
 
-        /*
-        persiana1 = myView.findViewById(R.id.persiana1);
-        persiana1.setOnClickListener(this);
-        persiana2 = myView.findViewById(R.id.persiana2);
-        persiana2.setOnClickListener(this);
-        persiana3 = myView.findViewById(R.id.persiana3);
-        persiana3.setOnClickListener(this);
-        persiana4 = myView.findViewById(R.id.persiana4);
-        //persiana2B.setOnClickListener(this);
 
-       // persiana4.setOnLongClickListener((OnLongClickListener) this);
-
-*/
         if(id == 1){
             estado1 = ambiente.devuelveEstados("GP3A01");
             estado2 = ambiente.devuelveEstados("GP3A02");
-            estado3 = ambiente.devuelveEstados("IR3A01");
-            estado4 = ambiente.devuelveEstados("IR3A02");
+            estado3 = ambiente.devuelveEstados("PR3A01");
+            estado4 = ambiente.devuelveEstados("PR3A02");
 
 
         }else{
             estado1 = ambiente.devuelveEstados("GP3B01");
             estado2 = ambiente.devuelveEstados("GP3B02");
-            estado3 = ambiente.devuelveEstados("IR3A01");
-            estado4 = ambiente.devuelveEstados("IR3A02");
+            estado3 = ambiente.devuelveEstados("PR3A01");
+            estado4 = ambiente.devuelveEstados("PR3A02");
         }
 
 
@@ -174,91 +162,7 @@ public class Dormitorio extends Fragment implements View.OnClickListener{
                     conex.send("GP3B02", "A", "0");
                 }
                 break;
-
-            /*case R.id.persiana1:
-                if (id == 1){
-                    Log.i("---------------------", "PERSIANA 1, DORMITORIO 1");
-                    if(estado3 == 0){
-                        persiana1.setBackgroundResource(ic_persiana_48dp);
-                        estado3 = 1;
-                    }else{
-                        persiana1.setBackgroundResource(ic_persiana_apagado_48dp);
-                        estado3 = 0;
-                    }
-                    conex.send("IR3A01", "A", "0");
-                }
-
-                if(id == 2){
-                    Log.i("---------------------", "PERSIANA 1, DORMITORIO 2");
-                    if (estado3 == 0){
-                        persiana1.setBackgroundResource(ic_persiana_48dp);
-                        estado3 = 1;
-                    }else{
-                        persiana1.setBackgroundResource(ic_persiana_apagado_48dp);
-                        estado3 =0;
-                    }
-                    conex.send("IR3B01", "A", "0");
-                }
-                break;
-
-            case R.id.persiana2:
-                if(id == 1){
-                    Log.i("--------------------", "PERSIANA 2, DORMITORIO 1");
-                    if(estado4 == 0){
-                        persiana2.setBackgroundResource(ic_persiana_48dp);
-                        estado4 = 1;
-                    }else{
-                        persiana2.setBackgroundResource(ic_persiana_apagado_48dp);
-                        estado4 = 0;
-                    }
-                    conex.send("IR3A02", "A", "0");
-                }
-
-                if(id == 2) {
-                    Log.i("--------------------", "PERSIANA 2, DORMITORIO 2");
-                    if (estado4 == 0) {
-                        persiana2.setBackgroundResource(ic_persiana_48dp);
-                        estado4 = 1;
-                    } else {
-                        persiana2.setBackgroundResource(ic_persiana_apagado_48dp);
-                        estado4 = 0;
-                    }
-                    conex.send("IR3B02", "A", "0");
-                }
-                break;
-
-            case R.id.persiana3:
-                if(id == 1){
-                    Log.i("--------------------", "PERSIANA 3, DORMITORIO 1");
-                    if(estado5 == 0){
-                        persiana3.setBackgroundResource(ic_persiana_48dp);
-                        estado5 = 1;
-                    }else{
-                        persiana3.setBackgroundResource(ic_persiana_apagado_48dp);
-                        estado5 = 0;
-                    }
-                    conex.send("IR3A03", "A", "0");
-                }
-                break;
-
-            case R.id.persiana4:
-                if(id == 1){
-                    Log.i("--------------------", "PERSIANA 3, DORMITORIO 2");
-                    if(estado6 == 0){
-                        persiana4.setBackgroundResource(ic_persiana_48dp);
-                        estado6 = 1;
-                    }else{
-                        persiana4.setBackgroundResource(ic_persiana_apagado_48dp);
-                        estado6 = 0;
-                    }
-                    conex.send("IR3A04", "A", "0");
-                }
-                break;
-                */
-
-
     }
-
 }
 
     private void manejoPersiana (SeekBar seekBar) {
@@ -283,14 +187,14 @@ public class Dormitorio extends Fragment implements View.OnClickListener{
                                     Log.i("---------------------", "PERSIANA 1, DORMITORIO 1");
 
                                     estadoPersiana = persiana1.getProgress();
-                                    conex.send("IR3A01", "A", "0");
+                                    conex.send("PR3A01", "A", String.valueOf(estadoPersiana));
                                 }
 
                                 if(id == 2){
                                     Log.i("---------------------", "PERSIANA 1, DORMITORIO 2");
 
                                     estadoPersiana = persiana1.getProgress();
-                                    conex.send("IR3B01", "A", "0");
+                                    conex.send("PR3B01", "A", String.valueOf(estadoPersiana));
                                 }
                                 break;
 
@@ -299,14 +203,14 @@ public class Dormitorio extends Fragment implements View.OnClickListener{
                                     Log.i("---------------------", "PERSIANA 2, DORMITORIO 1");
 
                                     estadoPersiana = persiana2.getProgress();
-                                    conex.send("IR3A02", "A", "0");
+                                    conex.send("PR3A02", "A", String.valueOf(estadoPersiana));
                                 }
 
                                 if(id == 2){
                                     Log.i("---------------------", "PERSIANA 2, DORMITORIO 2");
 
                                     estadoPersiana = persiana2.getProgress();
-                                    conex.send("IR3B02", "A", "0");
+                                    conex.send("PR3B02", "A", String.valueOf(estadoPersiana));
                                 }
                                 break;
                         }

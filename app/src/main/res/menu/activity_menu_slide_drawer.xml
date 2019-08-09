@@ -4,6 +4,15 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_entrada"
+            android:icon="@drawable/ic_entrada_18"
+            android:title="@string/string_entrada"/>
+        <item
+            android:id="@+id/nav_patio"
+            android:icon="@drawable/ic_local_florist_black_18dp"
+            android:title="@string/string_patio"/>
         <item
             android:id="@+id/nav_living"
             android:icon="@drawable/ic_tv_black_36dp"
@@ -28,10 +37,7 @@
             android:id="@+id/nav_dorm2"
             android:icon="@drawable/ic_hotel_black_12dp"
             android:title="@string/string_dormitorio2"/>
-        <item
-            android:id="@+id/nav_patio"
-            android:icon="@drawable/ic_local_florist_black_18dp"
-            android:title="@string/string_patio"/>
+
     </group>
 
     <!---

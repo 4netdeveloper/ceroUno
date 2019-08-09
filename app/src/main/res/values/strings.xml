@@ -67,6 +67,8 @@
     <string name="string_bano">Baño</string>
     <string name="string_comedor">Comedor</string>
     <string name="string_patio">Patio</string>
+    <string name="string_entrada">Entrada</string>
+    <string name="string_porton">Porton</string>
 
     <string name="volumen">Volúmen</string>
     <string name="canal">Canales</string>

@@ -1,6 +1,8 @@
 package com.example.cerouno.manejadores;
 
 import android.os.Bundle;
+
+import com.example.cerouno.ambientes.Entrada;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.fragment.app.Fragment;
@@ -62,13 +64,14 @@ public class MenuSlideActivity extends AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         switch (opcion){
-            case 1: cargarFragmento(new Living()); break;
-            case 2: cargarFragmento(new Cocina()); break;
-            case 3: cargarFragmento(new Comedor()); break;
-            case 4: cargarFragmento(new Bano());break;
-            case 5: cargarFragmento(new Dormitorio());break;
-            case 6: cargarFragmento(new Dormitorio());break;
-            case 7: cargarFragmento(new Patio());break;
+            case 1: cargarFragmento(new Entrada()); break;
+            case 2: cargarFragmento(new Patio());break;
+            case 3: cargarFragmento(new Living()); break;
+            case 4: cargarFragmento(new Cocina()); break;
+            case 5: cargarFragmento(new Comedor()); break;
+            case 6: cargarFragmento(new Bano());break;
+            case 7: cargarFragmento(new Dormitorio());break;
+            case 8: cargarFragmento(new Dormitorio());break;
 
             default: cargarFragmento(new Living()); break;
         }
@@ -129,7 +132,11 @@ public class MenuSlideActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_living) {
+        if(id == R.id.nav_entrada){
+            cargarFragmento(new Entrada());
+        } else if (id == R.id.nav_patio) {
+            cargarFragmento(new Patio());
+        } else if (id == R.id.nav_living) {
             cargarFragmento(new Living());
         } else if (id == R.id.nav_cocina) {
             cargarFragmento(new Cocina());
@@ -143,10 +150,7 @@ public class MenuSlideActivity extends AppCompatActivity
         } else if (id == R.id.nav_dorm2) {
             cargarFragmento(new Dormitorio());
             Dormitorio.id = 2;
-        } else if (id == R.id.nav_patio) {
-            cargarFragmento(new Patio());
         }
-
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

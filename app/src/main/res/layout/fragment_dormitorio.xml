@@ -155,12 +155,12 @@
                     android:gravity="center"
                     android:padding="10dp">
 
+
                     <SeekBar
                         android:id="@+id/seekBar_1"
                         android:layout_width="138dp"
                         android:layout_height="138dp"
                         android:rotation="270" />
-
 
                     <TextView
                         android:id="@+id/tv_persiana1"
