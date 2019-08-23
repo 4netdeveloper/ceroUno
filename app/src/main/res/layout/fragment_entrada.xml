@@ -153,27 +153,40 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal">
 
-                <ImageView
+                <ImageButton
+                    android:id="@+id/portonA1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:onClick="onClick"
+                    android:rotation="270"
                     android:src="@drawable/ic_persiana_48dp"
-                    android:rotation="270"/>
+                    android:tag="IR5B01" />
 
-                <SeekBar
-                    android:id="@+id/seekBar_1"
-                    android:layout_width="137dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:padding="15dp"
-                    android:rotation="180"/>
-
-                <ImageView
+                <ImageButton
+                    android:id="@+id/portonP"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:onClick="onClick"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:src="@drawable/porton_p"
+                    android:tag="IR5B01" />
+
+
+                <ImageButton
+                    android:id="@+id/portonC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:onClick="onClick"
+                    android:rotation="270"
                     android:src="@drawable/ic_persiana_apagado_48dp"
-                    android:rotation="270"/>
+                    android:tag="IR5B01" />
 
             </LinearLayout>
 

@@ -2,21 +2,20 @@ package com.example.cerouno.manejadores;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.cerouno.R;
 import com.example.cerouno.administrador.conexion;
 import com.example.cerouno.administrador.msg;
 import com.example.cerouno.ambientes.Dormitorio;
-
-import android.widget.Toast;
 
 public class ambiente extends AppCompatActivity implements View.OnClickListener{
 
@@ -68,7 +67,7 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
         status = conex.getStatus(new conexion.onPostExecute() {
             @Override
             public void recibirTexto(String txt, int estado) {
-                msg.echo("-------estadoamb"+ String.valueOf(estado));
+                msg.echo("-------estadoamb" + estado);
                 validarNuevoUsuario();
 
             }
@@ -127,7 +126,7 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
         int index=0;
         if (v.getId() == R.id.amb_dormitorio){
             Dormitorio.id = 1;
-           msg.echo(String.valueOf(v.getId())+"-");
+            msg.echo(v.getId() + "-");
         }else if (v.getId() == R.id.amb_dormitorio2){
             Dormitorio.id = 2;
             Log.i(String.valueOf(v.getId()),"------------------------");
@@ -149,7 +148,7 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
         conex.getStatus(new conexion.onPostExecute() {
             @Override
             public void recibirTexto(String txt, int estado) {
-                msg.echo("recibido:"+String.valueOf(estado));
+                msg.echo("recibido:" + estado);
                 estadoUsuario(estado);
 
             }

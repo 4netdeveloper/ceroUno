@@ -1,22 +1,16 @@
 package com.example.cerouno.ambientes;
 
-import androidx.fragment.app.Fragment;
 import android.os.Bundle;
-
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.SeekBar;
-import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.cerouno.R;
-import com.example.cerouno.administrador.conexion;
 import com.example.cerouno.aparatos.Televisor;
 import com.example.cerouno.manejadores.ambiente;
 
@@ -28,9 +22,14 @@ public class Comedor extends Fragment implements View.OnClickListener{
 
     public ImageButton boton1;
     static int estado1;
-    static SeekBar persiana1;
-    static SeekBar persiana2;
-    static int estadoPersiana = 0;
+
+    public ImageButton portonA1;
+    public ImageButton portonC1;
+    public ImageButton portonP1;
+
+    public ImageButton portonA2;
+    public ImageButton portonC2;
+    public ImageButton portonP2;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)  {
@@ -49,16 +48,19 @@ public class Comedor extends Fragment implements View.OnClickListener{
             boton1.setBackgroundResource(foco);
         }
 
-        //seekbar
-        persiana1 = myView.findViewById(R.id.seekBar_1);
-        persiana1.setProgress(estadoPersiana);
-        persiana1.setMax(100);
-        manejoPersiana(persiana1);
+        portonA1 = myView.findViewById(R.id.portonA1);
+        portonA1.setOnClickListener(this);
+        portonC1 = myView.findViewById(R.id.portonC1);
+        portonC1.setOnClickListener(this);
+        portonP1 = myView.findViewById(R.id.portonP1);
+        portonP1.setOnClickListener(this);
 
-        persiana2 = myView.findViewById(R.id.seekBar_2);
-        persiana2.setProgress(estadoPersiana);
-        persiana2.setMax(100);
-        manejoPersiana(persiana2);
+        portonA2 = myView.findViewById(R.id.portonA2);
+        portonA2.setOnClickListener(this);
+        portonC2 = myView.findViewById(R.id.portonC2);
+        portonC2.setOnClickListener(this);
+        portonP2 = myView.findViewById(R.id.portonP2);
+        portonP2.setOnClickListener(this);
 
         return myView;
     }
@@ -81,55 +83,39 @@ public class Comedor extends Fragment implements View.OnClickListener{
                     estado1 = 0;
                 }
                 break;
+
+            case R.id.portonA1:
+                Log.i("-----------------------", "PERSIANA 1 ARRIBA");
+                conex.send(String.valueOf(v.getTag()), "A", "up");
+                break;
+
+            case R.id.portonC1:
+                Log.i("-----------------------", "PERSIANA 1 ABAJO");
+                conex.send(String.valueOf(v.getTag()), "A", "down");
+                break;
+
+            case R.id.portonP1:
+                Log.i("-----------------------", "PERSIANA 1 PAUSA");
+                conex.send(String.valueOf(v.getTag()), "A", "pause");
+                break;
+
+            case R.id.portonA2:
+                Log.i("-----------------------", "PERSIANA 2 ARRIBA");
+                conex.send(String.valueOf(v.getTag()), "A", "up");
+                break;
+
+            case R.id.portonC2:
+                Log.i("-----------------------", "PERSIANA 2 ABAJO");
+                conex.send(String.valueOf(v.getTag()), "A", "down");
+                break;
+
+            case R.id.portonP2:
+                Log.i("-----------------------", "PERSIANA 2 PAUSA");
+                conex.send(String.valueOf(v.getTag()), "A", "pause");
+                break;
         }
     }
 
-    private void manejoPersiana (SeekBar seekBar) {
-
-        seekBar.setOnSeekBarChangeListener(
-                new SeekBar.OnSeekBarChangeListener() {
-                    //hace un llamado a la perilla cuando se arrastra
-                    @Override
-                    public void onProgressChanged(SeekBar seekBar,
-                                                  int progress, boolean fromUser) {
-
-                    }
-                    //hace un llamado  cuando se toca la perilla
-                    public void onStartTrackingTouch(SeekBar seekBar) {
-                    }
-                    //hace un llamado  cuando se detiene la perilla
-                    public void onStopTrackingTouch(SeekBar seekBar) {
-
-                        switch (seekBar.getId()){
-                            case R.id.seekBar_1:
-
-                                Log.i("---------------------", "PERSIANA 1, COMEDOR");
-
-                                estadoPersiana = persiana1.getProgress();
-                                conex.send("PR2A01", "A", String.valueOf(estadoPersiana));
-                                break;
-
-                            case  R.id.seekBar_2:
-                                Log.i("---------------------", "PERSIANA 2, COMEDOR");
-
-                                estadoPersiana = persiana2.getProgress();
-                                conex.send("PR2A02", "A", String.valueOf(estadoPersiana));
-
-                                break;
-                        }
-
-                        if(seekBar.getProgress() == 0){
-                            Toast.makeText(getContext(), "Persiana cerrada", Toast.LENGTH_SHORT).show();
-                        }else if(seekBar.getProgress() == 100){
-                            Toast.makeText(getContext(), "Persiana abierta", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(getContext(), "Persiana abierta al " + seekBar.getProgress()+"%", Toast.LENGTH_SHORT).show();
-                        }
-                        estadoPersiana = seekBar.getProgress();
-
-                    }
-                });
-    }
 
     private void cargarFragmento (Fragment fragmento){
         FragmentManager manager = getFragmentManager();

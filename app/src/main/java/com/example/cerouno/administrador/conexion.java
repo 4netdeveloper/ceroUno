@@ -2,30 +2,26 @@ package com.example.cerouno.administrador;
 // package com.example.testconexion;
 
 import android.content.Context;
-import android.net.wifi.WifiManager;
 import android.net.DhcpInfo;
-import java.net.InetAddress;
-
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.Socket;
-import java.net.SocketException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ExecutionException;
 
 public class conexion {
@@ -247,7 +243,7 @@ public class conexion {
 
         String rt= null;
         try {
-            rt = ((MyAsyncTask) _MAsync).get();
+            rt = _MAsync.get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
@@ -276,9 +272,104 @@ public class conexion {
      *
      * */
 
+    /**
+     * codificacion de servicios
+     */
 
-    private class MyAsyncTask extends AsyncTask<String, Void, String>
-    {
+
+    public void sendBroadcast(
+            final String Usuario, final String Valor
+            , final int puerto
+            , final onPostExecute Ejecutor
+    ) throws Exception {
+        InetAddress respuesta = null;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    msg.echo("enviando datagrama");
+                    InetAddress address = getBroadcastAddress(Contexto);
+                    msg.echo("broadcast obtenido.");
+                    String Cadena = "u:" + Usuario + ":v:" + Valor;
+                    byte[] Buf = Cadena.getBytes();
+
+
+                    msg.echo("verificando.");
+                    DatagramSocket clientSocket = new DatagramSocket();
+                    clientSocket.setBroadcast(true);
+
+                    msg.echo("preparando envio.");
+                    DatagramPacket sendPacket = new DatagramPacket(
+                            Buf
+                            , Buf.length
+                            , address
+                            , puerto);
+
+                    msg.echo("enviado.");
+                    clientSocket.send(sendPacket);
+
+
+                    DatagramPacket peticion = new DatagramPacket(Buf, Buf.length);
+                    msg.echo("recepcion:");
+                    clientSocket.receive(peticion);
+                    String txt = new String(peticion.getData());
+
+                    msg.echo("autorizacion:" + txt);
+                    setHash(txt.substring(0, 13));
+                    setHost(peticion.getAddress().getHostAddress());
+
+                    msg.echo("host:" + peticion.getAddress().getHostAddress());
+                    Ejecutor.recibirTexto("broadcast", 1);
+                    clientSocket.close();
+
+                } catch (Exception e) {
+                    //Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, null, e);
+                    msg.echo(e.getMessage());
+                }
+            }
+        }).start();
+
+    }
+
+
+    /**
+     * TODO: conexion automatica con la raspberry
+     */
+    public void ScanRaspberry(String Nombre, String Puerto, String BusquedaBonjour, onPostExecute Ejecutor) {
+
+        // funcion de buqueda del equipo
+        // "_domotica._tcp"
+
+        InetAddress test = null;
+        boolean ch = false;
+        msg.echo("buscando la raspberry pi.............");
+
+        try {
+            // solo envia paquete al broadcast
+            sendBroadcast(
+                    this.user
+                    , this.has
+                    , 8182, Ejecutor);//(int) Integer.getInteger(Puerto));
+            ch = true;
+            msg.echo("se ha enviado el broadcast");
+        } catch (Exception e) {
+            e.printStackTrace();
+            ch = false;
+        }
+
+
+        msg.echo("fin de la busqueda de la raspberry.");
+
+    }
+
+    public void setHost(String host) {
+        // la clave deve coincidir con el has de usuario
+        this.host = host;
+        status = 2;
+    }
+
+    private class MyAsyncTask extends AsyncTask<String, Void, String> {
 
         String host,port,headget,response;
         private int contadorSend =0;
@@ -288,7 +379,7 @@ public class conexion {
         IOException ioException;
         boolean working=false;
 
-        MyAsyncTask( String host,String port ,conexion padre) {
+        MyAsyncTask(String host, String port , conexion padre) {
             super();
 
             this.host = host;
@@ -330,7 +421,7 @@ public class conexion {
                 InputStream in = socket.getInputStream();
 
                 /*lectura de respuesta*/
-                byte buf[] = new byte[1024];
+                byte[] buf = new byte[1024];
                 int nbytes;
                 while ((nbytes = in.read(buf)) != -1) {
                     sb.append(new String(buf, 0, nbytes));
@@ -374,18 +465,22 @@ public class conexion {
         }
 
         public String getUsrhas() { return usrhas;}
+
         public void setUsrhas(String usrhas) {
             this.usrhas = usrhas;
 
         }
 
         public String getDev() {return dev;}
+
         public MyAsyncTask setDev(String dev) {this.dev = dev; return this ;}
 
         public String getAcc() {return acc;}
+
         public MyAsyncTask setAcc(String acc) {this.acc = acc; return this; }
 
         public String getVal() {return val;}
+
         public MyAsyncTask setVal(String val) {this.val = val; return this; }
 
         private String headGet(String host,String port, String usr,String dev,String acc,String val) {
@@ -411,6 +506,7 @@ public class conexion {
             return dataToSend;
             //return rt;
         }
+
         private String encript(String t){
 
             return Base64.encodeToString(t.getBytes(), Base64.CRLF);
@@ -422,120 +518,13 @@ public class conexion {
             String rt=code;
             byte[] data = Base64.decode(code, Base64.CRLF);
 
-            try {
-                rt= new String(data, "UTF-8");
-            } catch (UnsupportedEncodingException e) {
-                rt="falla decodificacion.";
-                e.printStackTrace();
-            }
+            rt= new String(data, StandardCharsets.UTF_8);
 
             // salido de tipo cadena:
             return rt;
         }
 
     }
-
-
-    /**
-     * TODO: conexion automatica con la raspberry
-     *
-     */
-    public void ScanRaspberry(String Nombre,String Puerto,String BusquedaBonjour,onPostExecute Ejecutor){
-
-        // funcion de buqueda del equipo
-        // "_domotica._tcp"
-
-        InetAddress test= null;
-        boolean ch=false;
-        msg.echo("buscando la raspberry pi.............");
-
-        try {
-            // solo envia paquete al broadcast
-            sendBroadcast(
-                    this.user
-                    ,this.has
-                    ,8182,Ejecutor);//(int) Integer.getInteger(Puerto));
-            ch=true;
-            msg.echo("se ha enviado el broadcast");
-        } catch (Exception e) {
-            e.printStackTrace();
-            ch=false;
-        }
-
-
-        msg.echo("fin de la busqueda de la raspberry.");
-
-    }
-    public void setHost(String host){
-        // la clave deve coincidir con el has de usuario
-        this.host = host;
-        status=2;
-    }
-
-    /**
-     *
-     *
-     * codificacion de servicios
-     *
-     * */
-
-
-    public void sendBroadcast(
-            final String Usuario, final String Valor
-            , final int puerto
-            , final onPostExecute Ejecutor
-    ) throws Exception {
-        InetAddress respuesta = null;
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                try {
-                    msg.echo("enviando datagrama");
-                    InetAddress address = getBroadcastAddress(Contexto );
-                    msg.echo("broadcast obtenido.");
-                    String Cadena = "u:" + Usuario + ":v:" + Valor;
-                    byte[] Buf = Cadena.getBytes();
-
-
-                    msg.echo("verificando.");
-                    DatagramSocket clientSocket = new DatagramSocket();
-                    clientSocket.setBroadcast(true);
-
-                    msg.echo("preparando envio.");
-                    DatagramPacket sendPacket = new DatagramPacket(
-                            Buf
-                            , Buf.length
-                            , address
-                            , puerto);
-
-                    msg.echo("enviado.");
-                    clientSocket.send(sendPacket);
-
-
-                    DatagramPacket peticion = new DatagramPacket(Buf, Buf.length);
-                    msg.echo("recepcion:");
-                    clientSocket.receive(peticion);
-                    String txt = new String(peticion.getData());
-
-                    msg.echo("autorizacion:"+txt  );
-                    setHash(txt.substring(0,13));
-                    setHost(peticion.getAddress().getHostAddress().toString());
-
-                    msg.echo("host:"+ peticion.getAddress().getHostAddress().toString() );
-                    Ejecutor.recibirTexto("broadcast",1);
-                    clientSocket.close();
-
-                } catch (Exception e) {
-                    //Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, null, e);
-                    msg.echo(e.getMessage());
-                }
-            }
-        }).start();
-
-    }
-
-
 
     private class UDPServer {
         //servicio de escucha en un puerto.
@@ -545,7 +534,7 @@ public class conexion {
         private String msg;
         // private Activity activity;
 
-        public UDPServer( int port ) throws SocketException, IOException {
+        public UDPServer( int port) throws IOException {
             this.port = port;
             this.udpSocket = new DatagramSocket(this.port);
             /* udpSocket .*/

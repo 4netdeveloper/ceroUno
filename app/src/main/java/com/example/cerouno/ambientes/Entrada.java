@@ -1,15 +1,13 @@
 package com.example.cerouno.ambientes;
 
-import androidx.fragment.app.Fragment;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.SeekBar;
-import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.cerouno.R;
 import com.example.cerouno.administrador.conexion;
@@ -23,7 +21,6 @@ import static com.example.cerouno.manejadores.ambiente.conex;
 public class Entrada extends Fragment implements View.OnClickListener {
 
 
-
     public ImageButton boton1;
     public ImageButton boton2;
     public ImageButton boton3;
@@ -32,9 +29,9 @@ public class Entrada extends Fragment implements View.OnClickListener {
     static int estado2;
     static int estado3;
 
-    static SeekBar persiana1;
-    //static SeekBar persiana2;
-    static int estadoPersiana = 0;
+    public ImageButton portonA;
+    public ImageButton portonC;
+    public ImageButton portonP;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)  {
@@ -50,45 +47,38 @@ public class Entrada extends Fragment implements View.OnClickListener {
         estado2 = ambiente.devuelveEstados(String.valueOf(boton2.getTag()));
         estado3 = ambiente.devuelveEstados(String.valueOf(boton3.getTag()));
 
-        /*if(estado1 == 0){
-            boton1.setBackgroundResource(foco_apagado);
-        }else{
-            boton1.setBackgroundResource(foco);
-        }
-
-        if(estado2 == 0){
-            boton2.setBackgroundResource(foco_apagado);
-        }else{
-            boton2.setBackgroundResource(foco);
-        }
-
-        if(estado3 == 0){
-            boton3.setBackgroundResource(foco_apagado);
-        }else{
-            boton3.setBackgroundResource(foco);
-        }
-        */
-
-        //seekbar
-        persiana1 = myView.findViewById(R.id.seekBar_1);
-        persiana1.setProgress(estadoPersiana);
-        persiana1.setMax(100);
-        manejoPersiana(persiana1);
+        portonA = myView.findViewById(R.id.portonA1);
+        portonA.setOnClickListener(this);
+        portonC = myView.findViewById(R.id.portonC);
+        portonC.setOnClickListener(this);
+        portonP = myView.findViewById(R.id.portonP);
+        portonP.setOnClickListener(this);
 
         return myView;
     }
 
     @Override
     public void onClick(View v) {
-        Log.i( "-----------------------", "BOTON LUZ ENTRADA");
-        final String param = String.valueOf(v.getTag()) ;
+        if (v.getId() == R.id.portonA1) {
+            Log.i("-----------------------", "ABRIR PORTON");
+            conex.send(String.valueOf(v.getTag()), "A", "up");
+        } else if (v.getId() == R.id.portonC) {
+            Log.i("-----------------------", "CERRAR PORTON");
+            conex.send(String.valueOf(v.getTag()), "A", "down");
+        } else if (v.getId() == R.id.portonP) {
+            Log.i("-----------------------", "PAUSA - PORTON");
+            conex.send(String.valueOf(v.getTag()), "A", "pause");
+        } else {
+            Log.i("-----------------------", "BOTON LUZ ENTRADA");
+            final String param = String.valueOf(v.getTag());
 
-        conex.send(String.valueOf(v.getTag()), "A", "0", new conexion.onPostExecute() {
-            @Override
-            public void recibirTexto(String txt, int est) {
-                CambiarEstadoDeLuz(param);
-            }
-        });
+            conex.send(String.valueOf(v.getTag()), "A", "0", new conexion.onPostExecute() {
+                @Override
+                public void recibirTexto(String txt, int est) {
+                    CambiarEstadoDeLuz(param);
+                }
+            });
+        }
 
     }
 
@@ -124,42 +114,5 @@ public class Entrada extends Fragment implements View.OnClickListener {
 
     }
 
-    private void manejoPersiana (SeekBar seekBar) {
 
-        seekBar.setOnSeekBarChangeListener(
-                new SeekBar.OnSeekBarChangeListener() {
-                    //hace un llamado a la perilla cuando se arrastra
-                    @Override
-                    public void onProgressChanged(SeekBar seekBar,
-                                                  int progress, boolean fromUser) {
-
-                    }
-                    //hace un llamado  cuando se toca la perilla
-                    public void onStartTrackingTouch(SeekBar seekBar) {
-                    }
-                    //hace un llamado  cuando se detiene la perilla
-                    public void onStopTrackingTouch(SeekBar seekBar) {
-
-                        switch (seekBar.getId()){
-                            case R.id.seekBar_1:
-
-                                    Log.i("---------------------", "PORTON DE ENTRADA");
-
-                                    estadoPersiana = persiana1.getProgress();
-                                    conex.send("GP5B01", "A", String.valueOf(estadoPersiana));
-                                break;
-                        }
-
-                        if(seekBar.getProgress() == 0){
-                            Toast.makeText(getContext(), "Portón cerrado", Toast.LENGTH_SHORT).show();
-                        }else if(seekBar.getProgress() == 100){
-                            Toast.makeText(getContext(), "Portón abierto", Toast.LENGTH_SHORT).show();
-                        }else{
-                            Toast.makeText(getContext(), "Portón abierto al " + seekBar.getProgress()+"%", Toast.LENGTH_SHORT).show();
-                        }
-                        estadoPersiana = seekBar.getProgress();
-
-                    }
-                });
-    }
 }

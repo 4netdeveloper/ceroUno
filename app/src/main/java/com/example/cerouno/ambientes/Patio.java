@@ -1,13 +1,13 @@
 package com.example.cerouno.ambientes;
 
-import androidx.fragment.app.Fragment;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.cerouno.R;
 import com.example.cerouno.administrador.conexion;
@@ -42,23 +42,6 @@ public class Patio extends Fragment implements View.OnClickListener {
         estado2 = ambiente.devuelveEstados(String.valueOf(boton2.getTag()));
         estado3 = ambiente.devuelveEstados(String.valueOf(boton3.getTag()));
 
-     /*   if(estado1 == 0){
-            boton1.setBackgroundResource(foco_apagado);
-        }else{
-            boton1.setBackgroundResource(foco);
-        }
-
-        if(estado2 == 0){
-            boton2.setBackgroundResource(foco_apagado);
-        }else{
-            boton2.setBackgroundResource(foco);
-        }
-
-        if(estado3 == 0){
-            boton3.setBackgroundResource(foco_apagado);
-        }else{
-            boton3.setBackgroundResource(foco);
-        }*/
 
         return myView;
     }

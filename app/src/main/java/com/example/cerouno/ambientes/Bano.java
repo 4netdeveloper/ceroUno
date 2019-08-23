@@ -1,13 +1,13 @@
 package com.example.cerouno.ambientes;
 
-import androidx.fragment.app.Fragment;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.cerouno.R;
 import com.example.cerouno.administrador.conexion;
@@ -16,7 +16,6 @@ import com.example.cerouno.manejadores.ambiente;
 
 import static com.example.cerouno.R.drawable.foco;
 import static com.example.cerouno.R.drawable.foco_apagado;
-import static com.example.cerouno.aparatos.Televisor.dev;
 import static com.example.cerouno.manejadores.ambiente.conex;
 
 
@@ -67,7 +66,7 @@ public class Bano extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Log.i("----------------------", "BOTON LUZ BAÑO " + String.valueOf(v.getTag()));
+        Log.i("----------------------", "BOTON LUZ BAÑO " + v.getTag());
 
         final String param = String.valueOf(v.getTag()) ;
 

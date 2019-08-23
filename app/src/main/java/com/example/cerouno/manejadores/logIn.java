@@ -2,8 +2,6 @@ package com.example.cerouno.manejadores;
 
 import android.content.Context;
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,12 +10,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cerouno.R;
 import com.example.cerouno.administrador.conexion;
 
-import static com.example.cerouno.manejadores.ambiente.conex;
 import static com.example.cerouno.manejadores.ambiente.banderaStatus;
+import static com.example.cerouno.manejadores.ambiente.conex;
 
 public class logIn extends AppCompatActivity {
 
@@ -45,8 +44,8 @@ public class logIn extends AppCompatActivity {
         / * manejadores de red y activaciones de servicio: * /
         / * *********************************************** */
 
-        etu = (EditText) findViewById(R.id.usuario);
-        etp = (EditText) findViewById(R.id.pass);
+        etu = findViewById(R.id.usuario);
+        etp = findViewById(R.id.pass);
 
         ingreso = findViewById(R.id.btn_ingresar);
         ingreso.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +80,7 @@ public class logIn extends AppCompatActivity {
         conex.getStatus(new conexion.onPostExecute() {
             @Override
             public void recibirTexto(String txt, int estado) {
-                Log.d("recibido","recibido:"+String.valueOf(estado));
+                Log.d("recibido", "recibido:" + estado);
                 estadoUsuario(estado);
 
             }

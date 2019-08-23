@@ -27,8 +27,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:orientation="vertical">
 
                 <ImageButton
                     android:id="@+id/botonTv"
@@ -54,7 +53,7 @@
                 android:layout_height="1dp"
                 android:background="@color/cardview_dark_background"
                 android:orientation="horizontal"
-                android:padding="10dp"></LinearLayout>
+                android:padding="15dp"></LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -72,7 +71,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="10dp">
+                        android:paddingTop="10dp">
 
                         <ImageButton
                             android:id="@+id/l41"
@@ -80,6 +79,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/foco_apagado"
+                            android:paddingTop="10dp"
                             android:tag="GP4A01" />
 
                         <TextView
@@ -104,7 +104,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="10dp">
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp">
 
                         <ImageButton
                             android:id="@+id/l42"
@@ -135,7 +137,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="10dp">
+                        android:paddingTop="10dp">
 
                         <ImageButton
                             android:id="@+id/l43"
@@ -168,54 +170,111 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp">
-
+                android:orientation="horizontal">
 
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:gravity="center"
-                    android:padding="10dp">
+                    android:orientation="vertical"
+                    android:paddingRight="10dp">
 
-                    <SeekBar
-                        android:id="@+id/seekBar_1"
-                        android:layout_width="138dp"
-                        android:layout_height="138dp"
-                        android:rotation="270" />
+                    <ImageButton
+                        android:id="@+id/portonA1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#FFFFFF"
+                        android:onClick="onClick"
+                        android:rotation="0"
+                        android:src="@drawable/ic_persiana_48dp"
+                        android:tag="GP4A11" />
+
+                    <ImageButton
+                        android:id="@+id/portonP1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#FFFFFF"
+                        android:onClick="onClick"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:src="@drawable/porton_p"
+                        android:tag="GP4A11" />
+
+
+                    <ImageButton
+                        android:id="@+id/portonC1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#FFFFFF"
+                        android:onClick="onClick"
+                        android:rotation="0"
+                        android:src="@drawable/ic_persiana_apagado_48dp"
+                        android:tag="GP4A11" />
 
 
                     <TextView
                         android:id="@+id/tv_persiana1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_light"
                         android:text="@string/persiana_1"
-                        android:textSize="25dp"
-                        android:fontFamily="@font/roboto_light"/>
+                        android:textSize="25dp" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="250dp"
+                    android:background="@color/cardview_dark_background"
+                    android:orientation="vertical"
+                    android:padding="100dp"></LinearLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
                     android:gravity="center"
-                    android:padding="10dp">
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp">
 
-                    <SeekBar
-                        android:id="@+id/seekBar_2"
-                        android:layout_width="138dp"
-                        android:layout_height="138dp"
-                        android:rotation="270" />
+                    <ImageButton
+                        android:id="@+id/portonA2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#FFFFFF"
+                        android:onClick="onClick"
+                        android:rotation="0"
+                        android:src="@drawable/ic_persiana_48dp"
+                        android:tag="GP4A21" />
+
+                    <ImageButton
+                        android:id="@+id/portonP2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#FFFFFF"
+                        android:onClick="onClick"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:src="@drawable/porton_p"
+                        android:tag="GP4A21" />
+
+
+                    <ImageButton
+                        android:id="@+id/portonC2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="#FFFFFF"
+                        android:onClick="onClick"
+                        android:rotation="0"
+                        android:src="@drawable/ic_persiana_apagado_48dp"
+                        android:tag="GP4A21" />
 
                     <TextView
                         android:id="@+id/tv_persiana2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_light"
                         android:text="@string/persiana_2"
-                        android:textSize="25dp"
-                        android:fontFamily="@font/roboto_light"/>
+                        android:textSize="25dp" />
 
                 </LinearLayout>
 
