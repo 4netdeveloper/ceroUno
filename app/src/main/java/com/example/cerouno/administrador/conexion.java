@@ -73,7 +73,7 @@ public class conexion {
     }
 
     public conexion send(String dev, String acc, String val){
-        send(dev,acc,val,new conexion.onPostExecute() {
+        send(dev,acc,val,new onPostExecute() {
             @Override
             public void recibirTexto(String txt, int est) {
             }

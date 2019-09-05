@@ -102,7 +102,7 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
                 SharedPreferences prefGuarda = getSharedPreferences("usuario", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefGuarda.edit();
                 editor.putString("user","");
-                editor.putInt("hash", 0);
+                editor.putString("hash", "");
                 editor.apply();
                 finish();
                 Intent intent = new Intent(this, logIn.class);

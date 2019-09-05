@@ -15,7 +15,7 @@
             android:title="@string/string_patio"/>
         <item
             android:id="@+id/nav_living"
-            android:icon="@drawable/ic_tv_black_36dp"
+            android:icon="@drawable/ic_living_black_36dp"
             android:title="@string/tv_living" />
         <item
             android:id="@+id/nav_cocina"

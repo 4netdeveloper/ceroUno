@@ -161,6 +161,7 @@ public class MenuSlideActivity extends AppCompatActivity
         FragmentTransaction fragmentTransaction = manager.beginTransaction().replace(R.id.contenedor, fragmento);
         fragmentTransaction.commit();
 
+
     }
 
 }
