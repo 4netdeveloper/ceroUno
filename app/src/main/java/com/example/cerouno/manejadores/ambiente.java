@@ -20,7 +20,7 @@ import com.example.cerouno.ambientes.Dormitorio;
 public class ambiente extends AppCompatActivity implements View.OnClickListener{
 
 
-    static int[] BOTONESMENU = {R.id.amb_entrada, R.id.amb_patio, R.id.amb_tv, R.id.amb_cocina, R.id.amb_comedor,
+    static int[] BOTONESMENU = {R.id.amb_entrada, R.id.amb_tv, R.id.amb_cocina,
             R.id.amb_bano, R.id.amb_dormitorio,  //array de botones
             R.id.amb_dormitorio2};
     public static conexion conex;
@@ -102,7 +102,7 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
                 SharedPreferences prefGuarda = getSharedPreferences("usuario", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefGuarda.edit();
                 editor.putString("user","");
-                editor.putInt("hash", 0);
+                editor.putString("hash", "");
                 editor.apply();
                 finish();
                 Intent intent = new Intent(this, logIn.class);

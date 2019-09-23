@@ -65,13 +65,11 @@ public class MenuSlideActivity extends AppCompatActivity
 
         switch (opcion){
             case 1: cargarFragmento(new Entrada()); break;
-            case 2: cargarFragmento(new Patio());break;
-            case 3: cargarFragmento(new Living()); break;
-            case 4: cargarFragmento(new Cocina()); break;
-            case 5: cargarFragmento(new Comedor()); break;
-            case 6: cargarFragmento(new Bano());break;
-            case 7: cargarFragmento(new Dormitorio());break;
-            case 8: cargarFragmento(new Dormitorio());break;
+            case 2: cargarFragmento(new Living());break;
+            case 3: cargarFragmento(new Cocina()); break;
+            case 4: cargarFragmento(new Bano()); break;
+            case 5: cargarFragmento(new Dormitorio()); break;
+            case 6: cargarFragmento(new Dormitorio());break;
 
             default: cargarFragmento(new Living()); break;
         }
@@ -134,14 +132,10 @@ public class MenuSlideActivity extends AppCompatActivity
 
         if(id == R.id.nav_entrada){
             cargarFragmento(new Entrada());
-        } else if (id == R.id.nav_patio) {
-            cargarFragmento(new Patio());
         } else if (id == R.id.nav_living) {
             cargarFragmento(new Living());
         } else if (id == R.id.nav_cocina) {
             cargarFragmento(new Cocina());
-        } else if (id == R.id.nav_comedor) {
-            cargarFragmento(new Comedor());
         } else if (id == R.id.nav_bano) {
             cargarFragmento(new Bano());
         } else if (id == R.id.nav_dorm1) {
@@ -160,6 +154,7 @@ public class MenuSlideActivity extends AppCompatActivity
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = manager.beginTransaction().replace(R.id.contenedor, fragmento);
         fragmentTransaction.commit();
+
 
     }
 
