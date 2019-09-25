@@ -16,83 +16,28 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_light"
-                android:text="@string/tv_livingComedor"
-                android:textAlignment="center"
-                android:textSize="50dp"
-                android:paddingBottom="10dp"/>
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
+                android:orientation="vertical">
 
-                <LinearLayout
+                <ImageButton
+                    android:id="@+id/botonTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingRight="10dp"
-                    android:layout_gravity="center">
+                    android:background="#FFFFFF"
+                    android:onClick="onClick"
+                    android:src="@drawable/ic_tv_black" />
 
-                    <ImageButton
-                        android:id="@+id/botonTv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="#FFFFFF"
-                        android:onClick="onClick"
-                        android:src="@drawable/ic_tv_black"
-                        android:layout_gravity="center"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_light"
-                        android:text="@string/tv_televisor"
-                        android:textAlignment="center"
-                        android:textSize="25dp"
-                        android:gravity="center"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingLeft="10dp">
-
-                    <ImageButton
-                        android:id="@+id/botonRadio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="#FFFFFF"
-                        android:onClick="onClick"
-                        android:src="@drawable/radio_black" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/roboto_light"
-                        android:text="@string/tv_radio"
-                        android:textAlignment="center"
-                        android:textSize="25dp" />
-
-                </LinearLayout>
+                    android:fontFamily="@font/roboto_light"
+                    android:text="@string/tv_televisor"
+                    android:textAlignment="center"
+                    android:textSize="25dp" />
 
             </LinearLayout>
-
-
-
-
-            <LinearLayout
-                android:layout_width="300dp"
-                android:layout_height="1dp"
-                android:background="@color/cardview_dark_background"
-                android:orientation="horizontal"
-                android:padding="15dp"></LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -110,8 +55,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:paddingTop="10dp"
-                        android:paddingRight="10dp">
+                        android:paddingTop="10dp">
 
                         <ImageButton
                             android:id="@+id/l41"
@@ -167,20 +111,51 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="10dp">
+
+                        <ImageButton
+                            android:id="@+id/l43"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/foco_apagado"
+                            android:tag="GP4A03" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_light"
+                            android:text="@string/luz_3"
+                            android:textAlignment="center"
+                            android:textSize="25dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="300dp"
                 android:layout_height="1dp"
                 android:background="@color/cardview_dark_background"
                 android:orientation="horizontal"
-                android:padding="50dp"></LinearLayout>
+                android:padding="15dp"></LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
+                android:orientation="horizontal">
 
 
                 <LinearLayout
@@ -244,8 +219,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:paddingLeft="10dp"
-                    android:layout_gravity="center">
+                    android:paddingLeft="10dp">
 
                     <ImageButton
                         android:id="@+id/portonA2"
@@ -291,6 +265,20 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="1dp"
+                android:background="@color/cardview_dark_background"
+                android:orientation="horizontal"
+                android:padding="50dp"></LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_light"
+                android:text="@string/tv_living"
+                android:textAlignment="center"
+                android:textSize="50dp" />
 
 
         </LinearLayout>

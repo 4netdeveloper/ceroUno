@@ -10,6 +10,10 @@
             android:icon="@drawable/ic_entrada_18"
             android:title="@string/string_entrada"/>
         <item
+            android:id="@+id/nav_patio"
+            android:icon="@drawable/ic_local_florist_black_18dp"
+            android:title="@string/string_patio" />
+        <item
             android:id="@+id/nav_living"
             android:icon="@drawable/ic_living_black_36dp"
             android:title="@string/tv_living" />
@@ -17,6 +21,10 @@
             android:id="@+id/nav_cocina"
             android:icon="@drawable/ic_kitchen_black_18dp"
             android:title="@string/string_cocina" />
+        <item
+            android:id="@+id/nav_comedor"
+            android:icon="@drawable/ic_restaurant_black_18dp"
+            android:title="@string/string_comedor" />
         <item
             android:id="@+id/nav_bano"
             android:icon="@drawable/ic_wc_black_18dp"

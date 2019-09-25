@@ -1,35 +1,27 @@
 package com.example.cerouno.manejadores;
 
 import android.os.Bundle;
-
-import com.example.cerouno.ambientes.Entrada;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
-import android.util.Log;
-import android.view.View;
-import androidx.core.view.GravityCompat;
-import androidx.appcompat.app.ActionBarDrawerToggle;
+import android.view.Menu;
 import android.view.MenuItem;
-import com.google.android.material.navigation.NavigationView;
-import androidx.drawerlayout.widget.DrawerLayout;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
-import android.view.Menu;
 
 import com.example.cerouno.R;
 import com.example.cerouno.ambientes.Bano;
 import com.example.cerouno.ambientes.Cocina;
 import com.example.cerouno.ambientes.Comedor;
 import com.example.cerouno.ambientes.Dormitorio;
+import com.example.cerouno.ambientes.Entrada;
 import com.example.cerouno.ambientes.Living;
 import com.example.cerouno.ambientes.Patio;
+import com.google.android.material.navigation.NavigationView;
 
 public class MenuSlideActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -65,11 +57,27 @@ public class MenuSlideActivity extends AppCompatActivity
 
         switch (opcion){
             case 1: cargarFragmento(new Entrada()); break;
-            case 2: cargarFragmento(new Living());break;
-            case 3: cargarFragmento(new Cocina()); break;
-            case 4: cargarFragmento(new Bano()); break;
-            case 5: cargarFragmento(new Dormitorio()); break;
-            case 6: cargarFragmento(new Dormitorio());break;
+            case 2:
+                cargarFragmento(new Patio());
+                break;
+            case 3:
+                cargarFragmento(new Living());
+                break;
+            case 4:
+                cargarFragmento(new Cocina());
+                break;
+            case 5:
+                cargarFragmento(new Comedor());
+                break;
+            case 6:
+                cargarFragmento(new Bano());
+                break;
+            case 7:
+                cargarFragmento(new Dormitorio());
+                break;
+            case 8:
+                cargarFragmento(new Dormitorio());
+                break;
 
             default: cargarFragmento(new Living()); break;
         }
@@ -132,10 +140,14 @@ public class MenuSlideActivity extends AppCompatActivity
 
         if(id == R.id.nav_entrada){
             cargarFragmento(new Entrada());
+        } else if (id == R.id.nav_patio) {
+            cargarFragmento(new Patio());
         } else if (id == R.id.nav_living) {
             cargarFragmento(new Living());
         } else if (id == R.id.nav_cocina) {
             cargarFragmento(new Cocina());
+        } else if (id == R.id.nav_comedor) {
+            cargarFragmento(new Comedor());
         } else if (id == R.id.nav_bano) {
             cargarFragmento(new Bano());
         } else if (id == R.id.nav_dorm1) {

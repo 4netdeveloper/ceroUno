@@ -66,20 +66,20 @@
                         android:orientation="vertical"
                         android:padding="5dp">
 
-                        <androidx.appcompat.widget.AppCompatImageButton
-                            android:id="@+id/amb_tv"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:onClick="onClick"
-                            android:src="@drawable/ic_living_black_36dp" />
-
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_light"
-                            android:text="@string/tv_livingComedor"
+                            android:text="@string/string_patio"
                             android:textAlignment="center"
                             android:textSize="20dp" />
+
+                        <androidx.appcompat.widget.AppCompatImageButton
+                            android:id="@+id/amb_patio"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="onClick"
+                            android:src="@drawable/ic_local_florist_black_36dp" />
 
                     </LinearLayout>
 
@@ -91,6 +91,28 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_light"
+                            android:text="@string/tv_living"
+                            android:textAlignment="center"
+                            android:textSize="20dp" />
+
+                        <androidx.appcompat.widget.AppCompatImageButton
+                            android:id="@+id/amb_tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="onClick"
+                            android:src="@drawable/ic_living_black_36dp" />
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -113,6 +135,36 @@
                             android:textSize="20dp" />
                     </LinearLayout>
 
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_light"
+                            android:text="@string/string_comedor"
+                            android:textAlignment="center"
+                            android:textSize="20dp" />
+
+                        <androidx.appcompat.widget.AppCompatImageButton
+                            android:id="@+id/amb_comedor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_restaurant_black_36dp" />
+                    </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -129,7 +181,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_light"
-                            android:text="@string/string_banio"
+                            android:text="@string/string_bano"
                             android:textAlignment="center"
                             android:textSize="20dp" />
                     </LinearLayout>
@@ -185,9 +237,7 @@
                             android:textSize="20dp" />
                     </LinearLayout>
 
-
                 </LinearLayout>
-
 
             </LinearLayout>
 

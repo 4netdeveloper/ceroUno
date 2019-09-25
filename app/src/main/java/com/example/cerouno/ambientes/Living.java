@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.cerouno.R;
-import com.example.cerouno.aparatos.Radio;
 import com.example.cerouno.aparatos.Televisor;
 import com.example.cerouno.manejadores.ambiente;
 
@@ -26,8 +25,6 @@ public class Living extends Fragment implements View.OnClickListener{
     public ImageButton boton1;
     public ImageButton boton2;
     public ImageButton boton3;
-    public ImageButton botonTv;
-    public ImageButton botonRadio;
 
     static int estado1;
     static int estado2;
@@ -46,14 +43,14 @@ public class Living extends Fragment implements View.OnClickListener{
         View myView = inflater.inflate(R.layout.fragment_living, container, false);
 
 
-        botonTv = myView.findViewById(R.id.botonTv);
-        botonTv.setOnClickListener(this);
-        botonRadio = myView.findViewById(R.id.botonRadio);
-        botonRadio.setOnClickListener(this);
+        ImageButton boton = myView.findViewById(R.id.botonTv);
+        boton.setOnClickListener(this);
         boton1 = myView.findViewById(R.id.l41);
         boton1.setOnClickListener(this);
         boton2 = myView.findViewById(R.id.l42);
         boton2.setOnClickListener(this);
+        boton3 = myView.findViewById(R.id.l43);
+        boton3.setOnClickListener(this);
 
         estado1 = ambiente.devuelveEstados(String.valueOf(boton1.getTag()));
         estado2 = ambiente.devuelveEstados(String.valueOf(boton2.getTag()));
@@ -104,10 +101,6 @@ public class Living extends Fragment implements View.OnClickListener{
                 cargarFragmento(new Televisor());
                 Televisor.dev = "TV4A01";
                 break;
-            case R.id.botonRadio:
-                cargarFragmento(new Radio());
-                Radio.dev = "RD4A01";
-                break;
             case R.id.l41:
                 Log.i("-----------------------", "BOTON LUZ 1 LIVING");
                 Log.i("-----------------------", String.valueOf(v.getTag()));
@@ -129,6 +122,18 @@ public class Living extends Fragment implements View.OnClickListener{
                 }else{
                     boton2.setBackgroundResource(foco_apagado);
                     estado2 = 0;
+                }
+                conex.send(String.valueOf(v.getTag()), "A", "0");
+                break;
+
+            case R.id.l43:
+                Log.i("-----------------------", "BOTON LUZ 3 LIVING");
+                if (estado3 == 0) {
+                    boton3.setBackgroundResource(foco);
+                    estado3 = 1;
+                } else {
+                    boton3.setBackgroundResource(foco_apagado);
+                    estado3 = 0;
                 }
                 conex.send(String.valueOf(v.getTag()), "A", "0");
                 break;
