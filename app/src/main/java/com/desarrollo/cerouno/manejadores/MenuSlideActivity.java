@@ -1,6 +1,9 @@
-package com.example.cerouno.manejadores;
+package com.desarrollo.cerouno.manejadores;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -13,14 +16,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.cerouno.R;
-import com.example.cerouno.ambientes.Bano;
-import com.example.cerouno.ambientes.Cocina;
-import com.example.cerouno.ambientes.Comedor;
-import com.example.cerouno.ambientes.Dormitorio;
-import com.example.cerouno.ambientes.Entrada;
-import com.example.cerouno.ambientes.Living;
-import com.example.cerouno.ambientes.Patio;
+import com.desarrollo.cerouno.R;
+import com.desarrollo.cerouno.administrador.conexion;
+import com.desarrollo.cerouno.ambientes.Bano;
+import com.desarrollo.cerouno.ambientes.Cocina;
+import com.desarrollo.cerouno.ambientes.Comedor;
+import com.desarrollo.cerouno.ambientes.Dormitorio;
+import com.desarrollo.cerouno.ambientes.Entrada;
+import com.desarrollo.cerouno.ambientes.Living;
+import com.desarrollo.cerouno.ambientes.Patio;
 import com.google.android.material.navigation.NavigationView;
 
 public class MenuSlideActivity extends AppCompatActivity
@@ -36,15 +40,6 @@ public class MenuSlideActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-/*        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        */
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -53,7 +48,9 @@ public class MenuSlideActivity extends AppCompatActivity
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
+
+
+        //FragmentManager fragmentManager = getSupportFragmentManager();
 
         switch (opcion){
             case 1: cargarFragmento(new Entrada()); break;
@@ -78,17 +75,14 @@ public class MenuSlideActivity extends AppCompatActivity
             case 8:
                 cargarFragmento(new Dormitorio());
                 break;
-
             default: cargarFragmento(new Living()); break;
         }
 
         navigationView.getMenu().getItem(0).setChecked(true);
 
-
-
-
-
     }
+
+
 
     @Override
     public void onBackPressed() {
@@ -115,15 +109,17 @@ public class MenuSlideActivity extends AppCompatActivity
         return true;
     }
 
+
+    // método para el botón de ajustes
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            cargarFragmento(new ajustes());
             return true;
         }
 
@@ -156,6 +152,17 @@ public class MenuSlideActivity extends AppCompatActivity
         } else if (id == R.id.nav_dorm2) {
             cargarFragmento(new Dormitorio());
             Dormitorio.id = 2;
+        } else if (id == R.id.nav_cerrar) {
+            Log.i("----------------->", "BORRANDO SHARED PREFERENCES");
+            SharedPreferences.Editor editor = getSharedPreferences("usuario", MODE_PRIVATE).edit();
+            editor.clear().apply();
+            //editor.putString("user", "00000");
+            //editor.putString("hash", "00000");
+            finishAffinity();
+            ambiente.conex.setHash("");
+            Intent intent = new Intent(getApplicationContext(), logIn.class);
+            startActivity(intent);
+            Log.i("----------------->", "BORRADO");
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

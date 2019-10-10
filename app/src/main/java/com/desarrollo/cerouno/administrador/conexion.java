@@ -1,4 +1,4 @@
-package com.example.cerouno.administrador;
+package com.desarrollo.cerouno.administrador;
 // package com.example.testconexion;
 
 import android.content.Context;
@@ -139,6 +139,7 @@ public class conexion {
             @Override
             public void recibirTexto(String txt, int est) {
                 // no hay accion asociada al recibir texto
+                int estado = est;
             }
         });
     }
@@ -212,7 +213,7 @@ public class conexion {
     }
     /* objeto especial para procesar respuestas fin */
 
-    protected void onPostProcesor(String respuesta){
+    protected void onPostProcesor(String respuesta) throws JSONException {
         // procesando respuesta recibida.
         receive();
         String rtspost="";
@@ -223,9 +224,14 @@ public class conexion {
         }else
             status = 1;
 
-        if (!(((JSONObject) rts.respuesta).isNull("shell"))) {
-            rtspost = ((JSONObject) rts.respuesta).opt("shell").toString();
+        try{
+            if (!(((JSONObject) rts.respuesta).isNull("shell"))) {
+                rtspost = ((JSONObject) rts.respuesta).opt("shell").toString();
+            }
+        } catch (NullPointerException n){
+            rtspost = "";
         }
+
         FuncionAEjecutar.recibirTexto(rtspost, status);
 
         //_MAsync.
@@ -236,7 +242,7 @@ public class conexion {
 
     public interface onPostExecute{
 
-        void recibirTexto(String txt, int estado);
+        void recibirTexto(String txt, int estado) throws JSONException;
     }
 
     public String receive(){
@@ -456,7 +462,11 @@ public class conexion {
             //msg.echo("MyAsinc: request-brute:"+result);
             msg.echo("MyAsinc: responde: --\r\n"+response );
             // this.button.setEnabled(true);
-            padre.onPostProcesor(result);
+            try {
+                padre.onPostProcesor(result);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         public String getResponse(){

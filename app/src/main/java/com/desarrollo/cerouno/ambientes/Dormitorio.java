@@ -1,4 +1,4 @@
-package com.example.cerouno.ambientes;
+package com.desarrollo.cerouno.ambientes;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -11,13 +11,13 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.cerouno.R;
-import com.example.cerouno.aparatos.Televisor;
-import com.example.cerouno.manejadores.ambiente;
+import com.desarrollo.cerouno.R;
+import com.desarrollo.cerouno.aparatos.Televisor;
+import com.desarrollo.cerouno.manejadores.ambiente;
 
-import static com.example.cerouno.R.drawable.foco;
-import static com.example.cerouno.R.drawable.foco_apagado;
-import static com.example.cerouno.manejadores.ambiente.conex;
+import static com.desarrollo.cerouno.R.drawable.foco;
+import static com.desarrollo.cerouno.R.drawable.foco_apagado;
+import static com.desarrollo.cerouno.manejadores.ambiente.conex;
 
 public class Dormitorio extends Fragment implements View.OnClickListener{
 

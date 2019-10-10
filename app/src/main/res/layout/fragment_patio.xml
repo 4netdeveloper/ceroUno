@@ -51,7 +51,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="15dp">
+                        android:paddingTop="10dp">
 
                         <ImageButton
                             android:id="@+id/l51"
@@ -82,7 +82,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="15dp">
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp">
 
                         <ImageButton
                             android:id="@+id/l52"
@@ -113,7 +115,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="15dp">
+                        android:paddingTop="10dp">
 
                         <ImageButton
                             android:id="@+id/l53"

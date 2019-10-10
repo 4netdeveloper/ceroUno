@@ -18,38 +18,31 @@
             android:gravity="center"
             android:orientation="vertical">
 
+
             <TextView
                 android:id="@+id/tv_dormitorio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_light"
                 android:text="@string/string_dormitorio"
                 android:textAlignment="center"
-                android:fontFamily="@font/roboto_light"
                 android:textSize="45dp" />
 
-
-            <LinearLayout
+            <ImageButton
+                android:id="@+id/botonTvDorm1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:background="#FFFFFF"
+                android:onClick="onClick"
+                android:src="@drawable/ic_tv_black" />
 
-                <ImageButton
-                    android:id="@+id/botonTvDorm1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:onClick="onClick"
-                    android:src="@drawable/ic_tv_black" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/roboto_light"
-                    android:text="@string/tv_televisor"
-                    android:textAlignment="center"
-                    android:textSize="25dp" />
-
-            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_light"
+                android:text="@string/tv_televisor"
+                android:textAlignment="center"
+                android:textSize="25dp" />
 
 
             <LinearLayout

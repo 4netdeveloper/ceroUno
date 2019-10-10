@@ -1,8 +1,8 @@
-package com.example.cerouno.aparatos;
+package com.desarrollo.cerouno.aparatos;
+
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,13 +12,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.example.cerouno.R;
-import com.example.cerouno.manejadores.ambiente;
+import com.desarrollo.cerouno.R;
 
-import static com.example.cerouno.manejadores.ambiente.conex;
+import static com.desarrollo.cerouno.manejadores.ambiente.conex;
 
 
-public class Radio extends Fragment implements View.OnClickListener {
+public class Televisor extends Fragment implements View.OnClickListener {
 
     public static String dev ="";
 
@@ -141,3 +140,8 @@ public class Radio extends Fragment implements View.OnClickListener {
 
 
 }
+
+
+
+
+

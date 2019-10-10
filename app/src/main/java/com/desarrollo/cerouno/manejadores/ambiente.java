@@ -1,4 +1,4 @@
-package com.example.cerouno.manejadores;
+package com.desarrollo.cerouno.manejadores;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,10 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.cerouno.R;
-import com.example.cerouno.administrador.conexion;
-import com.example.cerouno.administrador.msg;
-import com.example.cerouno.ambientes.Dormitorio;
+import com.desarrollo.cerouno.R;
+import com.desarrollo.cerouno.administrador.conexion;
+import com.desarrollo.cerouno.administrador.msg;
+import com.desarrollo.cerouno.ambientes.Dormitorio;
 
 public class ambiente extends AppCompatActivity implements View.OnClickListener{
 
@@ -28,41 +28,46 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
     int opcion = i;
     static int status;
     public static int banderaStatus;
-
-    static String [] lucesTag =
+    
+/* Arrays de tags de luces para determinar el estado inicial
+* cada tag pertenece a un aparato  
+*/
+    static String [] lucesTag = 
             {"GP0A01", "GP0A02", "GP0A03","GPA1A01", "GPA1A02", "GPA1A03","GP2A01",
                     "GP3A01", "GP3202", "GP3B01", "GP3B02", "GP4A01", "GP4A02", "GP4A03",
                         "GP5A01", "GP5A02", "GP5A03", "GP5C01", "GP5C02", "GP5C03"};
-
+    
+    /* Arrays de estados de luces para determinar 
+    * si esta encendido     
+     */    
     static int [] estados = new int[lucesTag.length];
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         /* ************************************************ * /
         / * manejadores de red y activaciones de servicio: * /
         / * ************************************************ */
-
-
-
         //RaspbyConnect rp = new RaspbyConnect(this);
-
-
         /* ************************************************ * /
         / * manejadores de red y activaciones de servicio: * /
         / * ************************************************ */
+
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ambiente);
 
         conex=new conexion(this);
         //Login----------
-        SharedPreferences prefLectura = getSharedPreferences("usuario", Context.MODE_PRIVATE);
+
+        SharedPreferences prefLectura =
+                getSharedPreferences("usuario", Context.MODE_PRIVATE);
 
         conex.setUser(prefLectura.getString("user", "nouser"));
         conex.setHash(prefLectura.getString("hash", "nouser"));
         banderaStatus = 1;
+
+
 
         status = conex.getStatus(new conexion.onPostExecute() {
             @Override
@@ -72,20 +77,11 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
 
             }
         });
-        /*
-        Log.i("---- AMBIENTE", String.valueOf(status));
-
-        if(status == 0){
-            Toast.makeText(this, "Servicio no encontrado!",
-                    Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, logIn.class);
-            startActivity(intent);
-        }
-        */
 
 
 
-        // bucle de creacion de ambientes:
+
+            // bucle de creacion de ambientes:
         for(int ambiente : BOTONESMENU){
             // Console.echo("asignado:"+ambiente);
             // asignando el controlador del boton :
@@ -97,12 +93,14 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
 
     public void estadoUsuario(int respuesta){
             if (respuesta == 2){
-                Toast.makeText(getApplicationContext(), "Bienvenid@!!!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),
+                        "Bienvenid@!!!", Toast.LENGTH_SHORT).show();
             }else if(respuesta == 1){
-                SharedPreferences prefGuarda = getSharedPreferences("usuario", Context.MODE_PRIVATE);
+                SharedPreferences prefGuarda =
+                        getSharedPreferences("usuario", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = prefGuarda.edit();
-                editor.putString("user","");
-                editor.putString("hash", "");
+                editor.putString("user","000000");
+                editor.putString("hash", "000000");
                 editor.apply();
                 finish();
                 Intent intent = new Intent(this, logIn.class);
@@ -155,6 +153,7 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
         });
     }
     public static int devuelveEstados (String tag){
+
         int estado = 0;
 
         for(int i =0; i<lucesTag.length; i++){
@@ -164,16 +163,15 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
         }       return estado;
     }
 
-
-
-
-
-
     @Override
     protected void onStart() {
         super.onStart();
         for(int i=0; i<lucesTag.length; i++){
             estados[i]=0;
         }
+
     }
 }
+
+
+

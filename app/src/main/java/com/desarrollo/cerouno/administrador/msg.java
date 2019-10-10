@@ -1,10 +1,6 @@
-package com.example.cerouno.administrador;
+package com.desarrollo.cerouno.administrador;
 
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
-
-
 
 
 public class msg {

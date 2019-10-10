@@ -20,6 +20,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_menu_slide"
-        app:menu="@menu/activity_menu_slide_drawer" />
+        app:menu="@menu/activity_menu_slide_drawer"
+        android:background="@color/cardview_light_background"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

@@ -1,4 +1,4 @@
-package com.example.cerouno;
+package com.desarrollo.cerouno;
 
 import android.content.Context;
 import androidx.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.cerouno", appContext.getPackageName());
+        assertEquals("com.desarrollo.cerouno", appContext.getPackageName());
     }
 }

@@ -1,4 +1,4 @@
-package com.example.cerouno.ambientes;
+package com.desarrollo.cerouno.ambientes;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -9,14 +9,14 @@ import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.cerouno.R;
-import com.example.cerouno.administrador.conexion;
-import com.example.cerouno.administrador.msg;
-import com.example.cerouno.manejadores.ambiente;
+import com.desarrollo.cerouno.R;
+import com.desarrollo.cerouno.administrador.conexion;
+import com.desarrollo.cerouno.administrador.msg;
+import com.desarrollo.cerouno.manejadores.ambiente;
 
-import static com.example.cerouno.R.drawable.foco;
-import static com.example.cerouno.R.drawable.foco_apagado;
-import static com.example.cerouno.manejadores.ambiente.conex;
+import static com.desarrollo.cerouno.R.drawable.foco;
+import static com.desarrollo.cerouno.R.drawable.foco_apagado;
+import static com.desarrollo.cerouno.manejadores.ambiente.conex;
 
 public class Entrada extends Fragment implements View.OnClickListener {
 

@@ -1,4 +1,4 @@
-package com.example.cerouno.manejadores;
+package com.desarrollo.cerouno.manejadores;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,11 +12,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.cerouno.R;
-import com.example.cerouno.administrador.conexion;
+import com.desarrollo.cerouno.R;
+import com.desarrollo.cerouno.administrador.conexion;
 
-import static com.example.cerouno.manejadores.ambiente.banderaStatus;
-import static com.example.cerouno.manejadores.ambiente.conex;
+import static com.desarrollo.cerouno.manejadores.ambiente.banderaStatus;
+import static com.desarrollo.cerouno.manejadores.ambiente.conex;
 
 public class logIn extends AppCompatActivity {
 
@@ -88,7 +88,6 @@ public class logIn extends AppCompatActivity {
     }
     public void estadoUsuario(int check){
         if (check == 2){
-            Toast.makeText(getApplicationContext(), "Bienvenido!", Toast.LENGTH_SHORT).show();
             SharedPreferences prefGuarda = getSharedPreferences("usuario", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = prefGuarda.edit();
             editor.putString("user",etu.getText().toString());
