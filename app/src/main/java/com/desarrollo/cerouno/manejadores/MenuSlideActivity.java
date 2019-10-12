@@ -25,6 +25,7 @@ import com.desarrollo.cerouno.ambientes.Dormitorio;
 import com.desarrollo.cerouno.ambientes.Entrada;
 import com.desarrollo.cerouno.ambientes.Living;
 import com.desarrollo.cerouno.ambientes.Patio;
+import com.desarrollo.cerouno.aparatos.Cajas;
 import com.google.android.material.navigation.NavigationView;
 
 public class MenuSlideActivity extends AppCompatActivity
@@ -47,6 +48,13 @@ public class MenuSlideActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
+        Cajas.setHabitacion("bano");
+        Cajas.setNodo("GP0A01");
+        Cajas.setLuz("luz0");
+        Bano.setEstado1(Cajas.getEstadoLuz());
 
 
 

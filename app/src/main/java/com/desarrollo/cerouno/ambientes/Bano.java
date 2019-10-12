@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.desarrollo.cerouno.R;
 import com.desarrollo.cerouno.administrador.conexion;
@@ -21,6 +23,7 @@ import org.json.JSONTokener;
 import static com.desarrollo.cerouno.R.drawable.foco;
 import static com.desarrollo.cerouno.R.drawable.foco_apagado;
 import static com.desarrollo.cerouno.manejadores.ambiente.conex;
+import static com.desarrollo.cerouno.manejadores.ambiente.devuelveEstados;
 
 
 /** Esta clase refiere al Fragment Baño, que controla las luces
@@ -37,11 +40,25 @@ public class Bano extends Fragment implements View.OnClickListener {
     public ImageButton boton1;
     public ImageButton boton2;
     public ImageButton boton3;
+
+
+    public static void setEstado1(int estado1) {
+        Bano.estado1 = estado1;
+    }
+
     static int estado1;
     static int estado2;
     static int estado3;
 
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Log.i("onCreate -->", " ON CREATE");
+
+
+    }
 
     /** Este es el método constructor
      * @param View es la clase que se utiliza para trabajar con el fragmento que se va a generar
@@ -55,7 +72,7 @@ public class Bano extends Fragment implements View.OnClickListener {
         View myView = inflater.inflate(R.layout.fragment_bano, container, false);
 
 
-        Cajas.estadoAparatos("bano");
+
 
         boton1 = myView.findViewById(R.id.l01);
         boton1.setOnClickListener(this);
@@ -71,9 +88,14 @@ public class Bano extends Fragment implements View.OnClickListener {
          *
          */
 
-        estado1 = ambiente.devuelveEstados(String.valueOf(boton1.getTag()));
-        estado2 = ambiente.devuelveEstados(String.valueOf(boton2.getTag()));
-        estado3 = ambiente.devuelveEstados(String.valueOf(boton3.getTag()));
+
+
+
+        //estado1 = getEstado1();
+        Log.i("estadoLuzBano -->", String.valueOf(estado1));
+
+        //cambia icono cuando cambia activity, no dentro de ella (menu)
+
 
         if(estado1 == 0){
             boton1.setBackgroundResource(foco_apagado);
@@ -143,5 +165,15 @@ public class Bano extends Fragment implements View.OnClickListener {
                 }break;
         }
 
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Bano.setEstado1(Cajas.getEstadoLuz());
     }
 }
+
+
+

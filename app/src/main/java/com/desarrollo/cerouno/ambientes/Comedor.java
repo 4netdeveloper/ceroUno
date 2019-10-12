@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.desarrollo.cerouno.R;
 import com.desarrollo.cerouno.administrador.conexion;
+import com.desarrollo.cerouno.aparatos.Cajas;
 import com.desarrollo.cerouno.aparatos.Televisor;
 import com.desarrollo.cerouno.manejadores.ambiente;
 
@@ -43,6 +44,8 @@ public class Comedor extends Fragment implements View.OnClickListener{
 
             }
         });
+
+        estado1 = Cajas.getEstadoLuz();
 
         ImageButton boton = myView.findViewById(R.id.botonTvCom);
         boton.setOnClickListener(this);
