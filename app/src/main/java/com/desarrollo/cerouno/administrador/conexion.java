@@ -104,15 +104,16 @@ public class conexion {
 
                 FuncionAEjecutar = EjecutarDespues;
             }
-        }else{
-            Toast.makeText(Contexto
-                    , "Hay una tecla funcionando aun."
-                    , Toast.LENGTH_LONG).show();
-        }
+        }/*else{
+                    Toast.makeText(Contexto
+                            , "Hay una tecla funcionando aún."
+                            , Toast.LENGTH_LONG).show();
+        } */
         // _MAsync.execute();// */
         Log.i("CONEXION SEND -------", dev+" --- "+acc+" --- "+val);
         return this;
     }
+
 
 
     public conexion setUser(String usuario){

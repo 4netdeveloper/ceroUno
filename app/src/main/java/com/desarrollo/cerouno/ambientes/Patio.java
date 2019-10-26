@@ -12,13 +12,14 @@ import androidx.fragment.app.Fragment;
 import com.desarrollo.cerouno.R;
 import com.desarrollo.cerouno.administrador.conexion;
 import com.desarrollo.cerouno.administrador.msg;
+import com.desarrollo.cerouno.aparatos.Cajas;
 import com.desarrollo.cerouno.manejadores.ambiente;
 
 import static com.desarrollo.cerouno.R.drawable.foco;
 import static com.desarrollo.cerouno.R.drawable.foco_apagado;
 import static com.desarrollo.cerouno.manejadores.ambiente.conex;
 
-public class Patio extends Fragment implements View.OnClickListener {
+public class Patio extends Cajas implements View.OnClickListener {
 
     public ImageButton boton1;
     public ImageButton boton2;

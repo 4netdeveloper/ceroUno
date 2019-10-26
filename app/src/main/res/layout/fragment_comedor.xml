@@ -68,10 +68,11 @@
 
                         <ImageButton
                             android:id="@+id/l21"
+                            style="@style/Widget.AppCompat.ImageButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:background="@drawable/foco_apagado"
-                            android:onClick="onClick"
+                            android:paddingTop="10dp"
                             android:tag="GP2A01" />
 
                         <TextView
@@ -79,6 +80,70 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/roboto_light"
                             android:text="@string/luz_1"
+                            android:textAlignment="center"
+                            android:textSize="25dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp">
+
+                        <ImageButton
+                            android:id="@+id/l22"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/foco_apagado"
+                            android:tag="GP2A02" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_light"
+                            android:text="@string/luz_2"
+                            android:textAlignment="center"
+                            android:textSize="25dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingTop="10dp">
+
+                        <ImageButton
+                            android:id="@+id/l23"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/foco_apagado"
+                            android:tag="GP2A03" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_light"
+                            android:text="@string/luz_3"
                             android:textAlignment="center"
                             android:textSize="25dp" />
 

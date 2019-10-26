@@ -7,25 +7,74 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.desarrollo.cerouno.R;
 import com.desarrollo.cerouno.administrador.conexion;
 import com.desarrollo.cerouno.administrador.msg;
+import com.desarrollo.cerouno.aparatos.Cajas;
 import com.desarrollo.cerouno.manejadores.ambiente;
 
 import static com.desarrollo.cerouno.R.drawable.foco;
 import static com.desarrollo.cerouno.R.drawable.foco_apagado;
 import static com.desarrollo.cerouno.manejadores.ambiente.conex;
 
-public class Cocina extends Fragment implements View.OnClickListener {
+public class Cocina extends Cajas implements View.OnClickListener {
 
-    public ImageButton boton1;
-    public ImageButton boton2;
-    public ImageButton boton3;
+    private ImageButton boton1;
+    private ImageButton boton2;
+    private ImageButton boton3;
+
+
     static int estado1;
     static int estado2;
     static int estado3;
+
+
+    private ImageButton botones [] = {boton1, boton2, boton3};
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHabitacion("cocina");
+        setLuces(botones);
+        Log.i("onCreate -->", " ON CREATE");
+    }
+
+    @Override
+    public void cambiarL(int id, Boolean estado){
+
+        Log.i("CAMBIAR COCINA -->", String.valueOf(estado));
+        Log.i("ID COCINA-->", String.valueOf(id));
+
+        switch (id){
+            case 0 : if (estado) {
+                boton1.setBackgroundResource(foco);
+                estado1 = 0;
+            }
+            else
+                boton1.setBackgroundResource(foco_apagado);
+                estado1 = 1;
+                break;
+            case 1: if (estado) {
+                boton2.setBackgroundResource(foco);
+                estado2 = 0;
+            }
+            else
+                boton2.setBackgroundResource(foco_apagado);
+                estado2 = 1;
+                break;
+            case 2: if (estado) {
+                boton3.setBackgroundResource(foco);
+                estado3 = 0;
+            }
+            else
+                boton3.setBackgroundResource(foco_apagado);
+                estado3 = 1;
+                break;
+        }
+    }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)  {
@@ -46,9 +95,7 @@ public class Cocina extends Fragment implements View.OnClickListener {
         boton3 = myView.findViewById(R.id.l13);
         boton3.setOnClickListener(this);
 
-        estado1 = ambiente.devuelveEstados(String.valueOf(boton1.getTag()));
-        estado2 = ambiente.devuelveEstados(String.valueOf(boton2.getTag()));
-        estado3 = ambiente.devuelveEstados(String.valueOf(boton3.getTag()));
+
 
         if(estado1 == 0){
             boton1.setBackgroundResource(foco_apagado);
@@ -80,6 +127,7 @@ public class Cocina extends Fragment implements View.OnClickListener {
             @Override
             public void recibirTexto(String txt, int est) {
                 CambiarEstadoDeLuz(param);
+                setEstadoLuz();
             }
         });
 

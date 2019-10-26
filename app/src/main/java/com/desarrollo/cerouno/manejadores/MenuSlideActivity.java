@@ -1,5 +1,6 @@
 package com.desarrollo.cerouno.manejadores;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -31,6 +32,9 @@ import com.google.android.material.navigation.NavigationView;
 public class MenuSlideActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    Cajas cajas;
+
     //variable para q aparezca el fragment elegido en la pantalla de aparatos
     public static int opcion;
 
@@ -51,39 +55,35 @@ public class MenuSlideActivity extends AppCompatActivity
 
 
 
-        Cajas.setHabitacion("bano");
-        Cajas.setNodo("GP0A01");
-        Cajas.setLuz("luz0");
-        Bano.setEstado1(Cajas.getEstadoLuz());
-
 
 
         //FragmentManager fragmentManager = getSupportFragmentManager();
 
         switch (opcion){
-            case 1: cargarFragmento(new Entrada()); break;
+            case 1: cargarFragmento(new Entrada(), "entrada");
+                break;
             case 2:
-                cargarFragmento(new Patio());
+                cargarFragmento(new Patio(), "Patio");
                 break;
             case 3:
-                cargarFragmento(new Living());
+                cargarFragmento(new Living(), "living");
                 break;
             case 4:
-                cargarFragmento(new Cocina());
+                cargarFragmento(new Cocina(), "cocina");
                 break;
             case 5:
-                cargarFragmento(new Comedor());
+                cargarFragmento(new Comedor(), "comedor");
                 break;
             case 6:
-                cargarFragmento(new Bano());
+                cargarFragmento(new Bano(), "bano");
                 break;
             case 7:
-                cargarFragmento(new Dormitorio());
+                cargarFragmento(new Dormitorio(), "dormitorioprincipal");
                 break;
             case 8:
-                cargarFragmento(new Dormitorio());
+                cargarFragmento(new Dormitorio(), "dormitoriosecundario");
                 break;
-            default: cargarFragmento(new Living()); break;
+            default: cargarFragmento(new Living(), "living"); break;
         }
 
         navigationView.getMenu().getItem(0).setChecked(true);
@@ -143,22 +143,22 @@ public class MenuSlideActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if(id == R.id.nav_entrada){
-            cargarFragmento(new Entrada());
+            cargarFragmento(new Entrada(), "entrada");
         } else if (id == R.id.nav_patio) {
-            cargarFragmento(new Patio());
+            cargarFragmento(new Patio(), "Patio");
         } else if (id == R.id.nav_living) {
-            cargarFragmento(new Living());
+            cargarFragmento(new Living(), "living");
         } else if (id == R.id.nav_cocina) {
-            cargarFragmento(new Cocina());
+            cargarFragmento(new Cocina(), "cocina");
         } else if (id == R.id.nav_comedor) {
-            cargarFragmento(new Comedor());
+            cargarFragmento(new Comedor(), "comedor");
         } else if (id == R.id.nav_bano) {
-            cargarFragmento(new Bano());
+            cargarFragmento(new Bano(), "bano");
         } else if (id == R.id.nav_dorm1) {
-            cargarFragmento(new Dormitorio());
+            cargarFragmento(new Dormitorio(), "dormitorioprincipal");
             Dormitorio.id = 1;
         } else if (id == R.id.nav_dorm2) {
-            cargarFragmento(new Dormitorio());
+            cargarFragmento(new Dormitorio(), "dormitoriosecundario");
             Dormitorio.id = 2;
         } else if (id == R.id.nav_cerrar) {
             Log.i("----------------->", "BORRANDO SHARED PREFERENCES");
@@ -177,7 +177,17 @@ public class MenuSlideActivity extends AppCompatActivity
         return true;
     }
 
-    private void cargarFragmento (Fragment fragmento){
+    private void cargarFragmento (Cajas fragmento, String nombreHab){
+        fragmento.setHabitacion(nombreHab);
+        fragmento.setEstadoLuz();
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = manager.beginTransaction().replace(R.id.contenedor, fragmento);
+        fragmentTransaction.commit();
+
+
+    }
+
+   private void cargarFragmento (Fragment fragmento){
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = manager.beginTransaction().replace(R.id.contenedor, fragmento);
         fragmentTransaction.commit();

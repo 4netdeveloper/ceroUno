@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +16,12 @@ import androidx.fragment.app.FragmentManager;
 import com.desarrollo.cerouno.R;
 import com.desarrollo.cerouno.administrador.conexion;
 import com.desarrollo.cerouno.administrador.msg;
+import com.desarrollo.cerouno.ambientes.Bano;
 import com.desarrollo.cerouno.ambientes.Dormitorio;
+import com.desarrollo.cerouno.aparatos.Cajas;
+
+import static com.desarrollo.cerouno.R.drawable.foco;
+import static com.desarrollo.cerouno.R.drawable.foco_apagado;
 
 
 public class ambiente extends AppCompatActivity implements View.OnClickListener{
@@ -29,6 +35,14 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
     int opcion = i;
     static int status;
     public static int banderaStatus;
+
+    Cajas cajas;
+
+    private ImageButton boton1;
+    private ImageButton boton2;
+    private ImageButton boton3;
+
+    private ImageButton botones [] = {boton1, boton2, boton3};
     
 /* Arrays de tags de luces para determinar el estado inicial
 * cada tag pertenece a un aparato  
@@ -143,6 +157,15 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
 
 
     }
+
+    public void meterL(){
+
+
+    }
+
+
+
+
     public void validarNuevoUsuario(){
         conex.getStatus(new conexion.onPostExecute() {
             @Override

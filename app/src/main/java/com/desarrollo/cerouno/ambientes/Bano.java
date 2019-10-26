@@ -8,22 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+
 import com.desarrollo.cerouno.R;
 import com.desarrollo.cerouno.administrador.conexion;
 import com.desarrollo.cerouno.administrador.msg;
 import com.desarrollo.cerouno.aparatos.Cajas;
-import com.desarrollo.cerouno.manejadores.ambiente;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.json.JSONTokener;
 
 import static com.desarrollo.cerouno.R.drawable.foco;
 import static com.desarrollo.cerouno.R.drawable.foco_apagado;
 import static com.desarrollo.cerouno.manejadores.ambiente.conex;
-import static com.desarrollo.cerouno.manejadores.ambiente.devuelveEstados;
 
 
 /** Esta clase refiere al Fragment Baño, que controla las luces
@@ -33,38 +26,77 @@ import static com.desarrollo.cerouno.manejadores.ambiente.devuelveEstados;
  */
 
 
-public class Bano extends Fragment implements View.OnClickListener {
+public class Bano<botones> extends Cajas implements View.OnClickListener {
 
 
 
-    public ImageButton boton1;
-    public ImageButton boton2;
-    public ImageButton boton3;
+    private ImageButton boton1;
+    private ImageButton boton2;
+    private ImageButton boton3;
 
-
-    public static void setEstado1(int estado1) {
-        Bano.estado1 = estado1;
-    }
 
     static int estado1;
     static int estado2;
     static int estado3;
 
 
+    private ImageButton botones [] = {boton1, boton2, boton3};
+
+
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setHabitacion("bano");
+        setLuces(botones);
         Log.i("onCreate -->", " ON CREATE");
-
-
     }
+
+    //ESTA APARECIENDO CRUZADO EN LA APLICACION
+    //REVISAR LOS ESTADOS EN EL SERVIDOR
+
+
 
     /** Este es el método constructor
      * @param View es la clase que se utiliza para trabajar con el fragmento que se va a generar
      * @param myView es el objeto de la clase View con el que accede a los métodos de la clase View
      * @param Inflater es el método utilizado para "inflar" o generar el fragmento
      */
+
+    @Override
+    public void cambiarL(int id, Boolean estado){
+
+        Log.i("CAMBIAR BANO -->", String.valueOf(estado));
+        Log.i("ID BANO -->", String.valueOf(id));
+
+        switch (id){
+            case 0 : if (estado) {
+                boton1.setBackgroundResource(foco);
+                estado1 = 0;
+            }
+            else
+                boton1.setBackgroundResource(foco_apagado);
+                estado1 = 1;
+                break;
+            case 1: if (estado) {
+                boton2.setBackgroundResource(foco);
+                estado2 = 0;
+            }
+            else
+                boton2.setBackgroundResource(foco_apagado);
+                estado2 = 1;
+                break;
+            case 2: if (estado) {
+                boton3.setBackgroundResource(foco);
+                estado3 = 0;
+            }
+            else
+                boton3.setBackgroundResource(foco_apagado);
+                estado3 = 1;
+                break;
+        }
+    }
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,17 +119,13 @@ public class Bano extends Fragment implements View.OnClickListener {
          *
          *
          */
-
-
-
-
         //estado1 = getEstado1();
         Log.i("estadoLuzBano -->", String.valueOf(estado1));
 
         //cambia icono cuando cambia activity, no dentro de ella (menu)
 
 
-        if(estado1 == 0){
+       if(estado1 == 0){
             boton1.setBackgroundResource(foco_apagado);
         }else{
             boton1.setBackgroundResource(foco);
@@ -118,6 +146,8 @@ public class Bano extends Fragment implements View.OnClickListener {
         return myView;
     }
 
+
+
     @Override
     public void onClick(View v) {
         Log.i("----------------------", "BOTON LUZ BAÑO " + v.getTag());
@@ -128,6 +158,7 @@ public class Bano extends Fragment implements View.OnClickListener {
             @Override
             public void recibirTexto(String txt, int est) {
                 CambiarEstadoDeLuz(param);
+                setEstadoLuz();
             }
         });
 
@@ -168,11 +199,7 @@ public class Bano extends Fragment implements View.OnClickListener {
 
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        Bano.setEstado1(Cajas.getEstadoLuz());
-    }
+
 }
 
 

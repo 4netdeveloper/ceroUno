@@ -17,7 +17,7 @@ import com.desarrollo.cerouno.R;
 import static com.desarrollo.cerouno.manejadores.ambiente.conex;
 
 
-public class Televisor extends Fragment implements View.OnClickListener {
+public class Televisor extends Cajas implements View.OnClickListener {
 
     public static String dev ="";
 
