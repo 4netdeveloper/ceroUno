@@ -35,7 +35,7 @@ public class Dormitorio extends Cajas implements View.OnClickListener{
     private ImageButton boton2;
     private ImageButton boton3;
 
-    private ImageButton botones [] = {boton1, boton2, boton3};
+    private ImageButton[] botones = {boton1, boton2, boton3};
 
     /*
     static int estado1;
@@ -66,7 +66,7 @@ public class Dormitorio extends Cajas implements View.OnClickListener{
 
 
         //Log.i("CAMBIAR DORMITORIO --> "+id, String.valueOf(estado));
-        Log.i(tag, "CAMBIARL:"+String.valueOf(id));
+        Log.i(tag, "CAMBIARL:"+ id);
         int d = (estado) ? foco : foco_apagado ;
 
         switch (id) {
@@ -116,21 +116,6 @@ public class Dormitorio extends Cajas implements View.OnClickListener{
         boton2 = myView.findViewById(R.id.l32);
         boton2.setOnClickListener(this);
 
-        /*
-        if(id == 1){
-            estado1 = ambiente.devuelveEstados("GP3A01");
-            estado2 = ambiente.devuelveEstados("GP3A02");
-            //estado3 = ambiente.devuelveEstados("PR3A01");
-            //estado4 = ambiente.devuelveEstados("PR3A02");
-
-
-        }else{
-            estado1 = ambiente.devuelveEstados("GP3B01");
-            estado2 = ambiente.devuelveEstados("GP3B02");
-            //estado3 = ambiente.devuelveEstados("PR3A01");
-            //estado4 = ambiente.devuelveEstados("PR3A02");
-        }
-        */
 
         dormitorio = myView.findViewById(R.id.tv_dormitorio);
         dormitorio.setText("Dormitorio " + id);

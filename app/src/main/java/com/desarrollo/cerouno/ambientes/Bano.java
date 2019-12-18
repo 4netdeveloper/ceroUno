@@ -40,7 +40,7 @@ public class Bano<botones> extends Cajas implements View.OnClickListener {
     static int estado3;
 
 
-    private ImageButton botones [] = {boton1, boton2, boton3};
+    private ImageButton[] botones = {boton1, boton2, boton3};
 
 
 
@@ -195,11 +195,7 @@ public class Bano<botones> extends Cajas implements View.OnClickListener {
                     estado3 = 0;
                 }break;
         }
-
-
     }
-
-
 }
 
 

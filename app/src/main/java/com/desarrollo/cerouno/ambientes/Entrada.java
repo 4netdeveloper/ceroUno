@@ -5,15 +5,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.desarrollo.cerouno.R;
 import com.desarrollo.cerouno.administrador.conexion;
 import com.desarrollo.cerouno.administrador.msg;
 import com.desarrollo.cerouno.aparatos.Cajas;
+import com.desarrollo.cerouno.aparatos.LucesLed;
 import com.desarrollo.cerouno.manejadores.ambiente;
 
 import static com.desarrollo.cerouno.R.drawable.foco;
@@ -26,12 +29,13 @@ public class Entrada extends Cajas implements View.OnClickListener {
     private ImageButton boton1;
     private ImageButton boton2;
     private ImageButton boton3;
+    private Button botonLed;
 
     static int estado1;
     static int estado2;
     static int estado3;
 
-    private ImageButton botones [] = {boton1, boton2, boton3};
+    private ImageButton[] botones = {boton1, boton2, boton3};
 
     public ImageButton portonA;
     public ImageButton portonC;
@@ -54,6 +58,9 @@ public class Entrada extends Cajas implements View.OnClickListener {
         boton2.setOnClickListener(this);
         boton3 = myView.findViewById(R.id.l53);
         boton3.setOnClickListener(this);
+
+        botonLed = myView.findViewById(R.id.botonLed);
+        botonLed.setOnClickListener(this);
 
         if(estado1 == 0){
             boton1.setBackgroundResource(foco_apagado);
@@ -94,7 +101,10 @@ public class Entrada extends Cajas implements View.OnClickListener {
         } else if (v.getId() == R.id.portonP) {
             Log.i("-----------------------", "PAUSA - PORTON");
             conex.send(String.valueOf(v.getTag()), "A", "pause");
-        } else {
+        } else if (v.getId() == R.id.botonLed) {
+            Log.i("-----------------------", "Boton LED");
+            cargarFragmento(new LucesLed());
+        }else{
             Log.i("-----------------------", "BOTON LUZ ENTRADA");
             final String param = String.valueOf(v.getTag());
 
@@ -139,6 +149,11 @@ public class Entrada extends Cajas implements View.OnClickListener {
                 }break;
         }
 
+    }
+
+    private void cargarFragmento (Fragment fragmento){
+        FragmentManager manager = getFragmentManager();
+        manager.beginTransaction().replace(R.id.contenedor, fragmento).addToBackStack(null).commit();
     }
 
 

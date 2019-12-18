@@ -32,7 +32,7 @@ public class Cocina extends Cajas implements View.OnClickListener {
     static int estado3;
 
 
-    private ImageButton botones [] = {boton1, boton2, boton3};
+    private ImageButton[] botones = {boton1, boton2, boton3};
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

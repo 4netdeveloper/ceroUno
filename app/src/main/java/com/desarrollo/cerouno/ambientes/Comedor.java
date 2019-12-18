@@ -30,7 +30,7 @@ public class Comedor extends Cajas implements View.OnClickListener{
     private ImageButton boton2;
     private ImageButton boton3;
 
-    private ImageButton botones [] = {boton1, boton2, boton3};
+    private ImageButton[] botones = {boton1, boton2, boton3};
 
     static int estado1;
     static int estado2;
@@ -236,43 +236,6 @@ public class Comedor extends Cajas implements View.OnClickListener{
                 conex.send(String.valueOf(v.getTag()), "A", "pause");
                 break;
         }
-    }
-
-    public void CambiarEstadoDeLuz(String tag) {
-        msg.echo("cambiando la luz" + tag);
-        switch (tag) {
-            case "GP2A01":
-                if (estado1 == 0) {
-                    boton1.setBackgroundResource(foco);
-                    estado1 = 1;
-                } else {
-                    boton1.setBackgroundResource(foco_apagado);
-                    estado1 = 0;
-                }
-                break;
-            case "GP2A02":
-                if (estado2 == 0) {
-                    boton2.setBackgroundResource(foco);
-                    estado2 = 1;
-                } else {
-                    boton2.setBackgroundResource(foco_apagado);
-                    estado2 = 0;
-                }
-                break;
-
-            case "GP2A03":
-                if (estado3 == 0) {
-                    boton3.setBackgroundResource(foco);
-                    estado3 = 1;
-                } else {
-                    boton3.setBackgroundResource(foco_apagado);
-                    estado3 = 0;
-                }
-                break;
-        }
-
-
-
     }
 
     private void cargarFragmento (Fragment fragmento){

@@ -48,7 +48,7 @@ public class Cajas extends Fragment  {
     protected ImageButton boton2;
     protected ImageButton boton3;
 
-    protected ImageButton botones [] = {boton1, boton2, boton3};
+    protected ImageButton[] botones = {boton1, boton2, boton3};
 
     protected int estado1;
     protected int estado2;

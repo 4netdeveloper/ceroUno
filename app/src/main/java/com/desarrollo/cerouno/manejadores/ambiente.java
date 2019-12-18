@@ -31,18 +31,9 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
             R.id.amb_bano, R.id.amb_dormitorio,  //array de botones
             R.id.amb_dormitorio2};
     public static conexion conex;
-    int i, j;
-    int opcion = i;
     static int status;
     public static int banderaStatus;
 
-    Cajas cajas;
-
-    private ImageButton boton1;
-    private ImageButton boton2;
-    private ImageButton boton3;
-
-    private ImageButton botones [] = {boton1, boton2, boton3};
     
 /* Arrays de tags de luces para determinar el estado inicial
 * cada tag pertenece a un aparato  
@@ -50,7 +41,7 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
     static String [] lucesTag = 
             {"GP0A01", "GP0A02", "GP0A03","GPA1A01", "GPA1A02", "GPA1A03","GP2A01",
                     "GP3A01", "GP3202", "GP3B01", "GP3B02", "GP4A01", "GP4A02", "GP4A03",
-                        "GP5A01", "GP5A02", "GP5A03", "GP5C01", "GP5C02", "GP5C03"};
+                        "GP5A01", "GP5A02", "GP5A03","GP5A10", "GP5C01", "GP5C02", "GP5C03"};
     
     /* Arrays de estados de luces para determinar 
     * si esta encendido     
@@ -123,11 +114,6 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
             }
     }
 
-
-    private void cargarFragmento (Fragment fragmento){
-        FragmentManager manager = getSupportFragmentManager();
-        manager.beginTransaction().replace(R.id.contenedor, fragmento).commit();
-    }
     public static conexion creaConexion(Context context){
         conex  = new conexion(context);
         return conex;
@@ -157,14 +143,6 @@ public class ambiente extends AppCompatActivity implements View.OnClickListener{
 
 
     }
-
-    public void meterL(){
-
-
-    }
-
-
-
 
     public void validarNuevoUsuario(){
         conex.getStatus(new conexion.onPostExecute() {

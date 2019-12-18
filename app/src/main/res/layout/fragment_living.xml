@@ -28,7 +28,9 @@
              android:fontFamily="@font/roboto_light"
              android:text="@string/tv_living"
              android:textAlignment="center"
-             android:textSize="50dp" />
+             android:textSize="50dp"
+             android:paddingBottom="5dp"/>
+
 
          <LinearLayout
              android:layout_width="match_parent"
@@ -36,21 +38,67 @@
              android:gravity="center"
              android:orientation="vertical">
 
-             <ImageButton
-                 android:id="@+id/botonTv"
+             <LinearLayout
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:background="#FFFFFF"
-                 android:onClick="onClick"
-                 android:src="@drawable/ic_tv_black" />
+                 android:orientation="horizontal">
 
-             <TextView
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:fontFamily="@font/roboto_light"
-                 android:text="@string/tv_televisor"
-                 android:textAlignment="center"
-                 android:textSize="25dp" />
+                 <LinearLayout
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:orientation="vertical"
+                     android:paddingRight="10dp">
+
+                     <ImageButton
+                         android:id="@+id/botonTv"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:background="#FFFFFF"
+                         android:onClick="onClick"
+                         android:src="@drawable/ic_tv_black" />
+
+                     <TextView
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:fontFamily="@font/roboto_light"
+                         android:text="TV"
+                         android:textAlignment="center"
+                         android:textSize="25dp" />
+                 </LinearLayout>
+
+                 <LinearLayout
+                     android:layout_width="1dp"
+                     android:layout_height="match_parent"
+                     android:background="@color/cardview_dark_background"
+                     android:orientation="vertical"
+                     ></LinearLayout>
+
+                 <LinearLayout
+                     android:layout_width= "match_parent"
+                     android:layout_height="wrap_content"
+                     android:orientation="vertical"
+                     android:paddingLeft="10dp">
+
+                     <ImageButton
+                         android:id="@+id/boton_Temp"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:background="#FFFFFF"
+                         android:onClick="onClick"
+                         android:src="@drawable/ic_temperatura" />
+
+                     <TextView
+                         android:id="@+id/tv_temperatura"
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:fontFamily="@font/roboto_light"
+                         android:textAlignment="center"
+                         android:textSize="25dp" />
+                 </LinearLayout>
+
+             </LinearLayout>
+
+
 
              <LinearLayout
                  android:layout_width="300dp"
@@ -166,9 +214,6 @@
              </LinearLayout>
 
          </LinearLayout>
-
-
-
 
          <LinearLayout
              android:layout_width="300dp"

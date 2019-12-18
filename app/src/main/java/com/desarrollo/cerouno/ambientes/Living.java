@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -14,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import com.desarrollo.cerouno.R;
 import com.desarrollo.cerouno.administrador.conexion;
 import com.desarrollo.cerouno.aparatos.Televisor;
+import com.desarrollo.cerouno.aparatos.Termostato;
 import com.desarrollo.cerouno.manejadores.ambiente;
 
 import static com.desarrollo.cerouno.R.drawable.foco;
@@ -43,7 +45,11 @@ public class Living extends Cajas implements View.OnClickListener{
     public ImageButton portonC2;
     public ImageButton portonP2;
 
-    private ImageButton botones [] = {boton1, boton2, boton3};
+    private ImageButton[] botones = {boton1, boton2, boton3};
+
+    private TextView temperatura;
+
+    //Termostato termostato = new Termostato();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -95,6 +101,10 @@ public class Living extends Cajas implements View.OnClickListener{
 
         ImageButton boton = myView.findViewById(R.id.botonTv);
         boton.setOnClickListener(this);
+        ImageButton botonTemp = myView.findViewById(R.id.boton_Temp);
+
+        botonTemp.setOnClickListener(this);
+
         boton1 = myView.findViewById(R.id.l41);
         boton1.setOnClickListener(this);
         boton2 = myView.findViewById(R.id.l42);
@@ -117,9 +127,17 @@ public class Living extends Cajas implements View.OnClickListener{
         portonP2 = myView.findViewById(R.id.portonP2);
         portonP2.setOnClickListener(this);
 
+        temperatura = myView.findViewById(R.id.tv_temperatura);
+        temperatura.setText(Termostato.getTemperatura()+"ºC");
+
         return myView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        temperatura.setText(Termostato.getTemperatura()+"ºC");
+    }
 
     @Override
     public void onClick(View v) {
@@ -128,6 +146,12 @@ public class Living extends Cajas implements View.OnClickListener{
                 cargarFragmento(new Televisor());
                 Televisor.dev = "TV4A01";
                 break;
+
+            case R.id.boton_Temp:
+                cargarFragmento(new Termostato());
+                Termostato.dev = "GR4A11";
+                break;
+
             case R.id.l41:
                 Log.i("-----------------------", "BOTON LUZ 1 LIVING");
                 Log.i("-----------------------", String.valueOf(v.getTag()));

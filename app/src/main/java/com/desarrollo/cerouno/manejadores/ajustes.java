@@ -9,9 +9,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.desarrollo.cerouno.R;
+import com.desarrollo.cerouno.aparatos.Cajas;
 
 
-public class ajustes extends Fragment implements View.OnClickListener{
+public class ajustes extends Cajas implements View.OnClickListener{
 
 
 
@@ -25,8 +26,6 @@ public class ajustes extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View myView = inflater.inflate(R.layout.fragment_ajustes, container, false);
-
-
 
         return myView;
     }

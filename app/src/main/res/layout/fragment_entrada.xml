@@ -192,8 +192,14 @@
 
             </LinearLayout>
 
-
-
+            <Button
+                android:padding="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/luz_led"
+                android:id="@+id/botonLed"
+                android:textSize="18dp"
+                ></Button>
         </LinearLayout>
 
     </RelativeLayout>

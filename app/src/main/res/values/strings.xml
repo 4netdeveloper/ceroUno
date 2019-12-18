@@ -22,7 +22,6 @@
     <string name="nav_header_title">Domótica aplicada</string>
     <string name="nav_header_subtitle">cerounodomotica@gmail.com</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Ajustes</string>
     <string name="cerrarSesion">Cerrar Sesión</string>
 
     <string name="menu_home">Home</string>
@@ -42,6 +41,7 @@
     <string name="luz_2">Luz 2</string>
     <string name="luz_3">Luz 3</string>
     <string name="luz_4">Luz 4</string>
+    <string name="luz_led">Luces LED</string>
 
 
     <string name="encendido">On/Off</string>
@@ -70,6 +70,7 @@
     <string name="string_patio">Patio</string>
     <string name="string_entrada">Entrada</string>
     <string name="string_porton">Portón</string>
+    <string name="string_temperatura">Temperatura</string>
 
     <string name="volumen">Volúmen</string>
     <string name="canal">Canales</string>
@@ -93,6 +94,12 @@
     <string name="porton_2">Portón 2</string>
 
     <string name="habitaciones">HABITACIONES</string>
+
+    <string name="action_settings">Ajustes</string>
+    <string name="acercaDe">Acerca de</string>
+    <string name="acercaTexto">ceroUno es un emprendimiento llevado a cabo por estudiantes de la carrera de Sistemas de la Universidad Nacional de la Patagónia Austral,
+        orientado a la automatización y control a distancia de los procesos eléctricos y electrónicos dentro de un espacio, de manera de fomentar el uso responsable de la energía eléctrica.</string>
+    <string name="acercaTexto2">Para más información, visite www.cerouno.net.ar, o bien, escríbanos a cerounodomotica@gmail.com</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

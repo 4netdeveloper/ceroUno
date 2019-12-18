@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.desarrollo.cerouno.R;
@@ -29,6 +30,16 @@ public class Patio extends Cajas implements View.OnClickListener {
     static int estado2;
     static int estado3;
 
+    private ImageButton[] botones = {boton1, boton2, boton3};
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHabitacion("patio");
+        setLuces(botones);
+        Log.i("onCreate -->", " ON CREATE");
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)  {
         View myView = inflater.inflate(R.layout.fragment_patio, container, false);
@@ -39,10 +50,23 @@ public class Patio extends Cajas implements View.OnClickListener {
         boton3 = myView.findViewById(R.id.l53);
         boton3.setOnClickListener(this);
 
-        estado1 = ambiente.devuelveEstados(String.valueOf(boton1.getTag()));
-        estado2 = ambiente.devuelveEstados(String.valueOf(boton2.getTag()));
-        estado3 = ambiente.devuelveEstados(String.valueOf(boton3.getTag()));
+        if(estado1 == 0){
+            boton1.setBackgroundResource(foco_apagado);
+        }else{
+            boton1.setBackgroundResource(foco);
+        }
 
+        if(estado2 == 0){
+            boton2.setBackgroundResource(foco_apagado);
+        }else{
+            boton2.setBackgroundResource(foco);
+        }
+
+        if(estado3 == 0){
+            boton3.setBackgroundResource(foco_apagado);
+        }else{
+            boton3.setBackgroundResource(foco);
+        }
 
         return myView;
     }

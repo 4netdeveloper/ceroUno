@@ -7,8 +7,8 @@
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="@string/acercaDe"
         app:showAsAction="never"
-        android:enabled="false"/>
-    <!--- borrar la condicion ENABLED para q se acceda al boton -->
+        />
+
 </menu>
