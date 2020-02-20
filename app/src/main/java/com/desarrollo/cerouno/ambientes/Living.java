@@ -13,10 +13,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.desarrollo.cerouno.R;
-import com.desarrollo.cerouno.administrador.conexion;
+import com.desarrollo.cerouno.administrador.conex.conexion;
+import com.desarrollo.cerouno.administrador.conex.onPostExecute;
 import com.desarrollo.cerouno.aparatos.Televisor;
 import com.desarrollo.cerouno.aparatos.Termostato;
-import com.desarrollo.cerouno.manejadores.ambiente;
 
 import static com.desarrollo.cerouno.R.drawable.foco;
 import static com.desarrollo.cerouno.R.drawable.foco_apagado;
@@ -162,7 +162,7 @@ public class Living extends Cajas implements View.OnClickListener{
                     boton1.setBackgroundResource(foco_apagado);
                     estado1 = 0;
                 }
-                conex.send(String.valueOf(v.getTag()), "A", "0", new conexion.onPostExecute() {
+                conex.send(String.valueOf(v.getTag()), "A", "0", new onPostExecute() {
                     @Override
                     public void recibirTexto(String txt, int estado) throws JSONException {
                         setEstadoLuz();
@@ -179,7 +179,7 @@ public class Living extends Cajas implements View.OnClickListener{
                     boton2.setBackgroundResource(foco_apagado);
                     estado2 = 0;
                 }
-                conex.send(String.valueOf(v.getTag()), "A", "0", new conexion.onPostExecute() {
+                conex.send(String.valueOf(v.getTag()), "A", "0", new onPostExecute() {
                     @Override
                     public void recibirTexto(String txt, int estado) throws JSONException {
                         setEstadoLuz();
@@ -196,7 +196,7 @@ public class Living extends Cajas implements View.OnClickListener{
                     boton3.setBackgroundResource(foco_apagado);
                     estado3 = 0;
                 }
-                conex.send(String.valueOf(v.getTag()), "A", "0", new conexion.onPostExecute() {
+                conex.send(String.valueOf(v.getTag()), "A", "0", new onPostExecute() {
                     @Override
                     public void recibirTexto(String txt, int estado) throws JSONException {
                         setEstadoLuz();

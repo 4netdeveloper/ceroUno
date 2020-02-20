@@ -13,7 +13,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.desarrollo.cerouno.R;
-import com.desarrollo.cerouno.administrador.conexion;
+import com.desarrollo.cerouno.administrador.conex.conexion;
+import com.desarrollo.cerouno.administrador.conex.onPostExecute;
 
 import static com.desarrollo.cerouno.manejadores.ambiente.banderaStatus;
 import static com.desarrollo.cerouno.manejadores.ambiente.conex;
@@ -59,7 +60,7 @@ public class logIn extends AppCompatActivity {
                 conex.setHash(password);
                 conex.setHost("");
                 banderaStatus = 2;
-                status = conex.getStatus(new conexion.onPostExecute() {
+                status = conex.getStatus(new onPostExecute() {
                     @Override
                     public void recibirTexto(String txt, int estado) {
                         validarNuevoUsuario();
@@ -77,7 +78,7 @@ public class logIn extends AppCompatActivity {
 
     }
     public void validarNuevoUsuario(){
-        conex.getStatus(new conexion.onPostExecute() {
+        conex.getStatus(new onPostExecute() {
             @Override
             public void recibirTexto(String txt, int estado) {
                 Log.d("recibido", "recibido:" + estado);

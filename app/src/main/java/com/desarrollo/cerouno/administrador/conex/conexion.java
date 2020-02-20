@@ -1,13 +1,13 @@
-package com.desarrollo.cerouno.administrador;
+package com.desarrollo.cerouno.administrador.conex;
 // package com.example.testconexion;
 
 import android.content.Context;
 import android.net.DhcpInfo;
 import android.net.wifi.WifiManager;
-import android.os.AsyncTask;
 import android.util.Base64;
 import android.util.Log;
-import android.widget.Toast;
+
+import com.desarrollo.cerouno.administrador.msg;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -81,16 +81,41 @@ public class conexion {
         return this;
     }
 
-    public conexion send(String dev, String acc, String val,onPostExecute EjecutarDespues) {
+    //envia la peticion al remoto
+    private conexion sendExterno(String dev, String acc, String val,onPostExecute EjecutarDespues) {
+            this._MAsync = new MyAsyncTask("cerouno.com.ar/app.php?g=" ,"80", this);
+            this._MAsync.setUsrhas(this.has);
+
+            _MAsync
+                    .setDev(dev)
+                    .setAcc(acc)
+                    .setVal(val)
+                    .execute();
+            Log.i("SEND-EXTERNO-->", dev+"-"+acc+"-"+val);
+            FuncionAEjecutar = EjecutarDespues;
+        return this;
+    }
+
+    public conexion send(String dev, String acc, String val, final onPostExecute EjecutarDespues) {
         // alg oooo par hacer.
         if (_MAsync == null) {
             // primera vez obteniendo informacion de contexto
 
             if (host==null || host=="" ) {
                 msg.echo("buscar raspberry....");
+                final String d =dev;
+                final String a =acc;
+                final String v =val;
+
                 ScanRaspberry("4net-core"
                         , port
-                        , "_domotica._tcp",EjecutarDespues);
+                        , "_domotica._tcp",EjecutarDespues, new onScanError() {
+                            @Override
+                            public void ejecutarFalla(String txt){
+                                // sin encontrar la raspberry....
+                                sendExterno(d,a,v,EjecutarDespues);
+                            }
+                });
             }else {
                 // no se ejecuta si no tengo el host
                 this._MAsync = new MyAsyncTask(host, port, this);
@@ -188,30 +213,35 @@ public class conexion {
         // {proto,host,port} = url.split(':');
     }
 
+    public String  receive(){
 
+        String rt= null;
+        try {
+            rt = _MAsync.get();
+        } catch (
+                ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // msg.echo("datos recibidos fin de espera.:"+rt);
+        try {
+            rts = new resultado(new JSONObject(rt));
+            //msg.var_dump(rts);
+
+        } catch (
+                JSONException e) {
+            rts = new resultado(new JSONObject());
+            e.printStackTrace();
+        }
+
+        return rt;
+    }
 
     /* objeto especial para procesar respuestas inicio */
     private resultado rts;
-    private class resultado{
-        public String staus;
-        public String usuario;
-        public Object respuesta;
-        public int error;
 
-        public resultado(JSONObject objSon){
-            try {
-                staus = objSon.getString("status");
-                usuario=objSon.getString("usuario");
-                respuesta=objSon.getJSONObject("respuesta");
-                error=objSon.getInt("error");
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-
-        }
-    }
     /* objeto especial para procesar respuestas fin */
 
     protected void onPostProcesor(String respuesta) throws JSONException {
@@ -241,34 +271,7 @@ public class conexion {
 
     }
 
-    public interface onPostExecute{
 
-        void recibirTexto(String txt, int estado) throws JSONException;
-    }
-
-    public String receive(){
-
-        String rt= null;
-        try {
-            rt = _MAsync.get();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // msg.echo("datos recibidos fin de espera.:"+rt);
-        try {
-            rts = new resultado(new JSONObject(rt));
-            //msg.var_dump(rts);
-
-        } catch (JSONException e) {
-            rts = new resultado(new JSONObject());
-            e.printStackTrace();
-        }
-
-        return rt;
-    }
 
 
 
@@ -288,6 +291,7 @@ public class conexion {
             final String Usuario, final String Valor
             , final int puerto
             , final onPostExecute Ejecutor
+            ,final onScanError Falla
     ) throws Exception {
         InetAddress respuesta = null;
         new Thread(new Runnable() {
@@ -333,6 +337,8 @@ public class conexion {
                 } catch (Exception e) {
                     //Logger.getLogger(MainActivity.class.getName()).log(Level.SEVERE, null, e);
                     msg.echo(e.getMessage());
+                    Falla.ejecutarFalla(e.getMessage());
+                    //Ejecutor.recibirTexto();
                 }
             }
         }).start();
@@ -343,7 +349,7 @@ public class conexion {
     /**
      * TODO: conexion automatica con la raspberry
      */
-    public void ScanRaspberry(String Nombre, String Puerto, String BusquedaBonjour, onPostExecute Ejecutor) {
+    public void ScanRaspberry(String Nombre, String Puerto, String BusquedaBonjour, onPostExecute Ejecutor, onScanError Error) {
 
         // funcion de buqueda del equipo
         // "_domotica._tcp"
@@ -357,12 +363,14 @@ public class conexion {
             sendBroadcast(
                     this.user
                     , this.has
-                    , 8182, Ejecutor);//(int) Integer.getInteger(Puerto));
+                    , 8182, Ejecutor
+                    ,Error);//(int) Integer.getInteger(Puerto));
             ch = true;
             msg.echo("se ha enviado el broadcast");
         } catch (Exception e) {
             e.printStackTrace();
             ch = false;
+            Error.ejecutarFalla(e.getMessage());
         }
 
 
@@ -376,27 +384,7 @@ public class conexion {
         status = 2;
     }
 
-    private class MyAsyncTask extends AsyncTask<String, Void, String> {
 
-        String host,port,headget,response;
-        private int contadorSend =0;
-        String usrhas, dev,acc,val;
-        // private onPostExecute FuncionPost;
-        private conexion padre;
-        IOException ioException;
-        boolean working=false;
-
-        MyAsyncTask(String host, String port , conexion padre) {
-            super();
-
-            this.host = host;
-            this.port = port;
-            // this.usrhas=usr;
-            this.padre=padre;
-            this.response = "";
-            this.ioException = null;
-
-        }
 
         /*
 
@@ -408,187 +396,7 @@ public class conexion {
 
         // * */
 
-        @Override
-        protected String doInBackground(String... params) {
-            // protected String doInBackground(String... params) {
-            this.working=true;
-            // construyendo el header :
-            headget=headGet(host,port,usrhas,dev,acc,val);
-            msg.echo("MyAsinc: enviando \r\n"+headget);
-            //msg.var_dump(this);
-            /*al enviar la ejecuion a segundo plano */
-            StringBuilder sb = new StringBuilder();
-            try {
 
-                Socket socket = new Socket( host, Integer.parseInt(port));
-                OutputStream out = socket.getOutputStream();
-                msg.echo("MyAsinc: write-"+contadorSend+"--");
-                out.write(headget.getBytes());
-                contadorSend++;
-                InputStream in = socket.getInputStream();
-
-                /*lectura de respuesta*/
-                byte[] buf = new byte[1024];
-                int nbytes;
-                while ((nbytes = in.read(buf)) != -1) {
-                    sb.append(new String(buf, 0, nbytes));
-                }
-
-                //msg.echo("MyAsinc: READ \r\n"+sb.toString());
-                socket.close();
-
-            } catch(IOException e) {
-                this.ioException = e;
-                this.working=false;
-                msg.echo("MyAsinc: falla" + e.getMessage());
-                return "{}";
-            }
-            this.working=false;
-            return headRequest( sb.toString() );
-            // sb.toString();
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            /*al terminar la ejcucion recibe la respuesta */
-            if (this.ioException != null) {
-                this.response="error";
-            } else {
-                // this.textView.setText(result);
-
-                this.response=result;
-            }
-
-
-            //msg.echo("MyAsinc: request-brute:"+result);
-            msg.echo("MyAsinc: responde: --\r\n"+response );
-            // this.button.setEnabled(true);
-            try {
-                padre.onPostProcesor(result);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        public String getResponse(){
-
-            return this.response;
-        }
-
-        public String getUsrhas() { return usrhas;}
-
-        public void setUsrhas(String usrhas) {
-            this.usrhas = usrhas;
-
-        }
-
-        public String getDev() {return dev;}
-
-        public MyAsyncTask setDev(String dev) {this.dev = dev; return this ;}
-
-        public String getAcc() {return acc;}
-
-        public MyAsyncTask setAcc(String acc) {this.acc = acc; return this; }
-
-        public String getVal() {return val;}
-
-        public MyAsyncTask setVal(String val) {this.val = val; return this; }
-
-        private String headGet(String host,String port, String usr,String dev,String acc,String val) {
-            // cambiamos desitno a la accion necesaria:
-            String rt = usr + '/' + dev + '/' + acc + '/' + val;
-            // codifcamos cabecera y datos a base64
-
-            String dataToSend = String.format(
-                    "GET /%s HTTP/1.1\r\n"
-                            +"Host: %s:%s\r\n"
-                            +"User-Agent: Midori/1.0 \r\n"
-                            +"Gecko/20100101 \r\n"
-                            +"Accept: */* \r\n"
-                            +"Connection: keep-alive \r\n\r\n"
-                    // encriptacion de datos:
-                    ,encript(rt)
-                    // ,proto
-                    ,host
-                    ,port
-            );
-
-
-            return dataToSend;
-            //return rt;
-        }
-
-        private String encript(String t){
-
-            return Base64.encodeToString(t.getBytes(), Base64.CRLF);
-
-        }
-
-        public String headRequest(String code){
-            // recibimos el resultado y lo convertimos a texto.
-            String rt=code;
-            byte[] data = Base64.decode(code, Base64.CRLF);
-
-            rt= new String(data, StandardCharsets.UTF_8);
-
-            // salido de tipo cadena:
-            return rt;
-        }
-
-    }
-
-    private class UDPServer {
-        //servicio de escucha en un puerto.
-        private DatagramSocket udpSocket;
-        private int port;
-        public String host,key;
-        private String msg;
-        // private Activity activity;
-
-        public UDPServer( int port) throws IOException {
-            this.port = port;
-            this.udpSocket = new DatagramSocket(this.port);
-            /* udpSocket .*/
-            //this.activity = activity;
-            this.host="";
-        }
-
-        public void listen() throws Exception {
-
-            // String msg;
-
-            while (true) {
-
-                byte[] buf = new byte[256];
-                DatagramPacket packet = new DatagramPacket(buf, buf.length);
-                // blocks until a packet is received
-                udpSocket.receive(packet);
-                // convirtiendo el datagrama en string recibido.
-                msg = new String(packet.getData()).trim();
-                /*
-                if (msg.equals("Okkkk")) {
-                    msg = "Message from " + packet.getAddress().getHostAddress() + ": " + msg;
-                    final String finalMsg = msg;
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(activity, finalMsg, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                }
-                */
-                Log.e("UDP_SERVER", "Message from "
-                        + packet.getAddress().getHostAddress()
-                        + ": " + msg);
-                host=packet.getAddress().getHostAddress();
-                key=msg;
-            }
-
-
-        }
-
-    }
 
     // private class NetworkHelper {
 

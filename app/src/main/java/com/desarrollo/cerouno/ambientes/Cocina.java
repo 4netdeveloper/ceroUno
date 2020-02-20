@@ -8,13 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.desarrollo.cerouno.R;
-import com.desarrollo.cerouno.administrador.conexion;
+import com.desarrollo.cerouno.administrador.conex.conexion;
+import com.desarrollo.cerouno.administrador.conex.onPostExecute;
 import com.desarrollo.cerouno.administrador.msg;
 import com.desarrollo.cerouno.aparatos.Cajas;
-import com.desarrollo.cerouno.manejadores.ambiente;
 
 import static com.desarrollo.cerouno.R.drawable.foco;
 import static com.desarrollo.cerouno.R.drawable.foco_apagado;
@@ -80,7 +79,7 @@ public class Cocina extends Cajas implements View.OnClickListener {
                              Bundle savedInstanceState)  {
         View myView = inflater.inflate(R.layout.fragment_cocina, container, false);
 
-        conex.send("", "pregunta", "cocina", new conexion.onPostExecute() {
+        conex.send("", "pregunta", "cocina", new onPostExecute() {
             @Override
             public void recibirTexto(String txt, int estado) {
                 Log.i("Que se recibe? ---->", txt);
@@ -123,7 +122,7 @@ public class Cocina extends Cajas implements View.OnClickListener {
         Log.i( "-----------------------", "BOTON LUZ COCINA");
         final String param = String.valueOf(v.getTag()) ;
 
-        conex.send(String.valueOf(v.getTag()), "A", "0", new conexion.onPostExecute() {
+        conex.send(String.valueOf(v.getTag()), "A", "0", new onPostExecute() {
             @Override
             public void recibirTexto(String txt, int est) {
                 CambiarEstadoDeLuz(param);

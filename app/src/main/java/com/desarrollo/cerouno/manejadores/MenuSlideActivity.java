@@ -1,6 +1,5 @@
 package com.desarrollo.cerouno.manejadores;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,7 +17,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.desarrollo.cerouno.R;
-import com.desarrollo.cerouno.administrador.conexion;
 import com.desarrollo.cerouno.ambientes.Bano;
 import com.desarrollo.cerouno.ambientes.Cocina;
 import com.desarrollo.cerouno.ambientes.Comedor;

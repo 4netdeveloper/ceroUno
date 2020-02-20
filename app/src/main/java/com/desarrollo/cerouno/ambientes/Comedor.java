@@ -12,11 +12,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.desarrollo.cerouno.R;
-import com.desarrollo.cerouno.administrador.conexion;
-import com.desarrollo.cerouno.administrador.msg;
+import com.desarrollo.cerouno.administrador.conex.conexion;
+import com.desarrollo.cerouno.administrador.conex.onPostExecute;
 import com.desarrollo.cerouno.aparatos.Cajas;
 import com.desarrollo.cerouno.aparatos.Televisor;
-import com.desarrollo.cerouno.manejadores.ambiente;
 
 import org.json.JSONException;
 
@@ -91,7 +90,7 @@ public class Comedor extends Cajas implements View.OnClickListener{
                              Bundle savedInstanceState)  {
         View myView = inflater.inflate(R.layout.fragment_comedor, container, false);
 
-        conex.send("", "pregunta", "comedor", new conexion.onPostExecute() {
+        conex.send("", "pregunta", "comedor", new onPostExecute() {
             @Override
             public void recibirTexto(String txt, int estado) {
                 Log.i("Que se recibe? ---->", txt);
@@ -164,7 +163,7 @@ public class Comedor extends Cajas implements View.OnClickListener{
                     boton1.setBackgroundResource(foco_apagado);
                     estado2 = 0;
                 }
-                conex.send(String.valueOf(v.getTag()), "A", "0", new conexion.onPostExecute() {
+                conex.send(String.valueOf(v.getTag()), "A", "0", new onPostExecute() {
                     @Override
                     public void recibirTexto(String txt, int estado) throws JSONException {
                         setEstadoLuz();
@@ -181,7 +180,7 @@ public class Comedor extends Cajas implements View.OnClickListener{
                     boton2.setBackgroundResource(foco_apagado);
                     estado2 = 0;
                 }
-                conex.send(String.valueOf(v.getTag()), "A", "0", new conexion.onPostExecute() {
+                conex.send(String.valueOf(v.getTag()), "A", "0", new onPostExecute() {
                     @Override
                     public void recibirTexto(String txt, int estado) throws JSONException {
                         setEstadoLuz();
@@ -198,7 +197,7 @@ public class Comedor extends Cajas implements View.OnClickListener{
                     boton3.setBackgroundResource(foco_apagado);
                     estado3 = 0;
                 }
-                conex.send(String.valueOf(v.getTag()), "A", "0", new conexion.onPostExecute() {
+                conex.send(String.valueOf(v.getTag()), "A", "0", new onPostExecute() {
                     @Override
                     public void recibirTexto(String txt, int estado) throws JSONException {
                         setEstadoLuz();

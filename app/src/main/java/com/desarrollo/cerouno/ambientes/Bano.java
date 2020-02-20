@@ -10,7 +10,8 @@ import android.widget.ImageButton;
 import androidx.annotation.Nullable;
 
 import com.desarrollo.cerouno.R;
-import com.desarrollo.cerouno.administrador.conexion;
+import com.desarrollo.cerouno.administrador.conex.conexion;
+import com.desarrollo.cerouno.administrador.conex.onPostExecute;
 import com.desarrollo.cerouno.administrador.msg;
 import com.desarrollo.cerouno.aparatos.Cajas;
 
@@ -52,10 +53,6 @@ public class Bano<botones> extends Cajas implements View.OnClickListener {
         setLuces(botones);
         Log.i("onCreate -->", " ON CREATE");
     }
-
-    //ESTA APARECIENDO CRUZADO EN LA APLICACION
-    //REVISAR LOS ESTADOS EN EL SERVIDOR
-
 
 
     /** Este es el método constructor
@@ -154,7 +151,7 @@ public class Bano<botones> extends Cajas implements View.OnClickListener {
 
         final String param = String.valueOf(v.getTag()) ;
 
-        conex.send(String.valueOf(v.getTag()), "A", "0", new conexion.onPostExecute() {
+        conex.send(String.valueOf(v.getTag()), "A", "0", new onPostExecute() {
             @Override
             public void recibirTexto(String txt, int est) {
                 CambiarEstadoDeLuz(param);

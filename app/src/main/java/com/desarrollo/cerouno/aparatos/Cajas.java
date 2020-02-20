@@ -1,14 +1,12 @@
 package com.desarrollo.cerouno.aparatos;
 
-import android.content.Context;
-import android.net.wifi.p2p.WifiP2pManager;
 import android.util.Log;
 import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 
-import com.desarrollo.cerouno.administrador.conexion;
-import com.desarrollo.cerouno.ambientes.Bano;
+import com.desarrollo.cerouno.administrador.conex.conexion;
+import com.desarrollo.cerouno.administrador.conex.onPostExecute;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
@@ -21,7 +19,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import static com.desarrollo.cerouno.R.drawable.foco;
-import static com.desarrollo.cerouno.R.drawable.foco_apagado;
 import static com.desarrollo.cerouno.manejadores.ambiente.conex;
 
 interface IntCambiarLuz{
@@ -74,7 +71,7 @@ public class Cajas extends Fragment  {
 
     public void setEstadoLuz () {
 
-        conex.send("", "pregunta", habitacion, new conexion.onPostExecute() {
+        conex.send("", "pregunta", habitacion, new onPostExecute() {
             @Override
    //se solicita el estado de las habitaciones de a traves de setHabitacion()
             public void recibirTexto(String txt, int estado) throws JSONException {
